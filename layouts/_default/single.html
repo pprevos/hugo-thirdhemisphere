@@ -1,0 +1,60 @@
+{{ define "main" }}
+<section class="section">
+  <article>
+    <div class="columns is-centered">
+      <div class="column max-800px">
+	<h1 class="title is-1">{{ .Title }}</h1>
+	{{ partial "widgets/seo.html" . }}
+	<div class="title subtitle heading is-6">
+	  <div class="columns is-vcentered">
+	    <div class="column">
+	      <div class="columns is-vcentered is-mobile">
+		{{ with .Site.Author.image }}
+		<div class="column is-narrow">
+		  <img src="{{ . }}" class="author-image">
+		</div>
+		{{ end }}
+		<div class="column">
+		  <p>{{ .Site.Author.name }}</p>
+		  <p><time>{{ .PublishDate.Format "2 January 2006" }}</time> |
+		    {{ .WordCount }} words | 
+		    {{ .ReadingTime }} {{ if eq .ReadingTime 1 }} minute {{ else }} minutes {{ end }}</p>
+		</div>
+	      </div>
+	    </div>
+	    <div class="column">
+	      {{ range $idx, $category := .Params.categories }}
+	      {{- if ne $idx 0 }}, {{ end }}<a href="{{ "categories/" | relURL }}{{ $category | urlize }}">{{ $category }}</a>
+	      {{- end }}
+	    </div>
+	  </div>
+	</div>
+	<figure class="title-image">
+	  <img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Description }}">
+	</figure>
+	<div class="content">
+	  {{ .Content }}
+	</div>
+      </div>
+  </article>
+</section>
+<section class="section">
+  {{ $related := (where (.Site.RegularPages.Related .) "Type" "articles") | first 3 }}
+  <div class="columns is-centered">
+    <div class="column max-800px">
+      <div class="content">
+	{{ if (ne (len $related) 0) }}
+	<h3>Related articles</h3>
+	{{ end }}
+      </div>
+      <div class="columns">
+        {{ range $related }}
+        <div class="column is-one-third">
+          {{ partial "widgets/postcard-small.html" . }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,116 @@
+<!-- SEO check -->
+
+{{ if (in (string .Site.BaseURL) "localhost") }}
+
+<hr>
+<p>Keyphrase: {{ .Params.Keyphrase }}</p>
+<p>Meta description: {{ .Description }}</p>
+<hr>
+
+<!-- Title length between 50 and 60 characters -->
+{{ $lent := (len .Title) }}
+{{ if (lt $lent 50) }}
+<p><a href="https://yoa.st/34h">Title width</a>: The title is too short ({{ $lent }} characters). Use the space to add keyphrase variations or create compelling call-to-action copy.</p>
+{{ else if (gt $lent 60) }}
+<p><a href="https://yoa.st/34h">Title width</a> is {{ $lent }} characters: The title is too long. Use the space to add keyphrase variations or create compelling call-to-action copy.</p>
+{{ else }}
+<p><a href="https://yoa.st/34h">Title width</a> is {{ $lent }} characters: Good job!</p>
+{{ end }}
+
+<!-- Meta description between 120 and 156 characters -->
+{{ $dsl := (len .Description) }}
+{{ if eq $dsl 0 }}
+<p><a href="https://yoa.st/34d">No meta description has been specified</a>. Search engines will display copy from the page instead. Make sure to write one!</p>
+{{ else if lt $dsl 120 }}
+<p><a href="https://yoa.st/34d">Meta description</a> is {{ $dsl }} characters: The meta description is shorter than 120 characters. Up to 156 characters are available. Use the space!</p>
+{{ else if gt $dsl 156 }}
+<p><a href="https://yoa.st/34d">Meta description</a> is {{ $dsl }} characters: The meta description is over 156 characters. To ensure the entire description will be visible, you should reduce the length!</p>
+{{ else }}
+<p><a href="https://yoa.st/34d">Meta description</a> is {{ $dsl }} words: Good job!</p>
+{{ end }}
+
+<!-- Check featured image -->
+{{ if .Params.images }}
+<p><a href = "https://yoa.st/33c">Image alt attributes</a>: Well done!</p>
+{{ else }}
+<p><a href = "https://yoa.st/33c">Image alt attributes</a>: No featured image appears on this page. The theme will add the meta description to the alt attribute. Add one!</p>
+{{ end }}
+
+<!-- Content has at least 300 words -->
+{{ if lt .WordCount 300 }}
+<p>The text contains {{ .WordCount }}  words. This is below the recommended minimum of 300 words. <a href="https://yoa.st/34n">Add more content.</a></p>
+{{ else }}
+<p>The text has a <a href="https://yoa.st/34n">length</a> of {{ .WordCount }} words. Good job!</p>
+{{ end }}
+
+<hr>
+
+<!-- Keyphrase checks -->
+{{ $kph := (lower .Params.Keyphrase) }}
+{{ $kpl := (countwords $kph) }}
+
+<!-- Keyphrase maximum 4 words -->
+{{ if (lt $kpl 1) }}
+<p>No focus <a href = "https://yoa.st/33i">Keyphrase</a> was set for this page. Define the keyphrase variable in the front matter.</p>
+{{ else if (gt $kpl 6) }}
+<p><a href = "https://yoa.st/33i">Keyphrase</a> has {{ $kpl }} words. That's perhaps more than the recommended maximum of 4 words. Make it shorter!</p>
+{{ else }}
+<p><a href = "https://yoa.st/33i">Keyphrase</a> has {{ $kpl }} words: Good job!</p>
+{{ end }}
+
+{{ if gt $kpl 0 }}
+
+<!-- Unique keyphrase -->
+{{ range .Site.Pages }}
+{{ .Params.Keyphrase }}
+{{ if in (lower .Params.Keyphrase) $kph }}
+<p><a href = "https://yoa.st/33x">Previously used keyphrase</a>: You've used this keyphrase <a href = "{{ .Params.RelPermalink }}">before</a>. Do not use your keyphrase more than once. {{ .Page.Title }}</p>
+{{ end }}
+{{ end }}
+
+<!-- Keyphrase in title -->
+{{ if (in (lower .Title) $kph) }}
+<p><a href="https://yoa.st/33g">Keyphrase in title</a>: The exact match of the keyphrase appears in the title. Good job!</p>
+{{ else }}
+<p><a href="https://yoa.st/33g">Keyphrase in title</a>: Your keyphrase "{{ $kph }}" does not appear in the SEO title. Try to use the exact match of your keyphrase in the title.</p>
+{{ end }}
+
+<!-- Keyphrase in meta desciption -->
+{{ with .Description }}
+{{ if (in . $kph) }}
+<p><a href = "https://yoa.st/33k">Keyphrase in meta description</a>: Well done!</p>
+{{ else }}
+<p><a href = "https://yoa.st/33k">Keyphrase in meta description</a>: The meta description does not contain the keyphrase. Fix that!</p>
+{{ end }}
+{{ end }}
+
+<!-- Keyphrase in meta summary -->
+{{ with .Summary }}
+{{ if (in (lower . ) $kph) }}
+<p><a href = "https://yoa.st/33e">Keyphrase in introduction</a>: Well done!</p>
+{{ else }}
+<p><a href = "https://yoa.st/33e">Keyphrase in introduction</a>: Your keyphrase does not appear in the first {{ countwords . }} words. Make sure the topic is clear immediately.</p>
+{{ end }}
+{{ end }}
+
+<!-- Keyphrase in Table of Contents -->
+{{ with .TableOfContents }}
+{{ if (in (lower . ) $kph) }}
+<p><a href="https://yoa.st/33m">Keyphrase in subheading</a>: Your higher-level subheading reflects the topic of your copy. Good job!</p>
+{{ else }}
+<p><a href="https://yoa.st/33m">Keyphrase in subheading</a>: Use more keyphrases or synonyms in your higher-level subheadings!</p>
+{{ end }}
+{{ end }}
+
+<!-- Keyphrase in slug -->
+{{ if in .RelPermalink $kph }}
+<p><a href = "https://yoa.st/33o">Keyphrase in slug</a>: Great work</p>
+{{ else }}
+<p><a href = "https://yoa.st/33o">Keyphrase in slug</a>: Your keyphrase does not appear in the slug. Change that!</p>
+{{ end }}
+
+      
+{{ end }} <!-- End keyphrase check -->
+
+{{ end }} <!-- End SEO check -->
+<hr>

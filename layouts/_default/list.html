@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="container">
+  <div class="section">
+    <div class="content">
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+    </div>
+    <div class="columns is-multiline">
+      {{ range .Paginator.Pages }}
+      <div class="column is-one-third">
+        {{ partial "widgets/postcard.html" . }}
+      </div>
+      {{ end }}
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+        {{ partial "widgets/pagination.html" . }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

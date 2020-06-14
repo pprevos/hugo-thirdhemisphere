@@ -1,0 +1,27 @@
+{{ $permalink := .Permalink }}
+
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-3by2">
+      <a href="{{ $permalink }}">
+	<img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Description }}"></a>
+    </figure>
+  </div>
+  <div class="card-content">
+    <a class="title is-4" href="{{ .Permalink }}">{{ .Title }}</a>
+    <span class="heading"><time>{{ .PublishDate.Format "2 January 2006"}}</time></span>
+    <div class="content">
+      {{ .Description }}
+    </div>
+    <div class="tags is-pulled-left">
+      {{ range .Params.categories }}
+      <a class="tag is-primary is-radiusless" href="/categories/{{ . | urlize}}">{{ . }}</a>
+      {{ end }}
+    </div>
+        <div class="tags is-pulled-right">
+      {{ range .Params.tags }}
+      <a class="tag is-info is-radiusless" href="/tags/{{ . | urlize}}">{{ . }}</a>
+      {{ end }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+# Third Hemisphere Hugo Theme
+
+This is a work-in-progress to create an SEO-optimised HUGO theme. Principles:
+- Optimised technical SEO, including [[https://schema.org/][schema.org]] for website and articles
+- Mimicking the functionality of the [[https://yoast.com/][Yoast SEO Wordpress]] plugin
+- Based on [[https://bulma.io/][Bulma CSS]]
+
+This theme is in development and is not available in the wild just yet.
