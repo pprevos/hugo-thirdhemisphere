@@ -6,3 +6,45 @@ This is a work-in-progress to create an SEO-optimised HUGO theme. Principles:
 - Based on [[https://bulma.io/][Bulma CSS]], based on the work by [[https://www.pakstech.com/blog/create-hugo-theme/][Päktech]]
 
 This theme is in development and is not available in the wild just yet.
+
+* Todo
+- [ ] Learn Bulma CSS
+- [-] Technical SEO
+  - [X] [[https://yoast.com/academy/][Technical SEO training]]
+  - [X] robots.txt
+  - [X] Meta tags
+    - [X] Description
+    - [X] Title
+    - [X] Robots
+    - [X] Canonical
+    - [X] hreflang
+  - [X] Alt tags enforced
+  - [ ] Structured data
+    - [ ] Website
+    - [ ] Articles
+- [ ] RSS for taxonomy
+- [ ] Sharing buttons
+- [X] Redirects to WP content
+- [ ] Page counter
+- [ ] Comments
+- [ ] link properties
+- [ ] Bibliographies
+- [ ] Colour themes
+- [ ] Favicon
+- [ ] Code snippets
+- [-] Recreate Yoast
+  - [X] Text length
+  - [X] Title length
+  - [X] Meta description length
+  - [-] Keyphrase
+    - [X] length (max 4 words)
+    - [X] In title
+    - [X] In description
+    - [X] In summary
+    - [X] In headings
+    - [X] Slug
+    - [ ] Previously used
+    - [X] In Alt tag (featured image)
+  - [ ] CSS
+- [ ] Document and deploy theme
+
