@@ -8,8 +8,7 @@ This is a work-in-progress to create an SEO-optimised HUGO theme. Principles:
 This theme is in development and is not available in the wild just yet.
 
 * Todo
-- [ ] Learn Bulma CSS
-- [-] Technical SEO
+- [X] Technical SEO
   - [X] [[https://yoast.com/academy/][Technical SEO training]]
   - [X] robots.txt
   - [X] Meta tags
@@ -19,19 +18,18 @@ This theme is in development and is not available in the wild just yet.
     - [X] Canonical
     - [X] hreflang
   - [X] Alt tags enforced
-  - [ ] Structured data
-    - [ ] Website
-    - [ ] Articles
-- [ ] RSS for taxonomy
-- [ ] Sharing buttons
-- [X] Redirects to WP content
+  - [X] Structured data
+- [ ] Learn Bulma CSS
+- [ ] Website logo
+- [ ] Favicon
+- [ ] Colour themes
+- [ ] Social sharing buttons
+- [ ] Source code snippets
+- [ ] RSS (taxonomies)
 - [ ] Page counter
 - [ ] Comments
 - [ ] link properties
-- [ ] Bibliographies
-- [ ] Colour themes
-- [ ] Favicon
-- [ ] Code snippets
+- [ ] Bibliographies (through JSON data)
 - [-] Recreate Yoast
   - [X] Text length
   - [X] Title length
@@ -47,4 +45,5 @@ This theme is in development and is not available in the wild just yet.
     - [X] In Alt tag (featured image)
   - [ ] CSS
 - [ ] Document and deploy theme
+
 

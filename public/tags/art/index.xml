@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Art on Hugo SEO theme</title>
+    <link>http://thirdhemisphere.net/tags/art/</link>
+    <description>Recent content in Art on Hugo SEO theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 05 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://thirdhemisphere.net/tags/art/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Aboriginal Art Symbols in Dot Painting: Larapinta Dreaming</title>
+      <link>http://thirdhemisphere.net/articles/aboriginal-art-symbols/</link>
+      <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://thirdhemisphere.net/articles/aboriginal-art-symbols/</guid>
+      <description>The ancestors of today&amp;#39;s Aboriginal people populated the Australian continent about tens of thousands of years ago. Their culture is in many respects unique because, until the eighteenth century, they had limited contact with people outside Australia. One of the most striking manifestations of contemporary Aboriginal culture are the iconic dot paintings of the desert people. Dot paintings include many Aboriginal art symbols that convey meaning to the work.</description>
+    </item>
+    
+  </channel>
+</rss>

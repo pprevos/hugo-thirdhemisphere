@@ -4,7 +4,7 @@
     <div class="columns is-centered">
       <div class="column max-800px">
 	<h1 class="title is-1">{{ .Title }}</h1>
-	{{ partial "widgets/seo.html" . }}
+	{{ partial "seo-check.html" . }}
 	<div class="title subtitle heading is-6">
 	  <div class="columns is-vcentered">
 	    <div class="column">
@@ -50,7 +50,7 @@
       <div class="columns">
         {{ range $related }}
         <div class="column is-one-third">
-          {{ partial "widgets/postcard-small.html" . }}
+          {{ partial "postcard-small.html" . }}
         </div>
         {{ end }}
       </div>

@@ -9,13 +9,22 @@
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
   {{ if not (in (string .Site.BaseURL) "localhost") }}
-      {{ template "_internal/google_analytics_async.html" . }}
+  {{ template "_internal/google_analytics_async.html" . }}
   {{ end }}
-  {{ partial "site-schema.html" . }}  
+  {{- if .IsPage -}}
+  {{ partial "schema-page.html" . }}
+  {{- end }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Parse LaTeX formulas with MathJax -->
+  <!-- set math = true in the page -->
+  {{ if .Params.math }}
+  <script type="text/javascript"
+	  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  {{ end }}
 </head>
 
 

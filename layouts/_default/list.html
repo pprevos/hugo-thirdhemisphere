@@ -8,13 +8,13 @@
     <div class="columns is-multiline">
       {{ range .Paginator.Pages }}
       <div class="column is-one-third">
-        {{ partial "widgets/postcard.html" . }}
+        {{ partial "postcard.html" . }}
       </div>
       {{ end }}
     </div>
     <div class="columns is-centered">
       <div class="column is-narrow">
-        {{ partial "widgets/pagination.html" . }}
+        {{ partial "pagination.html" . }}
       </div>
     </div>
   </div>

@@ -1,19 +1,19 @@
 baseURL = "http://thirdhemisphere.net/"
 languageCode = "en-gb"
 title = "Hugo SEO theme"
-
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
 
 [author]
     name = "Peter Prevos"
-    image = "/images/assets/peter_prevos_small.jpg"
+    image = "/images/peter_prevos_small.jpg"
+
+[params]
+    description = "SEO-optimised theme for Hugo static websites."
+    googleAnalytics = "xxx"
 
 [params.publisher]		
     name = "Third Hemisphere"
-
-[params]
-    description = "Website description."
-    googleAnalytics = "xxx"
+    logo = "/images/logo.png"
 
 [related]
     threshold = 100
