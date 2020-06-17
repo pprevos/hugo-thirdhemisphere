@@ -7,7 +7,30 @@ This is a work-in-progress to create an SEO-optimised HUGO theme. Principles:
 
 This theme is in development and is not available in the wild just yet.
 
-* Todo
+* Search-Engine Optimisation
+This theme implements best practice for search-engine optimisation. The head of the html file contains the usual meta tags. 
+** SEO Assessment
+This theme also contains a partial that assess the content of each single page. This module implements some of the features of the popular Wordpress Yoast plugin. The check is based on the =keyphrase= page parameter. This is the series of words that visitors to your page will most likely use in their search engine. This keyphrase needs to appear at strategic positions in your page.
+
+The SEO module check for the following characteristics:
+- [[https://yoa.st/34h][Title width]] between 50 and 60 characters.
+- [[https://yoa.st/34d][Meta description]] between 120 and 156 characters.
+- [[https://yoa.st/33c][Featured image]] is present (the template will assign the meta description to the alt tag).
+- [[https://yoa.st/34n][Content length]] is at least 300 words.
+- [[https://yoa.st/34i][Keyphrase]] between 1 and 4 words.
+- [[appearse in][Keyphrase]] appears in the title.
+- [[https://yoa.st/33k][Keyphrase]] appears in meta description.
+- [[https://yoa.st/33e][Keyphrase]] appears in first paragraph (first 7 words).
+- [[https://yoa.st/33m][Keyphrase]] appears in headings.
+- [[https://yoa.st/33o][Keyphrase]] appears in slug
+- [[https://yoa.st/33x][Keyphrase]] is not duplicated in another page.
+
+Each page has a default =seo= parameter that is set to =true= by default. If the parameter is set to =false=, then the [[https://developers.google.com/search/reference/robots_meta_tag][robots meta tag]] is set to "noindex, nofollow". Resetting this parameter will also remove the SEO check.
+** Structured data
+Each single page has an article [[https://developers.google.com/search/docs/guides/intro-structured-data][structured data schema]] with meta data for search engines and social media.
+** Canonical content
+All taxonomy pages are enabled with content to develop canonical content. As pages are tagged with their category or tag, a network of links is created that 
+* Progress
 - [X] Technical SEO
   - [X] [[https://yoast.com/academy/][Technical SEO training]]
   - [X] robots.txt
@@ -17,14 +40,31 @@ This theme is in development and is not available in the wild just yet.
     - [X] Robots
     - [X] Canonical
     - [X] hreflang
-  - [X] Alt tags enforced
   - [X] Structured data
+- [X] Recreate Yoast
+  - [X] Text length
+  - [X] Title length
+  - [X] Meta description length
+  - [X] Keyphrase
+    - [X] length (max 4 words)
+    - [X] In title
+    - [X] In description
+    - [X] In summary
+    - [X] In headings
+    - [X] Slug
+    - [X] Previously used
+    - [X] In Alt tag (featured image)
+  - [X] CSS
 - [X] Learn Bulma CSS
-- [ ] index.html
-- [ ] 404 page
+- [-] Templates
+  - [X] Single
+  - [X] Lists
+  - [X] Taxonomies
+  - [ ] index.html
+  - [ ] 404 page
+  - [ ] About
+  - [ ] Contact
 - [ ] Website logo
-- [ ] About
-- [ ] Contact
 - [ ] Favicon
 - [ ] Colour themes
 - [ ] Social sharing buttons
@@ -35,20 +75,6 @@ This theme is in development and is not available in the wild just yet.
 - [ ] link properties
 - [ ] Search engine
 - [ ] Bibliographies through JSON data shortcode (accordion)
-- [-] Recreate Yoast
-  - [X] Text length
-  - [X] Title length
-  - [X] Meta description length
-  - [-] Keyphrase
-    - [X] length (max 4 words)
-    - [X] In title
-    - [X] In description
-    - [X] In summary
-    - [X] In headings
-    - [X] Slug
-    - [ ] Previously used
-    - [X] In Alt tag (featured image)
-  - [X] CSS
 - [ ] Document and deploy theme
 
 

@@ -40,7 +40,7 @@
 	<div class="media-content">
 	  <div class="content">
 	    <p class="is-size-7"><a href="https://yoa.st/34h" target="_blank">
-	      Title width</a>  
+		Title width</a>  
 	      {{ if (lt $lent 50) }}
 	      too short: 
 	      {{ else if (gt $lent 60) }}
@@ -259,13 +259,13 @@
     </div>
     {{ end }}
     <!-- Keyphrase in headings -->
-    {{ with lower .TableOfContents }}
+    {{ $toc := lower .TableOfContents }}
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon">
 	    <i class="fas fa-lg fa-circle 
-		      {{ if (in . $kph) }}
+		      {{ if (in $toc $kph) }}
 		      has-text-success
 		      {{ else }}
 		      has-text-danger
@@ -276,7 +276,7 @@
 	<div class="media-content">
 	  <div class="content">
 	    <p class="is-size-7"><a href="https://yoa.st/33m" target="_blank">Keyphrase</a> 
-	      {{ if (in . $kph) }}
+	      {{ if (in $toc $kph) }}
 	      appears in the headings.
 	      {{ else }}
 	      does not appear in the headings.
@@ -286,7 +286,6 @@
 	</div>
       </article>
     </div>
-    {{ end }}
     <!-- Keyphrase in slug -->
     {{ $kph2 := replace $kph " " "-" }}
     <div class="column is-one-quarter">
@@ -316,17 +315,30 @@
       </article>
     </div>
     <!-- Unique keyphrase -->
-        <div class="column is-one-quarter">
+    {{ $.Scratch.Set "count" 0 }}
+    {{ range .Site.RegularPages }}
+    {{ if eq .Params.keyphrase $kph }}
+    {{ $.Scratch.Add "count" 1 }}
+    {{ end }}
+    {{ end }}
+    {{ $nkp := $.Scratch.Get "count" }}
+    <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon">
-	    <i class="fas fa-lg fa-circle has-text-grey"></i>
+	    <i class="fas fa-lg fa-circle 
+		      {{ if gt $nkp 1 }}
+		      has-text-danger
+		      {{ else }}	
+		      has-text-success
+		      {{ end }}
+		      "></i>
 	  </span>
 	</figure>
 	<div class="media-content">
 	  <div class="content">
 	    <p class="is-size-7"><a href="https://yoa.st/33x" target="_blank">Duplicate keyphrase</a>:
-	      Not yet implemented
+	      keyphrase used {{ $nkp }} time{{ if gt $nkp 1 }}s{{ end }}.
 	    </p>
 	  </div>
 	</div>
@@ -334,5 +346,6 @@
     </div>
     {{ end }} <!-- checks with keyphrase -->
   </div> <!-- end colums -->
-<hr>
+  <hr>
+  
 </section>
