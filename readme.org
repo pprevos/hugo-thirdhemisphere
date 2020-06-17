@@ -3,7 +3,7 @@
 This is a work-in-progress to create an SEO-optimised HUGO theme. Principles:
 - Optimised technical SEO, including [[https://schema.org/][schema.org]] for website and articles
 - Mimicking the functionality of the [[https://yoast.com/][Yoast SEO Wordpress]] plugin
-- Based on [[https://bulma.io/][Bulma CSS]], based on the work by [[https://www.pakstech.com/blog/create-hugo-theme/][Päktech]]
+- Uses [[https://bulma.io/][Bulma CSS]], based on the work by [[https://www.pakstech.com/blog/create-hugo-theme/][Päktech]]
 
 This theme is in development and is not available in the wild just yet.
 
@@ -19,8 +19,12 @@ This theme is in development and is not available in the wild just yet.
     - [X] hreflang
   - [X] Alt tags enforced
   - [X] Structured data
-- [ ] Learn Bulma CSS
+- [X] Learn Bulma CSS
+- [ ] index.html
+- [ ] 404 page
 - [ ] Website logo
+- [ ] About
+- [ ] Contact
 - [ ] Favicon
 - [ ] Colour themes
 - [ ] Social sharing buttons
@@ -29,7 +33,8 @@ This theme is in development and is not available in the wild just yet.
 - [ ] Page counter
 - [ ] Comments
 - [ ] link properties
-- [ ] Bibliographies (through JSON data)
+- [ ] Search engine
+- [ ] Bibliographies through JSON data shortcode (accordion)
 - [-] Recreate Yoast
   - [X] Text length
   - [X] Title length
@@ -43,7 +48,7 @@ This theme is in development and is not available in the wild just yet.
     - [X] Slug
     - [ ] Previously used
     - [X] In Alt tag (featured image)
-  - [ ] CSS
+  - [X] CSS
 - [ ] Document and deploy theme
 
 

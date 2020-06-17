@@ -1,116 +1,338 @@
 <!-- SEO check -->
+<section class="section has-background-light mgt-small">
+  <h2 class="title is-2">SEO Assessment</h2>
+  <!-- Mimick Google preview -->
+  <section class="section">
+    <div class="box">
+      <div class="media">
+	<div class="media-left">
+          <figure class="image is-96x96">
+	    <img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Params.images }}">
+          </figure>
+	</div>
+	<div class="media-content">
+	  <a href= "#">{{ .Title }}</a><br>
+	  <span class="has-text-success is-size-7">{{ .Permalink }}</span><br>
+	  <span class="has-text-grey is-size-7">{{ .PublishDate.Format "Jan 2, 2006"}} - {{ .Description }}</span>
+	</div>
+      </div>
+    </div>
+  </section>
 
-{{ if (in (string .Site.BaseURL) "localhost") }}
-
+  <div class="columns is-multiline is-vcentered">
+    <!-- Title length between 50 and 60 characters -->
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	{{ $lent := (len .Title) }}
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if (lt $lent 50) }}
+		      has-text-warning
+		      {{ else if (gt $lent 60) }}
+		      has-text-danger
+		      {{ else }}
+		      has-text-success
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/34h" target="_blank">
+	      Title width</a>  
+	      {{ if (lt $lent 50) }}
+	      too short: 
+	      {{ else if (gt $lent 60) }}
+	      too long: 
+	      {{ end }}
+	      {{ $lent }} chars.
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    <!-- Meta description between 120 and 156 characters -->
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	{{ $dsl := (len .Description) }}
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if eq $dsl 0 }}
+		      has-text-danger
+		      {{ else if or (lt $dsl 120) (gt $dsl 156) }}
+		      has-text-warning
+		      {{ else }}
+		      has-text-success
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/34d" target="_blank">Meta desrciption</a> is 
+	      {{ if eq $dsl 0 }}
+	      unavailable. 
+	      {{ else if or (lt $dsl 120) (gt $dsl 156) }}
+	      {{ $dsl }} chars.
+	      {{ else }}
+	      {{ $dsl }} chars.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    <!-- Check featured image -->
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if .Params.images }}
+		      has-text-success
+		      {{ else }}
+		      has-text-danger
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/33c" target="_blank">Featured image</a> with alt tags is 
+	      {{ if .Params.images }}
+	      available.
+	      {{ else }}
+	      unavailable.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    <!-- Content has at least 300 words -->
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if gt .WordCount 300 }}
+		      has-text-success
+		      {{ else }}
+		      has-text-danger
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/34n" target="_blank">Wordcount</a> is 
+	      {{ if gt .WordCount 300 }}
+	      longer than 300 words.
+	      {{ else }}
+	      shorter than 300 words.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    <!-- Keyphrase checks -->
+    {{ $kph := (lower .Params.Keyphrase) }}
+    {{ $kpl := (countwords $kph) }}
+    <!-- Keyphrase between 1 and 4 words -->
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if (lt $kpl 1) }}
+		      has-text-danger
+		      {{ else if (gt $kpl 6) }}
+		      has-text-warning
+		      {{ else }}
+		      has-text-success
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/34i" target="_blank">Keyphrase</a> 
+	      {{ if (lt $kpl 1) }}
+	      unavailable.
+	      {{ else if (gt $kpl 6) }}
+	      "{{ $kph }}". Longer than the recommended 6 words.
+	      {{ else }}
+	      "{{ $kph }}".
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    {{ if gt $kpl 0 }}
+    <!-- Keyphrase in title -->
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if (in (lower .Title) $kph) }}
+		      has-text-success
+		      {{ else }}
+		      has-text-danger
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/33g" target="_blank">Keyphrase</a> 
+	      {{ if (in (lower .Title) $kph) }}
+	      appears in the title.
+	      {{ else }}
+	      does not appear in the title.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    <!-- Keyphrase in meta description -->
+    {{ with lower .Description }}
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if (in . $kph) }}
+		      has-text-success
+		      {{ else }}
+		      has-text-danger
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/33k" target="_blank">Keyphrase</a> 
+	      {{ if (in . $kph) }}
+	      appears in the description.
+	      {{ else }}
+	      does not appear in the description.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    {{ end }}
+    <!-- Keyphrase in first paragraph -->
+    {{ with lower .Summary }}
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if (in . $kph) }}
+		      has-text-success
+		      {{ else }}
+		      has-text-danger
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/33e" target="_blank">Keyphrase</a> 
+	      {{ if (in . $kph) }}
+	      appears in the first paragraph.
+	      {{ else }}
+	      does not appear in the first {{ countwords . }} words.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    {{ end }}
+    <!-- Keyphrase in headings -->
+    {{ with lower .TableOfContents }}
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if (in . $kph) }}
+		      has-text-success
+		      {{ else }}
+		      has-text-danger
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/33m" target="_blank">Keyphrase</a> 
+	      {{ if (in . $kph) }}
+	      appears in the headings.
+	      {{ else }}
+	      does not appear in the headings.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    {{ end }}
+    <!-- Keyphrase in slug -->
+    {{ $kph2 := replace $kph " " "-" }}
+    <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle 
+		      {{ if in .RelPermalink $kph2 }}
+		      has-text-success
+		      {{ else }}
+		      has-text-danger
+		      {{ end}}
+		      "></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/33o" target="_blank">Keyphrase</a> 
+	      {{ if in .RelPermalink $kph2 }}
+	      appears in the slug.
+	      {{ else }}
+	      does not appear in the slug.
+	      {{ end }}
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    <!-- Unique keyphrase -->
+        <div class="column is-one-quarter">
+      <article class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon">
+	    <i class="fas fa-lg fa-circle has-text-grey"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"><a href="https://yoa.st/33x" target="_blank">Duplicate keyphrase</a>:
+	      Not yet implemented
+	    </p>
+	  </div>
+	</div>
+      </article>
+    </div>
+    {{ end }} <!-- checks with keyphrase -->
+  </div> <!-- end colums -->
 <hr>
-<p>Keyphrase: {{ .Params.Keyphrase }}</p>
-<p>Meta description: {{ .Description }}</p>
-<hr>
-
-<!-- Title length between 50 and 60 characters -->
-{{ $lent := (len .Title) }}
-{{ if (lt $lent 50) }}
-<p><a href="https://yoa.st/34h">Title width</a>: The title is too short ({{ $lent }} characters). Use the space to add keyphrase variations or create compelling call-to-action copy.</p>
-{{ else if (gt $lent 60) }}
-<p><a href="https://yoa.st/34h">Title width</a> is {{ $lent }} characters: The title is too long. Use the space to add keyphrase variations or create compelling call-to-action copy.</p>
-{{ else }}
-<p><a href="https://yoa.st/34h">Title width</a> is {{ $lent }} characters: Good job!</p>
-{{ end }}
-
-<!-- Meta description between 120 and 156 characters -->
-{{ $dsl := (len .Description) }}
-{{ if eq $dsl 0 }}
-<p><a href="https://yoa.st/34d">No meta description has been specified</a>. Search engines will display copy from the page instead. Make sure to write one!</p>
-{{ else if lt $dsl 120 }}
-<p><a href="https://yoa.st/34d">Meta description</a> is {{ $dsl }} characters: The meta description is shorter than 120 characters. Up to 156 characters are available. Use the space!</p>
-{{ else if gt $dsl 156 }}
-<p><a href="https://yoa.st/34d">Meta description</a> is {{ $dsl }} characters: The meta description is over 156 characters. To ensure the entire description will be visible, you should reduce the length!</p>
-{{ else }}
-<p><a href="https://yoa.st/34d">Meta description</a> is {{ $dsl }} words: Good job!</p>
-{{ end }}
-
-<!-- Check featured image -->
-{{ if .Params.images }}
-<p><a href = "https://yoa.st/33c">Image alt attributes</a>: Well done!</p>
-{{ else }}
-<p><a href = "https://yoa.st/33c">Image alt attributes</a>: No featured image appears on this page. The theme will add the meta description to the alt attribute. Add one!</p>
-{{ end }}
-
-<!-- Content has at least 300 words -->
-{{ if lt .WordCount 300 }}
-<p>The text contains {{ .WordCount }}  words. This is below the recommended minimum of 300 words. <a href="https://yoa.st/34n">Add more content.</a></p>
-{{ else }}
-<p>The text has a <a href="https://yoa.st/34n">length</a> of {{ .WordCount }} words. Good job!</p>
-{{ end }}
-
-<hr>
-
-<!-- Keyphrase checks -->
-{{ $kph := (lower .Params.Keyphrase) }}
-{{ $kpl := (countwords $kph) }}
-
-<!-- Keyphrase maximum 4 words -->
-{{ if (lt $kpl 1) }}
-<p>No focus <a href = "https://yoa.st/33i">Keyphrase</a> was set for this page. Define the keyphrase variable in the front matter.</p>
-{{ else if (gt $kpl 6) }}
-<p><a href = "https://yoa.st/33i">Keyphrase</a> has {{ $kpl }} words. That's perhaps more than the recommended maximum of 4 words. Make it shorter!</p>
-{{ else }}
-<p><a href = "https://yoa.st/33i">Keyphrase</a> has {{ $kpl }} words: Good job!</p>
-{{ end }}
-
-{{ if gt $kpl 0 }}
-
-<!-- Unique keyphrase -->
-{{ range .Site.Pages }}
-{{ .Params.Keyphrase }}
-{{ if in (lower .Params.Keyphrase) $kph }}
-<p><a href = "https://yoa.st/33x">Previously used keyphrase</a>: You've used this keyphrase <a href = "{{ .Params.RelPermalink }}">before</a>. Do not use your keyphrase more than once. {{ .Page.Title }}</p>
-{{ end }}
-{{ end }}
-
-<!-- Keyphrase in title -->
-{{ if (in (lower .Title) $kph) }}
-<p><a href="https://yoa.st/33g">Keyphrase in title</a>: The exact match of the keyphrase appears in the title. Good job!</p>
-{{ else }}
-<p><a href="https://yoa.st/33g">Keyphrase in title</a>: Your keyphrase "{{ $kph }}" does not appear in the SEO title. Try to use the exact match of your keyphrase in the title.</p>
-{{ end }}
-
-<!-- Keyphrase in meta desciption -->
-{{ with .Description }}
-{{ if (in . $kph) }}
-<p><a href = "https://yoa.st/33k">Keyphrase in meta description</a>: Well done!</p>
-{{ else }}
-<p><a href = "https://yoa.st/33k">Keyphrase in meta description</a>: The meta description does not contain the keyphrase. Fix that!</p>
-{{ end }}
-{{ end }}
-
-<!-- Keyphrase in meta summary -->
-{{ with .Summary }}
-{{ if (in (lower . ) $kph) }}
-<p><a href = "https://yoa.st/33e">Keyphrase in introduction</a>: Well done!</p>
-{{ else }}
-<p><a href = "https://yoa.st/33e">Keyphrase in introduction</a>: Your keyphrase does not appear in the first {{ countwords . }} words. Make sure the topic is clear immediately.</p>
-{{ end }}
-{{ end }}
-
-<!-- Keyphrase in Table of Contents -->
-{{ with .TableOfContents }}
-{{ if (in (lower . ) $kph) }}
-<p><a href="https://yoa.st/33m">Keyphrase in subheading</a>: Your higher-level subheading reflects the topic of your copy. Good job!</p>
-{{ else }}
-<p><a href="https://yoa.st/33m">Keyphrase in subheading</a>: Use more keyphrases or synonyms in your higher-level subheadings!</p>
-{{ end }}
-{{ end }}
-
-<!-- Keyphrase in slug -->
-{{ if in .RelPermalink $kph }}
-<p><a href = "https://yoa.st/33o">Keyphrase in slug</a>: Great work</p>
-{{ else }}
-<p><a href = "https://yoa.st/33o">Keyphrase in slug</a>: Your keyphrase does not appear in the slug. Change that!</p>
-{{ end }}
-
-      
-{{ end }} <!-- End keyphrase check -->
-
-{{ end }} <!-- End SEO check -->
-<hr>
+</section>

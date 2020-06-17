@@ -4,7 +4,9 @@
     <div class="columns is-centered">
       <div class="column max-800px">
 	<h1 class="title is-1">{{ .Title }}</h1>
+	{{ if (in (string .Site.BaseURL) "localhost") }}
 	{{ partial "seo-check.html" . }}
+	{{ end }}
 	<div class="title subtitle heading is-6">
 	  <div class="columns is-vcentered">
 	    <div class="column">
