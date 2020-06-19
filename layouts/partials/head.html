@@ -6,18 +6,21 @@
   <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Site.LanguageCode }}" />
   <title>{{ if not .IsHome }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end }}{{ end }} ">
+  <link rel="icon" type="image/png"
+	href="{{ .Site.Params.logo |absURL }}">
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
   {{ if not (in (string .Site.BaseURL) "localhost") }}
   {{ template "_internal/google_analytics_async.html" . }}
   {{ end }}
   {{- if and .IsPage .Params.seo -}}
-  {{ partial "schema-page.html" . }}
+  {{ partial "schema-article.html" . }}
   {{- end }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <script src="https://use.fontawesome.com/{{ .Site.Params.FontAwesome }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   <!-- Parse LaTeX formulas with MathJax -->
   <!-- set math = true in the page -->
   {{ if .Params.math }}

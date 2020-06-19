@@ -17,17 +17,24 @@
 		</div>
 		{{ end }}
 		<div class="column">
-		  <p>{{ .Site.Author.name }}</p>
-		  <p><time>{{ .PublishDate.Format "2 January 2006" }}</time> |
+		  <p>{{ .Site.Author.name }} | 
+		    <time>{{ .PublishDate.Format "2 January 2006" }}</time> <br>
 		    {{ .WordCount }} words | 
-		    {{ .ReadingTime }} {{ if eq .ReadingTime 1 }} minute {{ else }} minutes {{ end }}</p>
+		    {{ .ReadingTime }} minute{{ if gt .ReadingTime 1 }}s{{ end }}</p>
 		</div>
 	      </div>
 	    </div>
-	    <div class="column">
-	      {{ range $idx, $category := .Params.categories }}
-	      {{- if ne $idx 0 }}, {{ end }}<a href="{{ "categories/" | relURL }}{{ $category | urlize }}">{{ $category }}</a>
-	      {{- end }}
+	    <div class="column">	      
+	      <div class="tags is-pulled-left">
+		{{ range .Params.categories }}
+		<a class="tag is-primary is-radiusless" href="/categories/{{ . | urlize}}">{{ . }}</a>
+		{{ end }}
+	      </div>
+              <div class="tags is-pulled-right">
+		{{ range .Params.tags }}
+		<a class="tag is-info is-radiusless" href="/tags/{{ . | urlize}}">{{ . }}</a>
+		{{ end }}
+	      </div>
 	    </div>
 	  </div>
 	</div>
@@ -36,6 +43,7 @@
 	</figure>
 	<div class="content">
 	  {{ .Content }}
+	  {{ partial "social-share.html" . }}
 	</div>
       </div>
   </article>

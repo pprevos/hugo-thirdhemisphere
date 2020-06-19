@@ -1,14 +1,20 @@
 # Third Hemisphere Hugo Theme
 
 This is a work-in-progress to create an SEO-optimised HUGO theme. Principles:
-- Optimised technical SEO, including [[https://schema.org/][schema.org]] for website and articles
+- Optimised technical SEO, including [[https://schema.org/][schema.org]] for articles
 - Mimicking the functionality of the [[https://yoast.com/][Yoast SEO Wordpress]] plugin
 - Uses [[https://bulma.io/][Bulma CSS]], based on the work by [[https://www.pakstech.com/blog/create-hugo-theme/][Päktech]]
 
 This theme is in development and is not available in the wild just yet.
 
-* Search-Engine Optimisation
-This theme implements best practice for search-engine optimisation. The head of the html file contains the usual meta tags. 
+* Technical SEO
+This theme implements the following
+- Meta tags for title, description, canonical and hreflang self-referencing links.
+- Robots meta tags configurable with the `seo` page variable.
+  - `true`: index, follow
+  - `false` or missing: noindex, nofollow
+
+The head of the html file contains the usual meta tags. 
 ** SEO Assessment
 This theme also contains a partial that assess the content of each single page. This module implements some of the features of the popular Wordpress Yoast plugin. The check is based on the =keyphrase= page parameter. This is the series of words that visitors to your page will most likely use in their search engine. This keyphrase needs to appear at strategic positions in your page.
 
@@ -30,6 +36,12 @@ Each page has a default =seo= parameter that is set to =true= by default. If the
 Each single page has an article [[https://developers.google.com/search/docs/guides/intro-structured-data][structured data schema]] with meta data for search engines and social media.
 ** Canonical content
 All taxonomy pages are enabled with content to develop canonical content. As pages are tagged with their category or tag, a network of links is created that 
+* Social Media links
+The social media menu in the =config.toml= provides icons and links to your profiles. You can find the icons on the [[https://fontawesome.com/icons?d=gallery][Font Awesome]] website, e.g. "=fab fa-github=". The icons link to the [[https://cdn.fontawesome.com/][Font Awesome CDN]]. You will need to get your own CDN-link and add it to the config file to make it work.
+* Copyright statement
+A copyright statement appears in the central footer column with the appropriate icon. The `license` variable in the site parameters section of your configuration file holds the copyright statement text. the `cc` variable holds the icon name from the [[https://fontawesome.com/][Font Awesome]] library.
+* Branding
+The logo image is a square png file that is used in the navigation bar and as the favicon.
 * Progress
 - [X] Technical SEO
   - [X] [[https://yoast.com/academy/][Technical SEO training]]
@@ -41,39 +53,41 @@ All taxonomy pages are enabled with content to develop canonical content. As pag
     - [X] Canonical
     - [X] hreflang
   - [X] Structured data
-- [X] Recreate Yoast
-  - [X] Text length
-  - [X] Title length
-  - [X] Meta description length
-  - [X] Keyphrase
-    - [X] length (max 4 words)
-    - [X] In title
-    - [X] In description
-    - [X] In summary
-    - [X] In headings
-    - [X] Slug
-    - [X] Previously used
-    - [X] In Alt tag (featured image)
-  - [X] CSS
+  - [X] Recreate Yoast
+    - [X] Text length
+    - [X] Title length
+    - [X] Meta description length
+    - [X] Keyphrase
+      - [X] length (max 4 words)
+      - [X] In title
+      - [X] In description
+      - [X] In summary
+      - [X] In headings
+      - [X] Slug
+      - [X] Previously used
+      - [X] In Alt tag (featured image)
+    - [X] CSS
 - [X] Learn Bulma CSS
 - [-] Templates
   - [X] Single
   - [X] Lists
-  - [X] Taxonomies
+  - [ ] Taxonomies
   - [ ] index.html
   - [ ] 404 page
   - [ ] About
   - [ ] Contact
-- [ ] Website logo
-- [ ] Favicon
-- [ ] Colour themes
-- [ ] Social sharing buttons
-- [ ] Source code snippets
+- [X] FontAwesome
+- [X] Social media links
+- [X] Copyright statement
+- [X] Favicon
+- [X] Social sharing buttons
 - [ ] RSS (taxonomies)
-- [ ] Page counter
+- [ ] Google Analytics
 - [ ] Comments
 - [ ] link properties
 - [ ] Search engine
+- [ ] Admin dashboard (localhost only)
+- [ ] Source code snippets
 - [ ] Bibliographies through JSON data shortcode (accordion)
 - [ ] Document and deploy theme
 

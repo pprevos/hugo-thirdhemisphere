@@ -1,0 +1,51 @@
+<section class="has-text-centered">
+  <ul class="share-buttons">
+    <!-- Twitter -->
+    {{ if .Site.Params.twitter }}
+    <li>
+      <a href="http://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via @{{ .Site.Params.twitter }}"
+	 target = "_blank", title = "Tweet this article">
+	<span style="color:#6CADDE">
+	  <i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
+	</span>
+      </a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </li>
+    {{ end }}
+    <!-- Facebook -->
+    {{ if .Site.Params.facebook }}
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftest.com&quote=" target="_blank"
+	 title="Share on Facebook"
+	 onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;">
+	<span style="color:#0e1f56">
+	<i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i>
+</span>
+      </a>
+    </li>
+    {{ end }}
+    <!-- Reddit -->
+    {{ if .Site.Params.reddit }}
+    <li><a href="http://www.reddit.com/submit?url=http%3A%2F%2Ftest.com&title=" target="_blank"
+	   title="Submit to Reddit"
+	   onclick="window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
+	<span style="color:#FF5700">
+	  <i class="fa fa-reddit-square fa-3x" aria-hidden="true"></i>
+	</span>
+      </a>
+    </li>
+    {{ end }}
+    <!-- LinedIn -->
+    {{ if .Site.Params.linkedin }}
+    <li>
+      <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftest.com&title=&summary=&source=http%3A%2F%2Ftest.com"
+	 target="_blank" title="Share on LinkedIn"
+	 onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
+		<span style="color:#0072b1">
+		  <i class="fa fa-linkedin fa-3x" aria-hidden="true"></i>
+		  </span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>

@@ -1,41 +1,44 @@
 <header>
-    <nav class="navbar" role="navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a href="{{ .Site.BaseURL }}" title="home" class="navbar-item">
-                    <span class="logo"><h2>{{ .Site.Title }}</h2></span>
-                </a>
-                {{ range .Site.Menus.social }}
-                <a href="{{ .URL }}" class="navbar-item is-hidden-desktop" title="{{ .Name }}"><span
-                        class="icon">{{ .Pre }}</span></a>
-                {{ end }}
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div class="navbar-menu">
-                <div class="navbar-start">
-                    {{ range .Site.Menus.main }}
-                    <a href="{{ .URL }}" class="navbar-item">{{ .Name }}</a>
-                    {{ end }}
-                </div>
-                <div class="navbar-end">
-                    {{ range .Site.Menus.social }}
-                    <a href="{{ .URL }}" class="navbar-item is-hidden-touch" title="{{ .Name }}"><span
-                            class="icon">{{ .Pre }}</span></a>
-                    {{ end }}
-                </div>
-            </div>
+  <nav class="navbar" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+	<a class="navbar-item" href="{{ .Site.BaseURL }}">
+	  <img src="{{ .Site.Params.Logo }}" alt="{{ .Site.Params.description }}" width="30" height="30">
+	</a>
+        <a href="{{ .Site.BaseURL }}" title="home" class="navbar-item">
+          <span class="logo"><h2>{{ .Site.Title }}</h2></span>
+        </a>
+        {{ range .Site.Menus.social }}
+        <a href="{{ .URL }}" class="navbar-item is-hidden-desktop" title="{{ .Name }}">
+	  <span class="icon fa-lg"><i class="{{ .Pre }}"></i></span></a>
+        {{ end }}
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          {{ range .Site.Menus.main }}
+          <a href="{{ .URL }}" class="navbar-item">{{ .Name }}</a>
+          {{ end }}
         </div>
-    </nav>
-    <script>
-        $(document).ready(function () {
-            $(".navbar-burger").click(function () {
-                $(".navbar-burger").toggleClass("is-active");
-                $(".navbar-menu").toggleClass("is-active");
-            })
+        <div class="navbar-end">
+          {{ range .Site.Menus.social }}
+          <a href="{{ .URL }}" class="navbar-item is-hidden-touch" title="{{ .Name }}">
+	    <span class="icon fa-lg"><i class="{{ .Pre }}"></i></span></a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </nav>
+  <script>
+    $(document).ready(function () {
+        $(".navbar-burger").click(function () {
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("is-active");
         })
-    </script>
+    })
+  </script>
 </header>

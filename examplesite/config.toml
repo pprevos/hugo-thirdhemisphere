@@ -1,0 +1,58 @@
+baseURL = "http://thirdhemisphere.net/"
+languageCode = "en-gb"
+title = "Hugo SEO theme"
+theme = "gohugo-thirdhemisphere"
+themesDir = "../.."
+
+[author]
+    name = "Peter Prevos"
+    image = "/images/peter_prevos_small.jpg"
+
+[params]
+    description = "SEO-optimised theme for Hugo static websites."
+    googleAnalytics = "xxx"
+    FontAwesome = "17d563593b.js"
+    logo = "/images/logo.png"
+    license = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+    cc = "fa fa-creative-commons"
+    facebook = true
+    twitter = "pprevos"
+    reddit = true
+    linkedin = true
+
+
+[[menu.main]]
+    name = "About"
+    url = "/about"
+
+[[menu.main]]
+    name = "Categories"
+    url = "/categories"
+
+[[menu.main]]
+  name = "Articles"
+  url = "/articles"
+
+[[menu.main]]
+    name = "Contact"
+    url = "/contact"
+
+[[menu.footer]]
+  name = "About"
+  url = "/about"
+
+[[menu.footer]]
+  name = "Privacy"
+  url = "/privacy"
+
+[[menu.social]]
+    name = "GitHub"
+    url = "https://github.com/pprevos"
+    pre = "fa fa-github"
+
+[[menu.social]]
+    name = "Twitter"
+    url = "https://twitter.com/pprevos"
+    pre = "fa fa-twitter"
+
+

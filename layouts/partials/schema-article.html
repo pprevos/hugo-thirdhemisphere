@@ -1,0 +1,40 @@
+<script type="application/ld+json">
+  {
+      "@context": "http://schema.org/",
+      "@type":"BlogPosting",
+      "mainEntityOfPage": {
+	  "@type": "WebPage",
+	  "@id": "{{ .Permalink }}"
+      },
+      "headline": "{{ .Title }}",
+      "description": "{{ .Description }}",
+      "image": [{{ with .Params.images -}} {{ delimit . ", " }} {{- end }}],
+      {{ if not .PublishDate.IsZero -}}
+      "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+      {{- else if not .Date.IsZero -}}
+      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+      {{- end }}
+      {{ with .Lastmod -}}
+      "dateModified": "{{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+      {{- end }}
+      {{ if .Params.author -}}
+      "author": {
+	  "@type": "Person",
+	  "name": "{{ .Params.author }}"
+      },
+      {{- else if .Site.Author.name -}}
+      "author": {
+	  "@type": "Person",
+	  "name": "{{ .Site.Author.name }}"
+      },
+      {{- end }}
+      "publisher": {
+	  "@type": "Organization",
+	  "name": "{{ .Site.Title }}",
+	  "logo": {
+	      "@type": "ImageObject",
+	      "url": "{{ .Site.Params.logo | absURL }}"
+	  }
+      }
+  }
+</script>

@@ -1,11 +1,23 @@
 <footer class="footer">
   <div class="container">
-    <div class="columns has-text-centered">
-      {{ range .Site.Menus.footer }}
-      <div class="column is-narrow">
-        <a href="{{ .URL }}" class="">{{ .Name }}</a>
+    <div class="columns">
+      <div class="column has-text-left">
+	<aside class="menu">
+	  <ul class="menu-list">
+	    {{ range .Site.Menus.footer }}
+	    <li>
+	      <a href="{{ .URL | absURL }}" class="">{{ .Name }}</a>
+	    </li>
+	    {{ end }}
+	  </ul>
+	</aside>
       </div>
-      {{ end }}
+      <div class="column has-text-centeredx">
+	<span class="icon fa-lg"><i class="{{ .Site.Params.cc }}"></i></span>
+	{{ .Site.Params.license }}
+      </div>
+      <div class="column has-text-right">
+      </div>
     </div>
   </div>
 </footer>

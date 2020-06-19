@@ -25,8 +25,8 @@
       <article class="media notification has-background-white">
 	{{ $lent := (len .Title) }}
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if (lt $lent 50) }}
 		      has-text-warning
 		      {{ else if (gt $lent 60) }}
@@ -57,8 +57,8 @@
       <article class="media notification has-background-white">
 	{{ $dsl := (len .Description) }}
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if eq $dsl 0 }}
 		      has-text-danger
 		      {{ else if or (lt $dsl 120) (gt $dsl 156) }}
@@ -88,8 +88,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if .Params.images }}
 		      has-text-success
 		      {{ else }}
@@ -115,8 +115,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if gt .WordCount 300 }}
 		      has-text-success
 		      {{ else }}
@@ -145,8 +145,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if (lt $kpl 1) }}
 		      has-text-danger
 		      {{ else if (gt $kpl 6) }}
@@ -177,8 +177,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if (in (lower .Title) $kph) }}
 		      has-text-success
 		      {{ else }}
@@ -205,8 +205,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if (in . $kph) }}
 		      has-text-success
 		      {{ else }}
@@ -234,8 +234,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if (in . $kph) }}
 		      has-text-success
 		      {{ else }}
@@ -263,8 +263,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if (in $toc $kph) }}
 		      has-text-success
 		      {{ else }}
@@ -291,8 +291,8 @@
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if in .RelPermalink $kph2 }}
 		      has-text-success
 		      {{ else }}
@@ -315,18 +315,17 @@
       </article>
     </div>
     <!-- Unique keyphrase -->
-    {{ $.Scratch.Set "count" 0 }}
-    {{ range .Site.RegularPages }}
-    {{ if eq .Params.keyphrase $kph }}
-    {{ $.Scratch.Add "count" 1 }}
+    {{ $nkp := 0}}
+      {{ range .Site.RegularPages }}
+      {{ if eq .Params.keyphrase $kph }}
+        {{ $nkp = add $nkp 1 }}
+      {{ end }}
     {{ end }}
-    {{ end }}
-    {{ $nkp := $.Scratch.Get "count" }}
     <div class="column is-one-quarter">
       <article class="media notification has-background-white">
 	<figure class="media-left">
-	  <span class="icon">
-	    <i class="fas fa-lg fa-circle 
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
 		      {{ if gt $nkp 1 }}
 		      has-text-danger
 		      {{ else }}	
