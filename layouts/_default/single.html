@@ -11,11 +11,10 @@
 	  <div class="columns is-vcentered">
 	    <div class="column">
 	      <div class="columns is-vcentered is-mobile">
-		{{ with .Site.Author.image }}
 		<div class="column is-narrow">
-		  <img src="{{ . }}" class="author-image">
+		  <img src="{{ .Site.Author.image | absURL }}" class="author-image"
+		       alt = "{{ .Site.Author.name }}">
 		</div>
-		{{ end }}
 		<div class="column">
 		  <p>{{ .Site.Author.name }} | 
 		    <time>{{ .PublishDate.Format "2 January 2006" }}</time> <br>
@@ -60,7 +59,14 @@
       <div class="columns">
         {{ range $related }}
         <div class="column is-one-third">
-          {{ partial "postcard-small.html" . }}
+          <div class="card">
+	    <div class="card-image">
+              <figure class="image is-3by2">
+		<a href="{{ .Permalink }}">
+		  <img src="{{ with .Params.images }}{{ index . 0 }}{{ end }}" alt="{{ .Description }}"></a>
+              </figure>
+	    </div>
+	  </div>
         </div>
         {{ end }}
       </div>

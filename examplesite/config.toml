@@ -1,6 +1,6 @@
+title = "Hugo SEO theme"
 baseURL = "http://thirdhemisphere.net/"
 languageCode = "en-gb"
-title = "Hugo SEO theme"
 theme = "gohugo-thirdhemisphere"
 themesDir = "../.."
 
@@ -13,13 +13,12 @@ themesDir = "../.."
     googleAnalytics = "xxx"
     FontAwesome = "17d563593b.js"
     logo = "/images/logo.png"
-    license = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+    license = "This work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-sa/4.0/' target = '_blank'>Creative Commons Attribution-ShareAlike 4.0 International </a> License."
     cc = "fa fa-creative-commons"
     facebook = true
     twitter = "pprevos"
     reddit = true
     linkedin = true
-
 
 [[menu.main]]
     name = "About"

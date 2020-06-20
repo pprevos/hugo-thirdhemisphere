@@ -1,0 +1,18 @@
+{{ $count := .Get "count" | default 6 }}
+{{ $pages := where .Site.RegularPages "Type" "in" site.Params.mainSections }}
+
+<section class="section is-centered">
+  <div class="columns is-centered">
+    <div class="column max-800px">
+      <h2 class="title has-text-centered">Recent Articles</h2>
+      <div class="columns is-multiline">
+        {{ range first $count $pages }}
+        <div class="column is-half">
+          {{ partial "postcard.html" . }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+</section>

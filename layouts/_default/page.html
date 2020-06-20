@@ -1,0 +1,42 @@
+{{ define "main" }}
+<section class="section">
+  <article>
+    <div class="columns is-centered">
+      <div class="column max-800px">
+	<h1 class="title is-1">{{ .Title }}</h1>
+	<figure class="title-image">
+	  <img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Description }}">
+	</figure>
+	<div class="content">
+	  {{ .Content }}
+	</div>
+      </div>
+  </article>
+</section>
+<section class="section">
+  {{ $related := (where (.Site.RegularPages.Related .) "Type" "articles") | first 3 }}
+  <div class="columns is-centered">
+    <div class="column max-800px">
+      <div class="content">
+	{{ if (ne (len $related) 0) }}
+	<h3>Related articles</h3>
+	{{ end }}
+      </div>
+      <div class="columns">
+        {{ range $related }}
+        <div class="column is-one-third">
+          <div class="card">
+	    <div class="card-image">
+              <figure class="image is-3by2">
+		<a href="{{ .Permalink }}">
+		  <img src="{{ with .Params.images }}{{ index . 0 }}{{ end }}" alt="{{ .Description }}"></a>
+              </figure>
+	    </div>
+	  </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

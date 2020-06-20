@@ -1,9 +1,23 @@
 {{ define "main" }}
-<div class="container">
-    <div class="section">
-        <div class="content">
-            {{ .Content }}
-        </div>
+<div class="hero is-dark is-fullheight-with-navbar"
+     {{ with .Params.heroimage }} style="background: url({{ . }}) center top; background-size:cover;" {{ end }}>
+  <div class="hero-body">
+    <div class="colums is-centered">
+    <div class="column max-800px", style="position:absolute;bottom:20px;left:20%;">
+      <h1 class="title is-1">{{ .Title }}</h1>
+      <h2 class="title subtitle is-4">{{ .Params.herotext }}</h2>
+      </div>
     </div>
+  </div>
 </div>
+<section class="section">
+  <article>
+    <div class="columns is-centered">
+      <div class="column max-800px">
+	<div class="content is-centered">
+	  {{ .Content }}
+	</div>
+      </div>
+  </article>
+</section>
 {{ end }}

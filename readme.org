@@ -68,20 +68,20 @@ The logo image is a square png file that is used in the navigation bar and as th
       - [X] In Alt tag (featured image)
     - [X] CSS
 - [X] Learn Bulma CSS
-- [-] Templates
+- [X] Templates
   - [X] Single
   - [X] Lists
-  - [ ] Taxonomies
-  - [ ] index.html
-  - [ ] 404 page
-  - [ ] About
-  - [ ] Contact
+  - [X] Taxonomies
+  - [X] index.html
+  - [X] 404 page
+  - [X] About
+  - [X] Contact
 - [X] FontAwesome
 - [X] Social media links
 - [X] Copyright statement
 - [X] Favicon
 - [X] Social sharing buttons
-- [ ] RSS (taxonomies)
+- [ ] RSS (total, categories and tags)
 - [ ] Google Analytics
 - [ ] Comments
 - [ ] link properties

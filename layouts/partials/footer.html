@@ -12,12 +12,27 @@
 	  </ul>
 	</aside>
       </div>
-      <div class="column has-text-centeredx">
-	<span class="icon fa-lg"><i class="{{ .Site.Params.cc }}"></i></span>
-	{{ .Site.Params.license }}
+      <div class="column">
+	<div class="columns is-vcentered">
+	  <div class="narrowcolumn">
+	    <figure class="media-left">
+	      <span class="icon fa-2x"><i class="{{ .Site.Params.cc }}"></i></span>
+	    </figure>	  
+	  </div>
+	  <div class="column">
+	    <div class="content has-text-centered">
+	      {{ .Site.Params.license  | safeHTML }}
+	    </div>
+	  </div>
+	</div>
       </div>
       <div class="column has-text-right">
+	<a href="https://bulma.io">
+  <img src="/img/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+</a>
       </div>
     </div>
   </div>
 </footer>
+
+
