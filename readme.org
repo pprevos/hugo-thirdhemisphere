@@ -41,54 +41,14 @@ The social media menu in the =config.toml= provides icons and links to your prof
 * Copyright statement
 A copyright statement appears in the central footer column with the appropriate icon. The `license` variable in the site parameters section of your configuration file holds the copyright statement text. the `cc` variable holds the icon name from the [[https://fontawesome.com/][Font Awesome]] library.
 * Branding
-The logo image is a square png file that is used in the navigation bar and as the favicon.
-* Progress
-- [X] Technical SEO
-  - [X] [[https://yoast.com/academy/][Technical SEO training]]
-  - [X] robots.txt
-  - [X] Meta tags
-    - [X] Description
-    - [X] Title
-    - [X] Robots
-    - [X] Canonical
-    - [X] hreflang
-  - [X] Structured data
-  - [X] Recreate Yoast
-    - [X] Text length
-    - [X] Title length
-    - [X] Meta description length
-    - [X] Keyphrase
-      - [X] length (max 4 words)
-      - [X] In title
-      - [X] In description
-      - [X] In summary
-      - [X] In headings
-      - [X] Slug
-      - [X] Previously used
-      - [X] In Alt tag (featured image)
-    - [X] CSS
-- [X] Learn Bulma CSS
-- [X] Templates
-  - [X] Single
-  - [X] Lists
-  - [X] Taxonomies
-  - [X] index.html
-  - [X] 404 page
-  - [X] About
-  - [X] Contact
-- [X] FontAwesome
-- [X] Social media links
-- [X] Copyright statement
-- [X] Favicon
-- [X] Social sharing buttons
-- [ ] RSS (total, categories and tags)
-- [ ] Google Analytics
-- [ ] Comments
-- [ ] link properties
-- [ ] Search engine
-- [ ] Admin dashboard (localhost only)
-- [ ] Source code snippets
-- [ ] Bibliographies through JSON data shortcode (accordion)
-- [ ] Document and deploy theme
+The logo image is a square png file that is used in the navigation bar and as the favicon. The location of the logo file is identified in the params section of the config file, e.g. =logo = "/favicon.png"=.
 
+Ideally, a website has several versions of icons for the various browsers on desktop and mobile. The [[https://realfavicongenerator.net/][Favicon Generator]] website helps you to create a complete set. This theme only uses a 128 by 128 pixel png file, which most browsers seem to be able to handle.
+* Contact form
+The =contact-from= shortcode enables the form by assigning an endpoint that processes the data. The example below uses [[https://formspree.io/][Formspree]], that can be any other endpoint.
+#+begin_src 
+{{< contact-form endpoint="https://formspree.io/jtshwodj" >}}
+#+end_src
 
+* External links
+The =lnk= shortcode helps to create blank targets for external links. ={{< lnk url="https://website.com/" >}}=

@@ -1,8 +1,10 @@
 <!-- SEO check -->
-<section class="section has-background-light mgt-small">
-  <h2 class="title is-2">SEO Assessment</h2>
+{{ $tit := .Title }}
+{{ if .Params.seotitle }}
+{{ $tit = .Params.seotitle }}
+{{ end }}
+<aside class="section has-background-light mgt-small">
   <!-- Mimick Google preview -->
-  <section class="section">
     <div class="box">
       <div class="media">
 	<div class="media-left">
@@ -11,19 +13,18 @@
           </figure>
 	</div>
 	<div class="media-content">
-	  <a href= "#">{{ .Title }}</a><br>
+	  <a href= "#">{{ $tit }}</a><br>
 	  <span class="has-text-success is-size-7">{{ .Permalink }}</span><br>
 	  <span class="has-text-grey is-size-7">{{ .PublishDate.Format "Jan 2, 2006"}} - {{ .Description }}</span>
 	</div>
       </div>
     </div>
-  </section>
 
   <div class="columns is-multiline is-vcentered">
     <!-- Title length between 50 and 60 characters -->
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
-	{{ $lent := (len .Title) }}
+      <aside class="media notification has-background-white">
+	{{ $lent := (len $tit) }}
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -50,11 +51,11 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     <!-- Meta description between 120 and 156 characters -->
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	{{ $dsl := (len .Description) }}
 	<figure class="media-left">
 	  <span class="icon fa-lg">
@@ -82,11 +83,11 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     <!-- Check featured image -->
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -109,11 +110,11 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     <!-- Content has at least 300 words -->
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -136,14 +137,15 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
+
     <!-- Keyphrase checks -->
     {{ $kph := (lower .Params.Keyphrase) }}
     {{ $kpl := (countwords $kph) }}
     <!-- Keyphrase between 1 and 4 words -->
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -170,16 +172,16 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     {{ if gt $kpl 0 }}
     <!-- Keyphrase in title -->
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if (in (lower .Title) $kph) }}
+		      {{ if (in (lower $tit) $kph) }}
 		      has-text-success
 		      {{ else }}
 		      has-text-danger
@@ -190,7 +192,7 @@
 	<div class="media-content">
 	  <div class="content">
 	    <p class="is-size-7"><a href="https://yoa.st/33g" target="_blank">Keyphrase</a> 
-	      {{ if (in (lower .Title) $kph) }}
+	      {{ if (in (lower $tit) $kph) }}
 	      appears in the title.
 	      {{ else }}
 	      does not appear in the title.
@@ -198,12 +200,12 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     <!-- Keyphrase in meta description -->
     {{ with lower .Description }}
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -226,13 +228,13 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     {{ end }}
     <!-- Keyphrase in first paragraph -->
     {{ with lower .Summary }}
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -255,13 +257,13 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     {{ end }}
     <!-- Keyphrase in headings -->
     {{ $toc := lower .TableOfContents }}
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -284,16 +286,16 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     <!-- Keyphrase in slug -->
-    {{ $kph2 := replace $kph " " "-" }}
+    {{ $slug := replaceRE "/|-|_|http:" " " .Permalink}}
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if in .RelPermalink $kph2 }}
+		      {{ if in $slug $kph }}
 		      has-text-success
 		      {{ else }}
 		      has-text-danger
@@ -304,7 +306,7 @@
 	<div class="media-content">
 	  <div class="content">
 	    <p class="is-size-7"><a href="https://yoa.st/33o" target="_blank">Keyphrase</a> 
-	      {{ if in .RelPermalink $kph2 }}
+	      {{ if in $slug $kph }}
 	      appears in the slug.
 	      {{ else }}
 	      does not appear in the slug.
@@ -312,17 +314,17 @@
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     <!-- Unique keyphrase -->
-    {{ $nkp := 0}}
-      {{ range .Site.RegularPages }}
-      {{ if eq .Params.keyphrase $kph }}
-        {{ $nkp = add $nkp 1 }}
-      {{ end }}
+    {{ $nkp := 0 }}
+    {{ range .Site.RegularPages }}
+    {{ if eq (lower .Params.keyphrase) $kph }}
+    {{ $nkp = add $nkp 1 }}
+    {{ end }}
     {{ end }}
     <div class="column is-one-quarter">
-      <article class="media notification has-background-white">
+      <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
@@ -336,15 +338,14 @@
 	</figure>
 	<div class="media-content">
 	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33x" target="_blank">Duplicate keyphrase</a>:
-	      keyphrase used {{ $nkp }} time{{ if gt $nkp 1 }}s{{ end }}.
+	    <p class="is-size-7"><a href="https://yoa.st/33x" target="_blank">Keyphrase</a>
+	      used {{ $nkp }} time{{ if gt $nkp 1 }}s{{ end }}.
 	    </p>
 	  </div>
 	</div>
-      </article>
+      </aside>
     </div>
     {{ end }} <!-- checks with keyphrase -->
   </div> <!-- end colums -->
   <hr>
-  
-</section>
+</aside>

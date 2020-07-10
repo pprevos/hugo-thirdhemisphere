@@ -1,15 +1,17 @@
-<section class="has-text-centered">
+{{ if or .Site.Params.twitter .Site.Params.Facebook .Site.Params.reddit .Site.Params.linkedin }}
+<section class="has-text-left">
+  <h2 class="subtitle">Share this article</h2>
   <ul class="share-buttons">
     <!-- Twitter -->
     {{ if .Site.Params.twitter }}
     <li>
-      <a href="http://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via @{{ .Site.Params.twitter }}"
-	 target = "_blank", title = "Tweet this article">
+      <a href="http://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via%20@{{ .Site.Params.twitter }}"
+	 target = "_blank" title = "Tweet this article">
 	<span style="color:#6CADDE">
 	  <i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
 	</span>
       </a>
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <script async src="https://platform.twitter.com/widgets.js"></script>
     </li>
     {{ end }}
     <!-- Facebook -->
@@ -19,8 +21,8 @@
 	 title="Share on Facebook"
 	 onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;">
 	<span style="color:#0e1f56">
-	<i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i>
-</span>
+	  <i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i>
+	</span>
       </a>
     </li>
     {{ end }}
@@ -41,11 +43,12 @@
       <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftest.com&title=&summary=&source=http%3A%2F%2Ftest.com"
 	 target="_blank" title="Share on LinkedIn"
 	 onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
-		<span style="color:#0072b1">
-		  <i class="fa fa-linkedin fa-3x" aria-hidden="true"></i>
-		  </span>
+	<span style="color:#0072b1">
+	  <i class="fa fa-linkedin fa-3x" aria-hidden="true"></i>
+	</span>
       </a>
     </li>
     {{ end }}
   </ul>
 </section>
+{{ end }}

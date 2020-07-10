@@ -6,3 +6,4 @@
 #+description: 
 #+images[]: /images/
 #+draft: true
+#+seo: true

@@ -1,60 +1,73 @@
 {{ define "main" }}
-<section class="section">
-  <article>
-    <div class="columns is-centered">
-      <div class="column max-800px">
-	<h1 class="title is-1">{{ .Title }}</h1>
-	{{ if and (in (string .Site.BaseURL) "localhost") .Params.seo }}
-	{{ partial "seo-check.html" . }}
-	{{ end }}
-	<div class="title subtitle heading is-6">
-	  <div class="columns is-vcentered">
-	    <div class="column">
-	      <div class="columns is-vcentered is-mobile">
-		<div class="column is-narrow">
-		  <img src="{{ .Site.Author.image | absURL }}" class="author-image"
-		       alt = "{{ .Site.Author.name }}">
-		</div>
-		<div class="column">
-		  <p>{{ .Site.Author.name }} | 
-		    <time>{{ .PublishDate.Format "2 January 2006" }}</time> <br>
-		    {{ .WordCount }} words | 
-		    {{ .ReadingTime }} minute{{ if gt .ReadingTime 1 }}s{{ end }}</p>
-		</div>
-	      </div>
+<article>
+  <div class="columns is-centered">
+    <div class="column max-800px">
+      {{ if and (in (string .Site.BaseURL) "localhost") (eq .Params.seo "true") }}
+      {{ partial "seo-check.html" . }}
+      {{ end }}
+      <figure class="title-image">
+	<img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Description }}">
+      </figure>
+      <h1 class="title is-1 pb-2">{{ .Title }}</h1>
+      <div class="columns is-vcentered">
+	<div class="column">
+	  {{ $author := .Site.Author.name }}
+	  {{ if .Params.Author }}
+	  {{ $author = .Params.Author }}
+	  {{ end }}
+	  <div class="columns is-vcentered is-mobile">
+	    <div class="column is-narrow">
+	      {{ if .Params.authorimage }}
+	      <img src="{{ .Params.authorimage | absURL }}" class="author-image"
+	      {{ else }}
+	      <img src="{{ .Site.Author.image | absURL }}" class="author-image"
+		   {{ end }}
+		   alt = "{{ $author }}" title = "{{ $author }}">
 	    </div>
-	    <div class="column">	      
-	      <div class="tags is-pulled-left">
-		{{ range .Params.categories }}
-		<a class="tag is-primary is-radiusless" href="/categories/{{ . | urlize}}">{{ . }}</a>
-		{{ end }}
-	      </div>
-              <div class="tags is-pulled-right">
-		{{ range .Params.tags }}
-		<a class="tag is-info is-radiusless" href="/tags/{{ . | urlize}}">{{ . }}</a>
-		{{ end }}
-	      </div>
+	    <div class="column">
+	      <p>{{ $author }} | 
+		<time datetime="{{ .PublishDate.Format "2006-01-02"}}">
+		  {{ .PublishDate.Format "2 January 2006" }}
+		</time> <br>
+		{{ .WordCount }} words | 
+		{{ .ReadingTime }} minute{{ if gt .ReadingTime 1 }}s{{ end }}</p>
 	    </div>
 	  </div>
 	</div>
-	<figure class="title-image">
-	  <img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Description }}">
-	</figure>
-	<div class="content">
-	  {{ .Content }}
-	  {{ partial "social-share.html" . }}
+	<div class="column">	      
+	  <div class="tags is-pulled-left">
+	    {{ range .Params.categories }}
+	    <a class="tag is-primary is-radiusless" href="/categories/{{ . | urlize}}">{{ replace . "-" " " }}</a>
+	    {{ end }}
+	  </div>
+          <div class="tags is-pulled-right">
+	    {{ range .Params.tags }}
+	    <a class="tag is-info is-radiusless" href="/tags/{{ . | urlize}}">{{ replace . "-" " " }}</a>
+	    {{ end }}
+	  </div>
 	</div>
       </div>
-  </article>
-</section>
+      <div class="content">
+	{{ .Content }}
+	{{ partial "social-share.html" . }}
+      </div>
+    </div>
+  </div>
+</article>
+<aside class="columns is-centered">
+  <div class="column max-800px">
+    <div class="content">
+      {{ template "_internal/disqus.html" . }}
+    </div>
+  </div>
+</aside>
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ if (ne (len $related) 0) }}
 <section class="section">
-  {{ $related := (where (.Site.RegularPages.Related .) "Type" "articles") | first 3 }}
   <div class="columns is-centered">
     <div class="column max-800px">
       <div class="content">
-	{{ if (ne (len $related) 0) }}
-	<h3>Related articles</h3>
-	{{ end }}
+	<h2>You might also enjoy reading these articles</h2>
       </div>
       <div class="columns">
         {{ range $related }}
@@ -73,4 +86,5 @@
     </div>
   </div>
 </section>
+{{ end }}
 {{ end }}

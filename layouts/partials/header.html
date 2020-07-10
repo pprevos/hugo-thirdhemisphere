@@ -1,12 +1,12 @@
 <header>
-  <nav class="navbar" role="navigation">
+  <nav class="navbar">
     <div class="container">
       <div class="navbar-brand">
 	<a class="navbar-item" href="{{ .Site.BaseURL }}">
 	  <img src="{{ .Site.Params.Logo }}" alt="{{ .Site.Params.description }}" width="30" height="30">
 	</a>
         <a href="{{ .Site.BaseURL }}" title="home" class="navbar-item">
-          <span class="logo"><h2>{{ .Site.Title }}</h2></span>
+          <span class="logo is-size-4">{{ .Site.Title }}</span>
         </a>
         {{ range .Site.Menus.social }}
         <a href="{{ .URL }}" class="navbar-item is-hidden-desktop" title="{{ .Name }}">
@@ -21,7 +21,7 @@
       <div class="navbar-menu">
         <div class="navbar-start">
           {{ range .Site.Menus.main }}
-          <a href="{{ .URL }}" class="navbar-item">{{ .Name }}</a>
+          <a href="{{ .URL | absURL }}" class="navbar-item">{{ .Name }}</a>
           {{ end }}
         </div>
         <div class="navbar-end">

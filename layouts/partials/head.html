@@ -1,28 +1,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-!fit=cover">
-  <meta name="robots" content={{if .Params.seo}}"index, follow"{{ else }}"noindex, nofollow"{{ end }}/>
+  <meta name="robots" content={{if not .Params.norobots}}"index, follow"{{ else }}"noindex, nofollow"{{ end }}/>
   <link rel="canonical" href="{{ .Permalink }}" />
   <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Site.LanguageCode }}" />
-  <title>{{ if not .IsHome }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}</title>
+  <title>
+    {{ if not .IsHome }}
+    {{ if .Params.seotitle }}
+    {{ .Params.seotitle }}
+    {{ else }}
+    {{ .Title }}
+    {{ end }}
+    {{ else }}
+    {{ .Site.Title }}
+    {{ end }}
+  </title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end }}{{ end }} ">
-  <link rel="icon" type="image/png"
-	href="{{ .Site.Params.logo |absURL }}">
+  <link rel="icon" type="image/png" href="{{ .Site.Params.logo | absURL }}">  
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
   {{ if not (in (string .Site.BaseURL) "localhost") }}
   {{ template "_internal/google_analytics_async.html" . }}
   {{ end }}
-  {{- if and .IsPage .Params.seo -}}
+  {{- if .IsPage -}}
   {{ partial "schema-article.html" . }}
   {{- end }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "css/style.css" | absURL }}" />
   <script src="https://use.fontawesome.com/{{ .Site.Params.FontAwesome }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
-  <!-- Parse LaTeX formulas with MathJax -->
-  <!-- set math = true in the page -->
+  <!-- Parse LaTeX formulas with MathJax set math = true -->
   {{ if .Params.math }}
   <script type="text/javascript"
 	  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">

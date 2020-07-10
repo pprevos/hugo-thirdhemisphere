@@ -1,11 +1,11 @@
-<section class="section is-centered">
+<aside class="section is-centered">
   <div class="columns is-centered">
     <div class="column max-800px">
-      <form action="{{ .Get "endpoint"}}", accept-charset="utf-8", method="post">
+      <form action="{{ .Get 0}}" accept-charset="utf-8" method="post">
 	<div class="field">
 	  <label class="label">Name</label>
 	  <div class="control has-icons-left">
-	    <input class="input" type="text" placeholder="Your name", name="name", required="">
+	    <input class="input" type="text" placeholder="Your name" name="name" required="">
 	    <span class="icon is-small is-left">
 	      <i class="fa fa-user"></i>
 	    </span>
@@ -14,7 +14,7 @@
 	<div class="field">
 	  <label class="label">Email</label>
 	  <div class="control has-icons-left">
-	    <input class="input" type="email" placeholder="Your email address", name="from", required="">
+	    <input class="input" type="email" placeholder="Your email address" name="from" required="">
 	    <span class="icon is-small is-left">
 	      <i class="fa fa-at"></i>
 	    </span>
@@ -23,14 +23,14 @@
 	<div class="field">
 	  <label class="label">Message</label>
 	  <div class="control">
-	    <textarea class="textarea", placeholder="Your message", name="message", required=""></textarea>
+	    <textarea class="textarea" placeholder="Your message" name="message" required=""></textarea>
 	  </div>
 	</div>
 	<div class="control">
-	  <button class="button is-primary", type="submit",  value="Submit">Send</button>
+	  <button class="button is-primary" type="submit" value="Submit">Send</button>
 	</div>
       </form>
     </div>
   </div>
-</section>
+</aside>
 
