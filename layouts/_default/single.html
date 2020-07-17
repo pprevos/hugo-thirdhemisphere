@@ -10,39 +10,17 @@
       </figure>
       <h1 class="title is-1 pb-2">{{ .Title }}</h1>
       <div class="columns is-vcentered">
-	<div class="column">
-	  {{ $author := .Site.Author.name }}
-	  {{ if .Params.Author }}
-	  {{ $author = .Params.Author }}
-	  {{ end }}
-	  <div class="columns is-vcentered is-mobile">
-	    <div class="column is-narrow">
-	      {{ if .Params.authorimage }}
-	      <img src="{{ .Params.authorimage | absURL }}" class="author-image"
-	      {{ else }}
-	      <img src="{{ .Site.Author.image | absURL }}" class="author-image"
-		   {{ end }}
-		   alt = "{{ $author }}" title = "{{ $author }}">
-	    </div>
-	    <div class="column">
-	      <p>{{ $author }} | 
-		<time datetime="{{ .PublishDate.Format "2006-01-02"}}">
-		  {{ .PublishDate.Format "2 January 2006" }}
-		</time> <br>
-		{{ .WordCount }} words | 
-		{{ .ReadingTime }} minute{{ if gt .ReadingTime 1 }}s{{ end }}</p>
-	    </div>
-	  </div>
-	</div>
+	{{ partial "author.html" . }}
 	<div class="column">	      
 	  <div class="tags is-pulled-left">
+	    {{ $root := .Site.BaseURL }}
 	    {{ range .Params.categories }}
-	    <a class="tag is-primary is-radiusless" href="/categories/{{ . | urlize}}">{{ replace . "-" " " }}</a>
+	    <a class="tag is-primary is-radiusless" href="{{ $root }}/categories/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
 	    {{ end }}
 	  </div>
           <div class="tags is-pulled-right">
 	    {{ range .Params.tags }}
-	    <a class="tag is-info is-radiusless" href="/tags/{{ . | urlize}}">{{ replace . "-" " " }}</a>
+	    <a class="tag is-info is-radiusless" href="{{ $root }}/tags/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
 	    {{ end }}
 	  </div>
 	</div>

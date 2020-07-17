@@ -4,6 +4,6 @@
 #+tags[]: 
 #+keyphrase: 
 #+description: 
-#+images[]: /images/
+#+images[]: 
 #+draft: true
 #+seo: true

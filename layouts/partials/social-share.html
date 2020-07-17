@@ -5,7 +5,7 @@
     <!-- Twitter -->
     {{ if .Site.Params.twitter }}
     <li>
-      <a href="http://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via%20@{{ .Site.Params.twitter }}"
+      <a href="https://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via%20@{{ .Site.Params.twitter }}"
 	 target = "_blank" title = "Tweet this article">
 	<span style="color:#6CADDE">
 	  <i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
@@ -28,7 +28,7 @@
     {{ end }}
     <!-- Reddit -->
     {{ if .Site.Params.reddit }}
-    <li><a href="http://www.reddit.com/submit?url=http%3A%2F%2Ftest.com&title=" target="_blank"
+    <li><a href="https://www.reddit.com/submit?url=http%3A%2F%2Ftest.com&title=" target="_blank"
 	   title="Submit to Reddit"
 	   onclick="window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
 	<span style="color:#FF5700">
@@ -37,10 +37,10 @@
       </a>
     </li>
     {{ end }}
-    <!-- LinedIn -->
+    <!-- LinkedIn -->
     {{ if .Site.Params.linkedin }}
     <li>
-      <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftest.com&title=&summary=&source=http%3A%2F%2Ftest.com"
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftest.com&title=&summary=&source=http%3A%2F%2Ftest.com"
 	 target="_blank" title="Share on LinkedIn"
 	 onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
 	<span style="color:#0072b1">

@@ -132,7 +132,7 @@
 	      {{ if gt .WordCount 300 }}
 	      longer than 300 words.
 	      {{ else }}
-	      shorter than 300 words.
+	      too short: {{ .WordCount }} words.
 	      {{ end }}
 	    </p>
 	  </div>

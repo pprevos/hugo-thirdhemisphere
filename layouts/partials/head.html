@@ -1,9 +1,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-!fit=cover">
-  <meta name="robots" content={{if not .Params.norobots}}"index, follow"{{ else }}"noindex, nofollow"{{ end }}/>
+  <meta name="robots" content={{if eq .Params.private "true"}}"noindex, nofollow"{{ else }}"index, follow"{{ end }}/>
   <link rel="canonical" href="{{ .Permalink }}" />
   <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Site.LanguageCode }}" />
+  {{ with .OutputFormats.Get "rss" -}}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
   <title>
     {{ if not .IsHome }}
     {{ if .Params.seotitle }}
@@ -25,15 +28,19 @@
   {{- if .IsPage -}}
   {{ partial "schema-article.html" . }}
   {{- end }}
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
   <link rel="stylesheet" href="{{ "css/style.css" | absURL }}" />
-  <script src="https://use.fontawesome.com/{{ .Site.Params.FontAwesome }}"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Parse LaTeX formulas with MathJax set math = true -->
   {{ if .Params.math }}
   <script type="text/javascript"
 	  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
+  {{ end }}
+  {{ if .Params.pinterest }}
+  <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
   {{ end }}
 </head>
 

@@ -1,4 +1,3 @@
-<p>&nbsp;</p>
 <footer class="footer">
   <div class="container">
     <div class="columns">
@@ -22,17 +21,18 @@
 	  </div>
 	  <div class="column">
 	    <div class="content has-text-centered">
-	      {{ .Site.Params.license  | safeHTML }}
+	      {{ .Site.Copyright  | safeHTML }}
 	    </div>
 	  </div>
 	</div>
       </div>
       <div class="column has-text-right">
+	<p>Powered by</p>
 	<a href="https://gohugo.io">
-	  <img src="/images/hugo-logo.png" alt="Made with Bulma" width="128" height="24">
+	  <a href="https://gohugo.io" target="_blank"><img src="/images/hugo-logo.png" alt="Made with Bulma" width="64" height="12"><a>
 	</a><br>
 	<a href="https://bulma.io">
-	  <img src="/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+	  <a href="https://bulma.io" target="_blank"><img src="/images/made-with-bulma.png" alt="Made with Bulma" width="64" height="12"></a>
 	</a>
       </div>
     </div>

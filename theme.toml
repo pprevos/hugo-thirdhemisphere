@@ -4,7 +4,7 @@
 name = "Thirdhemisphere"
 license = "MIT"
 licenselink = "https://github.com/pprevos/"
-description = ""
+description = "SEO-optimised simple theme. Includes SEO content assessment for draft posts."
 homepage = "http://example.com/"
 tags = []
 features = []
@@ -13,9 +13,3 @@ min_version = "0.1"
 [author]
   name = "Peter Prevos"
   homepage = "https://peterprevos.com"
-
-# If porting an existing theme
-[original]
-  name = ""
-  homepage = ""
-  repo = ""

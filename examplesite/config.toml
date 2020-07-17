@@ -1,8 +1,11 @@
 title = "Hugo SEO theme"
-baseURL = "http://thirdhemisphere.net/"
+baseURL = "https://example.com"
 languageCode = "en-gb"
 theme = "gohugo-thirdhemisphere"
 themesDir = "../.."
+copyright = "This work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-sa/4.0/' target = '_blank'>Creative Commons Attribution-ShareAlike 4.0 International </a> License."
+disqusShortname = "xxx"
+enableRobotsTXT = true
 
 [author]
     name = "Peter Prevos"
@@ -11,9 +14,7 @@ themesDir = "../.."
 [params]
     description = "SEO-optimised theme for Hugo static websites."
     googleAnalytics = "xxx"
-    FontAwesome = "17d563593b.js"
     logo = "/images/logo.png"
-    license = "This work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-sa/4.0/' target = '_blank'>Creative Commons Attribution-ShareAlike 4.0 International </a> License."
     cc = "fa fa-creative-commons"
     facebook = true
     twitter = "pprevos"
@@ -22,36 +23,28 @@ themesDir = "../.."
 
 [[menu.main]]
     name = "About"
-    url = "/about"
+    url = "/about/"
 
 [[menu.main]]
     name = "Categories"
     url = "/categories"
 
 [[menu.main]]
-  name = "Articles"
-  url = "/articles"
-
-[[menu.main]]
     name = "Contact"
-    url = "/contact"
+    url = "/contact/"
 
 [[menu.footer]]
   name = "About"
-  url = "/about"
-
-[[menu.footer]]
-  name = "Privacy"
-  url = "/privacy"
+  url = "/about/"
 
 [[menu.social]]
     name = "GitHub"
     url = "https://github.com/pprevos"
-    pre = "fa fa-github"
+    pre = "fab fa-github"
 
 [[menu.social]]
     name = "Twitter"
     url = "https://twitter.com/pprevos"
-    pre = "fa fa-twitter"
+    pre = "fab fa-twitter"
 
 

@@ -1,0 +1,13 @@
+{{ $count := .Get 0 | default 6 }}
+{{ $pages := where .Site.RegularPages "Type" "in" site.Params.mainSections }}
+
+<div class="columns is-multiline">
+  {{ range first $count $pages }}
+  <div class="column is-half">
+    {{ partial "postcard.html" . }}
+  </div>
+  {{ end }}
+</div>
+
+
+
