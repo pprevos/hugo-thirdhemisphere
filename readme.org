@@ -80,7 +80,7 @@ Content pages also have the [[https://developers.google.com/search/docs/data-typ
 ** Content optimisation
 This theme contains a partial template that assesses the content of a page. This module implements some of the features of the popular WordPress Yoast plugin.
 
-This template tests whether the keyphrase appears in strategic locations on your page and checks the length of several page variables. The SEO assessment only appears when running the site on localhost and when the =seo= parameter is set to true.
+This template tests whether the keyphrase appears in strategic locations on your page and checks the length of several page variables. The SEO assessment only appears when running the site on localhost and when the =seo= parameter is set to =true=.
 
 #+caption: Example of SEO assessment.
 [[file:examplesite/static/images/seo-example.png]]
@@ -129,3 +129,11 @@ The =contact-from= shortcode enables a form by assigning an endpoint that proces
 #+begin_src 
 {{< contact-form "https://formspree.io/abcdefgh" >}}
 #+end_src
+* To do
+- [ ] Example site to show all options
+- [ ] Improve slider and sharing buttons
+- [ ] meaningful 404 page
+- [ ] Exports (=htaccess= and article overview csv)
+- [ ] Admin dashboard that shows all pages
+- [ ] Bibliographies through JSON data shortcode (accordion)
+- [ ] Optimise hero image
