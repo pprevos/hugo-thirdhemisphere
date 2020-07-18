@@ -32,13 +32,6 @@
     </div>
   </div>
 </article>
-<aside class="columns is-centered">
-  <div class="column max-800px">
-    <div class="content">
-      {{ template "_internal/disqus.html" . }}
-    </div>
-  </div>
-</aside>
 {{ $related := .Site.RegularPages.Related . | first 3 }}
 {{ if (ne (len $related) 0) }}
 <section class="section">
@@ -65,4 +58,11 @@
   </div>
 </section>
 {{ end }}
+<aside class="columns is-centered">
+  <div class="column max-800px">
+    <div class="content">
+      {{ template "_internal/disqus.html" . }}
+    </div>
+  </div>
+</aside>
 {{ end }}
