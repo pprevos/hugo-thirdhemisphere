@@ -6,7 +6,7 @@
         <a href="{{ .Page.Permalink }}">
           <figure class="image is-3by2">
 	    {{ if .Page.Params.Images }}
-	    <img src="{{ index .Page.Params.Images 0 }}" alt="{{ .Page.Description}} ">
+	    <img src="{{ index .Page.Params.Images 0 | absURL }}" alt="{{ .Page.Description}} ">
 	    {{ else }}
             {{ $firstChild := index .Pages 0 }}
             {{ with $firstChild.Params.images }}

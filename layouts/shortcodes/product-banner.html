@@ -1,0 +1,54 @@
+{{ $product := .Get 0 }}
+
+{{ range .Site.Data.products }}
+{{ if eq .code $product }}
+<div class="box">
+  <div class="media">
+    <figure class="media-left">
+      <p class="image is-128x128">
+      {{ if .url }}
+      <a href = "{{ .url }}">
+      {{ end }}
+	<img src="{{ .img | absURL }}"
+	     alt = "{{ .title }}", title = "{{ .title }}">
+      {{ if .url }}
+      </a>
+      {{ end }}
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+	<p class="is-size-5 has-text-weight-bold">{{ .title }}</p>
+	<p class="mb-2">{{ .desc }}</p>
+	<div class="buttons">
+	  {{ if .preview }}
+	  <a  class="button is-primary" href="{{ .preview |absURL }}" target="_blank">
+	    <span class="icon">
+	      <i class="far fa-file-pdf"></i>
+	    </span>
+	    <span>Free preview</span>
+	  </a>
+	  {{ end }}
+	  	  {{ if .payhip }}
+	  <a  class="button is-info" href="https://payhip.com/b/{{ .payhip }}" target="_blank">
+	    <span class="icon">
+	      <i class="fas fa-shopping-cart"></i>
+	    </span>
+	    <span>Payhip</span>
+	  </a>
+	  {{ end }}
+	  {{ range .retail }}
+	  <a  class="button is-info" href="{{ .url }}" target="_blank">
+	    <span class="icon">
+	      <i class="fas fa-shopping-cart"></i>
+	    </span>
+	    <span>{{ .shop }}</span>
+	  </a>
+	  {{ end }}
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+{{ end }}

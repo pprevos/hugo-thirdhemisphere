@@ -6,17 +6,13 @@
       {{ partial "seo-check.html" . }}
       {{ end }}
       <figure class="title-image">
-	<img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Description }}">
+	<img src="{{ with .Params.images }}{{ index . 0 }}{{ end }}" alt="{{ .Description }}">
       </figure>
       <h1 class="title is-1 pb-2">{{ .Title }}</h1>
-      <div class="columns is-vcentered">
-	{{ partial "author.html" . }}
-      </div>
       <div class="content">
 	{{ .Content }}
-	{{ partial "social-share.html" . }}
       </div>
-      <div class="section">
+      <section>
 	<div class="columns is-multiline">
 	  {{ range .Paginator.Pages }}
 	  <div class="column is-half">
@@ -29,7 +25,8 @@
             {{ partial "pagination.html" . }}
 	  </div>
 	</div>
-      </div>
+	{{ partial "social-share.html" . }}
+      </section>
     </div>
   </div>
 </article>

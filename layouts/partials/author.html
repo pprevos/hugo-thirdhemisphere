@@ -1,25 +1,34 @@
+{{ $author := .Site.Author.name }}
+{{ $image := .Site.Author.image }}
+{{ $lastmod := .Params.Lastmod }}
+
+{{ if .Params.Author }}
+{{ $author = .Params.Author }}
+{{ end }}
+
+{{ if .Params.authorimage }}
+{{ $image = .Params.authorimage }}
+{{ else if .Params.Author }}
+{{ $image = .Site.Params.logo }}
+{{ end }}
+
 <div class="column">
-  {{ $author := .Site.Author.name }}
-  {{ $image := .Site.Author.image }}
-
-  {{ if .Params.Author }}
-  {{ $author = .Params.Author }}
-  {{ end }}
-
-  {{ if .Params.authorimage }}
-  {{ $image = .Params.authorimage }}
-  {{ else if .Params.Author }}
-  {{ $image = .Site.Params.logo }}
-  {{ end }}
   <div class="columns is-vcentered is-mobile">
     <div class="column is-narrow">
       <img src="{{ $image | absURL }}" class="author-image" alt = "{{ $author }}" title = "{{ $author }}">
     </div>
     <div class="column">
-      <p>{{ $author }} | 
-	<time datetime="{{ .PublishDate.Format "2006-01-02"}}">
-	  {{ .PublishDate.Format "2 January 2006" }}
-	</time> <br>
+      <p>{{ $author }} |  
+	<time datetime="{{ .Date.Format "2006-01-02"}}">
+	  {{ .Date.Format "2 January 2006" }}
+	</time>
+	<br>
+	  {{ if ne .Lastmod .Date }}
+	<time datetime="{{ .Lastmod.Format "2006-01-02"}}">
+	  Last Updated | {{ .Lastmod.Format "2 January 2006" }}
+	</time> 
+	<br>
+	{{ end }}
 	{{ .WordCount }} words |
 	{{ if eq .ReadingTime 1 }}
 	One minute

@@ -1,8 +1,4 @@
 /* Style the logo text */
-.logo h2 {
-    font-family: Impact, Haettenschweiler, 'Arial Bold', sans-serif;
-    font-size: 1.5em;
-}
 
 /* Make sure that the footer is at the bottom of the page  */
 body {
@@ -18,6 +14,16 @@ main {
 /* Basic layout  */
 .max-800px {
     max-width: 800px;
+}
+
+/* Headings */
+h2 {
+    padding-top: 1em;
+}
+
+h3 {
+    padding-top: 1em;
+    font-style: italic;
 }
 
 /* Post metadata and author image */
@@ -53,4 +59,7 @@ ul.share-buttons li{
     display: inline;
 }
 
-
+/* Verbatim code */
+code {
+    color: black;
+}

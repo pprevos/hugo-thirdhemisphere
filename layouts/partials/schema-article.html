@@ -8,7 +8,7 @@
       },
       "headline": "{{ if .Params.seotitle }}{{ .Params.seotitle }}{{ else }}{{ .Title }}{{ end }}",
       "description": "{{ .Description }}",
-      "image": [{{ with .Params.images -}} {{ delimit . ", " }} {{- end }}],
+      "image": [{{ with .Params.images }}{{ index . 0 | absURL }}{{ end }}],
       {{ if not .PublishDate.IsZero -}}
       "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
       {{- else if not .Date.IsZero -}}

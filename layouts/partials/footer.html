@@ -1,40 +1,19 @@
 <footer class="footer">
-  <div class="container">
-    <div class="columns">
-      <div class="column has-text-left">
-	<aside class="menu">
-	  <ul class="menu-list">
-	    {{ range .Site.Menus.footer }}
-	    <li>
-	      <a href="{{ .URL | absURL }}" class="">{{ .Name }}</a>
-	    </li>
-	    {{ end }}
-	  </ul>
-	</aside>
-      </div>
-      <div class="column">
-	<div class="columns is-vcentered">
-	  <div class="narrowcolumn">
-	    <figure class="media-left">
-	      <span class="icon fa-2x"><i class="{{ .Site.Params.cc }}"></i></span>
-	    </figure>	  
-	  </div>
-	  <div class="column">
-	    <div class="content has-text-centered">
-	      {{ .Site.Copyright  | safeHTML }}
-	    </div>
-	  </div>
-	</div>
-      </div>
-      <div class="column has-text-right">
-	<p>Powered by</p>
-	<a href="https://gohugo.io">
-	  <a href="https://gohugo.io" target="_blank"><img src="/images/hugo-logo.png" alt="Made with Bulma" width="64" height="12"><a>
-	</a><br>
-	<a href="https://bulma.io">
-	  <a href="https://bulma.io" target="_blank"><img src="/images/made-with-bulma.png" alt="Made with Bulma" width="64" height="12"></a>
-	</a>
-      </div>
+  <div class="columns">
+    <div class="column has-text-left is-one-third">
+      {{ range .Site.Menus.social }}
+      <a href="{{ .URL | absURL }}" title="{{ .Name }}">
+	<span class="icon fa-lg has-text-dark"><i class="{{ .Pre }}"></i></span>
+      </a>
+      {{ end }}
+    </div>
+    <div class="column has-text-centered is-one-third">
+      {{ .Site.Copyright  | safeHTML }}
+    </div>
+    <div class="column has-text-right is-one-third">
+      <p>Powered by</p>
+      <a href="https://gohugo.io/" target="_blank"><img src="{{ .Site.BaseURL }}/images/hugo-logo.png" alt="Made with Bulma" width="64" height="12"></a>
+      <a href="https://bulma.io/" target="_blank"><img src="{{ .Site.BaseURL }}/images/made-with-bulma.png" alt="Made with Bulma" width="64" height="12"></a>
     </div>
   </div>
 </footer>

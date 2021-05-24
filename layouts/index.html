@@ -1,7 +1,7 @@
 {{ define "main" }}
 <article>
   <div class="hero is-dark is-fullheight-with-navbar"
-       {{ with .Params.heroimage }}style="background: url({{ . }}) center top; background-size:cover;" {{ end }}>
+       {{ with .Params.heroimage }}style="background: url({{ . | absURL }}) center top; background-size:cover;" {{ end }}>
   </div>
   <div class="columns is-centered">
     <div class="column max-800px">

@@ -5,32 +5,32 @@
 {{ end }}
 <aside class="section has-background-light mgt-small">
   <!-- Mimick Google preview -->
-    <div class="box">
-      <div class="media">
-	<div class="media-left">
-          <figure class="image is-96x96">
-	    <img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Params.images }}">
-          </figure>
-	</div>
-	<div class="media-content">
-	  <a href= "#">{{ $tit }}</a><br>
-	  <span class="has-text-success is-size-7">{{ .Permalink }}</span><br>
-	  <span class="has-text-grey is-size-7">{{ .PublishDate.Format "Jan 2, 2006"}} - {{ .Description }}</span>
-	</div>
+  <div class="box">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-96x96">
+	  <img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Params.images }}">
+        </figure>
+      </div>
+      <div class="media-content">
+	<a href= "#">{{ $tit }}</a><br>
+	<span class="has-text-success is-size-7">{{ .Permalink }}</span><br>
+	<span class="has-text-grey is-size-7">{{ .PublishDate.Format "Jan 2, 2006"}} - {{ .Description }}</span>
       </div>
     </div>
+  </div>
 
   <div class="columns is-multiline is-vcentered">
-    <!-- Title length between 50 and 60 characters -->
+    <!-- Title length between 30 and 60 characters -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
 	{{ $lent := (len $tit) }}
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if (lt $lent 50) }}
+		      {{ if (lt $lent 40) }}
 		      has-text-warning
-		      {{ else if (gt $lent 60) }}
+		      {{ else if (gt $lent 65) }}
 		      has-text-danger
 		      {{ else }}
 		      has-text-success
@@ -42,9 +42,9 @@
 	  <div class="content">
 	    <p class="is-size-7"><a href="https://yoa.st/34h" target="_blank">
 		Title width</a>  
-	      {{ if (lt $lent 50) }}
+	      {{ if (lt $lent 40) }}
 	      too short: 
-	      {{ else if (gt $lent 60) }}
+	      {{ else if (gt $lent 65) }}
 	      too long: 
 	      {{ end }}
 	      {{ $lent }} chars.
@@ -72,19 +72,17 @@
 	</figure>
 	<div class="media-content">
 	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/34d" target="_blank">Meta desrciption</a> is 
-	      {{ if eq $dsl 0 }}
-	      unavailable. 
-	      {{ else if or (lt $dsl 120) (gt $dsl 156) }}
-	      {{ $dsl }} chars.
-	      {{ else }}
-	      {{ $dsl }} chars.
-	      {{ end }}
+	    <p class="is-size-7"><a href="https://yoa.st/34d" target="_blank">Meta desrciption</a> is {{ $dsl }} chars
+	      <br>
+	      {{ if eq $dsl 0 }}unavailable.{{ end }}
+	      {{ if lt $dsl 120 }}(< 120){{ end }}
+              {{ if gt $dsl 156 }}(> 156){{ end }}
 	    </p>
 	  </div>
 	</div>
       </aside>
     </div>
+
     <!-- Check featured image -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
@@ -112,6 +110,7 @@
 	</div>
       </aside>
     </div>
+
     <!-- Content has at least 300 words -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
@@ -143,6 +142,7 @@
     <!-- Keyphrase checks -->
     {{ $kph := (lower .Params.Keyphrase) }}
     {{ $kpl := (countwords $kph) }}
+
     <!-- Keyphrase between 1 and 4 words -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
@@ -175,6 +175,7 @@
       </aside>
     </div>
     {{ if gt $kpl 0 }}
+
     <!-- Keyphrase in title -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
@@ -202,6 +203,7 @@
 	</div>
       </aside>
     </div>
+    
     <!-- Keyphrase in meta description -->
     {{ with lower .Description }}
     <div class="column is-one-quarter">
@@ -231,6 +233,7 @@
       </aside>
     </div>
     {{ end }}
+    
     <!-- Keyphrase in first paragraph -->
     {{ with lower .Summary }}
     <div class="column is-one-quarter">
@@ -260,6 +263,7 @@
       </aside>
     </div>
     {{ end }}
+    
     <!-- Keyphrase in headings -->
     {{ $toc := lower .TableOfContents }}
     <div class="column is-one-quarter">
@@ -288,6 +292,7 @@
 	</div>
       </aside>
     </div>
+    
     <!-- Keyphrase in slug -->
     {{ $slug := replaceRE "/|-|_|http:" " " .Permalink}}
     <div class="column is-one-quarter">
@@ -316,6 +321,7 @@
 	</div>
       </aside>
     </div>
+    
     <!-- Unique keyphrase -->
     {{ $nkp := 0 }}
     {{ range .Site.RegularPages }}

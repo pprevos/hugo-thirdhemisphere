@@ -5,11 +5,11 @@ name = "Thirdhemisphere"
 license = "MIT"
 licenselink = "https://github.com/pprevos/"
 description = "SEO-optimised simple theme. Includes SEO content assessment for draft posts."
-homepage = "http://example.com/"
+homepage = "http://thirdhemisphere.net/"
 tags = []
 features = []
 min_version = "0.1"
 
 [author]
   name = "Peter Prevos"
-  homepage = "https://peterprevos.com"
+  homepage = "https://peterprevos.com/"

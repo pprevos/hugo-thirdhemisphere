@@ -1,0 +1,22 @@
+<form onsubmit="myFunction(searchboxid); return false;" >
+  <input type="search" id="searchboxid" placeholder="Search" />
+  <button type="submit" >Search</button>
+</form>
+<hr>
+
+<script language="javascript">
+  function myFunction(searchboxid) {
+      if (window.location.hostname == "localhost") {
+	  console.log( "Running on localhost not a proper domain so cannot search via duckduckgo.com" );
+	  return;
+      }
+      var q = document.getElementById('searchboxid').value;
+      q = encodeURIComponent( q );
+      // var site = "rv1.tech";
+      var site = "{{ .Site.BaseURL }}" ;
+      var url  = "https://duckduckgo.com?q=" + q + "+site:" + site; 
+      console.log( url );
+      window.open(url, "_self");
+  }
+</script>
+

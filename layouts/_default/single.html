@@ -6,21 +6,22 @@
       {{ partial "seo-check.html" . }}
       {{ end }}
       <figure class="title-image">
-	<img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}" alt="{{ .Description }}">
+	<img src="{{ with .Params.images }}{{ index . 0 | absURL }}{{ end }}"
+	     alt="{{ .Description }}" title="{{ .Description }}">
       </figure>
       <h1 class="title is-1 pb-2">{{ .Title }}</h1>
-      <div class="columns is-vcentered">
+      <div class="columns">
 	{{ partial "author.html" . }}
-	<div class="column">	      
+	<div class="column">     
 	  <div class="tags is-pulled-left">
 	    {{ $root := .Site.BaseURL }}
 	    {{ range .Params.categories }}
-	    <a class="tag is-primary is-radiusless" href="{{ $root }}/categories/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
+	    <a class="tag is-primary" href="{{ $root }}categories/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
 	    {{ end }}
 	  </div>
           <div class="tags is-pulled-right">
 	    {{ range .Params.tags }}
-	    <a class="tag is-info is-radiusless" href="{{ $root }}/tags/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
+	    <a class="tag is-info" href="{{ $root }}tags/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
 	    {{ end }}
 	  </div>
 	</div>
@@ -49,6 +50,7 @@
 		<a href="{{ .Permalink }}">
 		  <img src="{{ with .Params.images }}{{ index . 0 }}{{ end }}" alt="{{ .Description }}"></a>
               </figure>
+	      <strong>{{ .Title }}</strong>
 	    </div>
 	  </div>
         </div>
@@ -58,6 +60,7 @@
   </div>
 </section>
 {{ end }}
+{{ if ne .Params.comments "false" }}
 <aside class="columns is-centered">
   <div class="column max-800px">
     <div class="content">
@@ -65,4 +68,5 @@
     </div>
   </div>
 </aside>
+{{ end }}
 {{ end }}

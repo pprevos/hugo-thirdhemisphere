@@ -1,7 +1,7 @@
 <aside class="section is-centered">
   <div class="columns is-centered">
     <div class="column max-800px">
-      <form action="{{ .Get 0}}" accept-charset="utf-8" method="post">
+      <form action="{{ .Get 0}}" accept-charset="utf-8" method="POST">
 	<div class="field">
 	  <label class="label">Name</label>
 	  <div class="control has-icons-left">
@@ -22,7 +22,7 @@
 	</div>
 	<div class="field">
 	  <label class="label">Message</label>
-	  <div class="control">
+	  <div class="control has-icon-left">
 	    <textarea class="textarea" placeholder="Your message" name="message" required=""></textarea>
 	  </div>
 	</div>

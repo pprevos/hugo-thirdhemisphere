@@ -4,7 +4,7 @@
     <div class="column max-800px">
       <h1 class="title is-1">{{ .Title }}</h1>
       <figure class="title-image">
-	<img src="{{ with .Params.images }} {{ index . 0 }} {{ end }}"
+	<img src="{{ with .Params.images }}{{ index . 0 }}{{ end }}"
 	     alt="{{ .Description }}"
 	     title="{{ .Description }}">
       </figure>

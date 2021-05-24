@@ -3,15 +3,11 @@
     <div class="container">
       <div class="navbar-brand">
 	<a class="navbar-item" href="{{ .Site.BaseURL }}">
-	  <img src="{{ .Site.Params.Logo }}" alt="{{ .Site.Params.description }}" width="30" height="30">
+	  <img src="{{ .Site.Params.Logo | absURL }}" alt="{{ .Site.Params.description }}" width="30" height="30">
 	</a>
         <a href="{{ .Site.BaseURL }}" title="home" class="navbar-item">
           <span class="logo is-size-4">{{ .Site.Title }}</span>
         </a>
-        {{ range .Site.Menus.social }}
-        <a href="{{ .URL }}" class="navbar-item is-hidden-desktop" title="{{ .Name }}">
-	  <span class="icon fa-lg"><i class="{{ .Pre }}"></i></span></a>
-        {{ end }}
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -25,10 +21,7 @@
           {{ end }}
         </div>
         <div class="navbar-end">
-          {{ range .Site.Menus.social }}
-          <a href="{{ .URL }}" target="_blank" class="navbar-item is-hidden-touch" title="{{ .Name }}">
-	    <span class="icon fa-lg"><i class="{{ .Pre }}"></i></span></a>
-          {{ end }}
+	  {{ partial "search.html" }}
         </div>
       </div>
     </div>
