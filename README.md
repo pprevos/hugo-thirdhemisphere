@@ -7,7 +7,7 @@ This [Hugo](https://gohugo.io/) theme create websites optimised for search engin
 - Simple one-column design
 - Uses [Bulma CSS](https://bulma.io/), based on the work by [Päktech](https://www.pakstech.com/blog/create-hugo-theme/)
 - Optimised for technical SEO, mimicking the functionality of the [Yoast SEO Wordpress plugin](https://yoast.com/)
-- Optimised for use with [Org-Mode](https://lucidmanager.org/productivity/create-websites-with-org-mode-and-hugo/)
+- Optimised for use with [Org-Mode](htttps://orgmode.org/).
 
 The following pages use this theme:
 
@@ -20,6 +20,15 @@ At the root of your Hugo project, run:
 ```bash
 git submodule add https://github.com/pprevos/hugo-thirdhemisphere themes
 ```
+
+## Org-Mode optimisation
+Emacs Org-Mode is the most powerful markdown language in existence. Hugo can parse Org-Mode files out-of-the-box.
+
+The `archetypes` folder contains a template for new Org-Mode pages, which include all theme-specific page variables.
+
+Keyword values can be either strings (`#+key: value`), or a whitespace-separated list of strings (`#+key[]: value_1 value_2`). If you need to add a value with two words, you will need to use a hyphen. This template replaces any hyphens in taxonomies with a space.
+
+Read [this article](https://lucidmanager.org/productivity/create-websites-with-org-mode-and-hugo/) for more information on how to use Org-Mode and Hugo.
 
 ## Hero images
 The `index.html` and `404.html` pages use hero images. 
@@ -97,10 +106,10 @@ This theme contains a partial template that assesses the content of a page. This
 
 The SEO assessment only appears when running the site on localhost, and when the `seo` parameter is set to `true`.
 
-![Example of SEO assessment.](file:exampleSite/static/images/seo-example.png)
+![Example of SEO assessment.](images/seo-example.png)
 
 #### Keyphrase
-The key phrase should be [[https://yoa.st/34i][between 1 and 4 words]]. You will need to do some research to find the ideal phrase. You should only use [each keyphrase once](https://yoa.st/33x) on your site.
+The key phrase should be [between 1 and 4 words](https://yoa.st/34i). You will need to do some research to find the ideal phrase. You should only use [each keyphrase once](https://yoa.st/33x) on your site.
 
 #### Slug
 The [page slug](https://yoa.st/33o) of the page should ideally contain the keyphrase.
@@ -115,7 +124,7 @@ Each page can have two titles, the one displayed on the page in the `h1` header 
 You can define a featured image with the `images` parameter. This image should be at least 800 pixels wide with an aspect ratio of 3:2. The image is used in the structured data page summary on index pages. The template assigns the meta description to the [alt and title tags](https://yoa.st/33c).
 
 #### Content
-The [content length](https://yoa.st/34n) need to be at least 300 words and contain the [[https://yoa.st/33e][keyphrase]] appears in first paragraph. Ideally, the key phrase should be mentioned a few times throughout the text. At least one [[https://yoa.st/33m][heading]] needs to contain the keyphrase.
+The [content length](https://yoa.st/34n) need to be at least 300 words and contain the [[https://yoa.st/33e][keyphrase]] appears in first paragraph. Ideally, the key phrase should be mentioned a few times throughout the text. At least one [heading](https://yoa.st/33m) needs to contain the keyphrase.
 
 ## Branding
 The logo image is a square png file that is used in the navigation bar and as the favicon. The location of the logo file is identified in the params section of the config file, e.g. `logo = "/favicon.png"`.
