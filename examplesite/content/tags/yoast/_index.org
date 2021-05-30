@@ -1,3 +1,0 @@
-#+title: Joost
-
-Hello Joost!

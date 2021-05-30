@@ -12,30 +12,46 @@
 {{ $image = .Site.Params.logo }}
 {{ end }}
 
-<div class="column">
-  <div class="columns is-vcentered is-mobile">
-    <div class="column is-narrow">
-      <img src="{{ $image | absURL }}" class="author-image" alt = "{{ $author }}" title = "{{ $author }}">
-    </div>
-    <div class="column">
-      <p>{{ $author }} |  
-	<time datetime="{{ .Date.Format "2006-01-02"}}">
-	  {{ .Date.Format "2 January 2006" }}
-	</time>
-	<br>
-	  {{ if ne .Lastmod .Date }}
-	<time datetime="{{ .Lastmod.Format "2006-01-02"}}">
-	  Last Updated | {{ .Lastmod.Format "2 January 2006" }}
-	</time> 
-	<br>
+<div class="columns is-tablet">
+    <div class="columns is-mobile">
+	{{ if ne $image "" }}
+	<div class="column is-narrow">
+	    <figure class="image is-64x64">
+		<img class="is-rounded" src="{{ $image | absURL }}"
+		     alt = "{{ $author }}" title = "{{ $author }}">
+	    </figure>
+	</div>
 	{{ end }}
-	{{ .WordCount }} words |
-	{{ if eq .ReadingTime 1 }}
-	One minute
-	{{ else }}
-	{{ .ReadingTime }} minutes
-	{{ end }}</p>
+	<div class="column">
+	    <p>{{ $author }} |  
+		<time datetime="{{ .Date.Format "2006-01-02"}}">
+		    {{ .Date.Format "2 January 2006" }}
+		</time>
+		<br>
+		<span class="has-text-grey-light">
+		    {{ .WordCount }} words |
+		    {{ if eq .ReadingTime 1 }}
+		    One minute
+		    {{ else }}
+		    {{ .ReadingTime }} minutes
+		    {{ end }}
+		</span>
+		<br>
+		{{ if ne .Lastmod .Date }}
+		<time datetime="{{ .Lastmod.Format "2006-01-02"}}">
+		    <span class="has-text-grey-light">
+			Last Updated | {{ .Lastmod.Format "2 January 2006" }}
+		    </span>
+		</time>
+		{{ end }}
+	    </p>
+	</div>
     </div>
-  </div>
+    {{ if or .Site.Params.twitter .Site.Params.Facebook .Site.Params.reddit .Site.Params.linkedin }}
+    <div class="column">
+	<div class="is-pulled-right">
+	    {{ partial "social-share.html" . }}
+	</div>
+    </div>
+    {{ end }}
 </div>
-

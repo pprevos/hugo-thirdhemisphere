@@ -1,15 +1,13 @@
-# theme.toml template for a Hugo theme
-# See https://github.com/gohugoio/hugoThemes#themetoml for an example
-
-name = "Thirdhemisphere"
+name = "Third Hemisphere"
 license = "MIT"
-licenselink = "https://github.com/pprevos/"
-description = "SEO-optimised simple theme. Includes SEO content assessment for draft posts."
-homepage = "http://thirdhemisphere.net/"
-tags = []
-features = []
-min_version = "0.1"
+licenselink = "https://github.com/pprevos/hugo-thirdhemisphere/blob/master/LICENSE"
+description = "Hugo theme optimised for Org-Mode and on-site SEO"
+homepage = "https://github.com/pprevos/hugo-thirdhemisphere/"
+tags = ["blog", "Bulma", "SEO", "Org-Mode"]
+features = ["Search-Engine Optimisation", "Image slider", "Embed Pinterest", "Contact form", "Structured data", "Mathjax"]
+min_version = "0.83.1"
 
 [author]
   name = "Peter Prevos"
   homepage = "https://peterprevos.com/"
+

@@ -1,0 +1,91 @@
+baseURL = "https://example.com"
+languageCode = "en-gb"
+pluralizeListTitles = false
+title = "Third Hemisphere"
+themesDir = "../themes"
+theme = "third-hemisphere"
+paginate = 8
+enableRobotsTXT = true
+copyright = "<i class='fab fa-creative-commons' aria-hidden='true'></i> This work is licensed under a <a rel='license' href='https://creativecommons.org/licenses/by-sa/4.0/' target = '_blank'>Creative Commons Attribution-ShareAlike 4.0 International</a> License."
+
+[author]
+name = "Peter Prevos"
+image = "/images/peter_prevos_small.jpg"
+
+[params]
+publisher = "Third Hemisphere"
+description = "Hugo Theme for Org-Mode"
+logo = "/favicon.png"
+heroindex = "/images/hero-index.jpg"
+hero404 = "/images/hero-404.jpg"
+facebook = true
+twitter = "pprevos"
+reddit = true
+linkedin = true
+
+[[menu.main]]
+name = "Categories"
+url = "/categories/"
+
+[[menu.main]]
+name = "Topics"
+url = "/tags/"
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+
+[[menu.navbar]]
+name = "Email"
+url = "/contact/"
+pre = "fa fa-envelope"
+
+[[menu.footer]]
+name = "Contact"
+url = "/contact/"
+
+[[menu.social]]
+name = "Email"
+url = "/contact/"
+pre = "fa fa-envelope"
+
+[[menu.social]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/peterprevos/"
+pre = "fab fa-linkedin"
+
+[[menu.social]]
+name = "YouTube"
+url = "https://www.youtube.com/channel/UCo1-URIop8gyzdC-oEvZTsA"
+pre = "fab fa-youtube"
+
+[[menu.social]]
+name = "Twitter"
+url = "https://twitter.com/lucidmanager"
+pre = "fab fa-twitter"
+
+[[menu.social]]
+name = "GitHub"
+url = "https://github.com/pprevos/"
+pre = "fab fa-github"
+
+[[menu.social]]
+name = "R Bloggers"
+url = "https://www.r-bloggers.com/"
+pre = "fab fa-r-project"
+
+[markup]
+[markup.highlight]
+style = "colorful"
+
+[related]
+includeNewer = true
+threshold = 80
+toLower = true
+[[related.indices]]
+name = "tags"
+weight = 100
+
+[outputs]
+  home = ["HTML", "RSS"]
+  

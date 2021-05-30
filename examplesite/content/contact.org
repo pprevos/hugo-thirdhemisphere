@@ -1,9 +1,0 @@
-#+title: Contact Third Hemisphere
-#+date: 2020-06-18T14:48:09+10:00
-#+draft: true
-
-* Hello world!
-
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-

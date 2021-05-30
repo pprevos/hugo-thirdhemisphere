@@ -6,8 +6,8 @@
       {{ .Content }}
     </div>
     <div class="columns is-multiline">
-      {{ range .Paginator.Pages }}
-      <div class="column is-one-third">
+	{{ range .Paginator.Pages }}
+	<div class="column is-one-quarter-desktop is-half-tablet">
         {{ partial "postcard.html" . }}
       </div>
       {{ end }}

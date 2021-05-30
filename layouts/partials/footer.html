@@ -1,19 +1,23 @@
 <footer class="footer">
-  <div class="columns">
-    <div class="column has-text-left is-one-third">
-      {{ range .Site.Menus.social }}
-      <a href="{{ .URL | absURL }}" title="{{ .Name }}">
-	<span class="icon fa-lg has-text-dark"><i class="{{ .Pre }}"></i></span>
-      </a>
-      {{ end }}
+    <div class="columns has-text-centered">
+	<div class="column is-one-third is-narrow">
+	    {{ range .Site.Menus.social }}
+	    <a href="{{ .URL | absURL }}" title="{{ .Name }}">
+		<span class="icon fa-lg has-text-dark"><i class="{{ .Pre }}"></i></span>
+	    </a>
+	    {{ end }}
+	</div>
+	<div class="column is-one-third is-narrow">
+	    {{ .Site.Copyright  | safeHTML }}
+	</div>
+	<div class="column is-one-third is-narrow">
+	    <p>Powered by</p>
+	    <a href="https://gohugo.io/" target="_blank">
+		<img src="{{ .Site.BaseURL }}images/hugo-logo.png" alt="Hugo" width="64" height="12">
+	    </a>
+	    <a href="https://bulma.io/" target="_blank">
+		<img src="{{ .Site.BaseURL }}images/made-with-bulma.png" alt="Bulma" width="64" height="12">
+	    </a>
+	</div>
     </div>
-    <div class="column has-text-centered is-one-third">
-      {{ .Site.Copyright  | safeHTML }}
-    </div>
-    <div class="column has-text-right is-one-third">
-      <p>Powered by</p>
-      <a href="https://gohugo.io/" target="_blank"><img src="{{ .Site.BaseURL }}/images/hugo-logo.png" alt="Made with Bulma" width="64" height="12"></a>
-      <a href="https://bulma.io/" target="_blank"><img src="{{ .Site.BaseURL }}/images/made-with-bulma.png" alt="Made with Bulma" width="64" height="12"></a>
-    </div>
-  </div>
 </footer>

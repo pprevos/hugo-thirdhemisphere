@@ -1,29 +1,30 @@
-{{ if or .Site.Params.twitter .Site.Params.Facebook .Site.Params.reddit .Site.Params.linkedin }}
-<section class="has-text-centered">
-  <h2 class="subtitle">Share this page</h2>
-  <ul class="share-buttons">
+<ul class="share-buttons">
+    <li>
+	<span class="icon has-text-grey is-medium">
+	    <i class = "fa fa-share-alt fa-2x" aria-hidden="true"></i>
+	</span>
+    </li>
     <!-- Twitter -->
     {{ if .Site.Params.twitter }}
     <li>
-      <a href="https://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via%20@{{ .Site.Params.twitter }}"
-	 target = "_blank" title = "Tweet this article">
-	<span style="color:#6CADDE">
-	  <i class="fab fa-twitter-square fa-3x" aria-hidden="true"></i>
-	</span>
-      </a>
-      <script async src="https://platform.twitter.com/widgets.js"></script>
+	<a href="https://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via%20@{{ .Site.Params.twitter }}" target = "_blank" title = "Tweet this article">
+	    <span class="icon has-text-grey is-medium">
+		<i class="fab fa-twitter-square fa-2x" aria-hidden="true"></i>
+	    </span>
+	</a>
+	<script async src="https://platform.twitter.com/widgets.js"></script>
     </li>
     {{ end }}
     <!-- Facebook -->
     {{ if .Site.Params.facebook }}
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftest.com&quote=" target="_blank"
-	 title="Share on Facebook"
-	 onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;">
-	<span style="color:#0e1f56">
-	  <i class="fab fa-facebook-square fa-3x" aria-hidden="true"></i>
-	</span>
-      </a>
+	<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftest.com&quote=" target="_blank"
+	   title="Share on Facebook"
+	   onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;">
+	    <span class="icon has-text-grey is-medium">
+		<i class="fab fa-facebook-square fa-2x" aria-hidden="true"></i>
+	    </span>
+	</a>
     </li>
     {{ end }}
     <!-- Reddit -->
@@ -31,24 +32,22 @@
     <li><a href="https://www.reddit.com/submit?url=http%3A%2F%2Ftest.com&title=" target="_blank"
 	   title="Submit to Reddit"
 	   onclick="window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
-	<span style="color:#FF5700">
-	  <i class="fab fa-reddit-square fa-3x" aria-hidden="true"></i>
+	<span class="icon has-text-grey is-medium">
+	    <i class="fab fa-reddit-square fa-2x" aria-hidden="true"></i>
 	</span>
-      </a>
+    </a>
     </li>
     {{ end }}
     <!-- LinkedIn -->
     {{ if .Site.Params.linkedin }}
     <li>
-      <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftest.com&title=&summary=&source=http%3A%2F%2Ftest.com"
-	 target="_blank" title="Share on LinkedIn"
-	 onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
-	<span style="color:#0072b1">
-	  <i class="fab fa-linkedin fa-3x" aria-hidden="true"></i>
-	</span>
-      </a>
+	<a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftest.com&title=&summary=&source=http%3A%2F%2Ftest.com"
+	   target="_blank" title="Share on LinkedIn"
+	   onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
+	    <span class="icon has-text-grey is-medium">
+		<i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+	    </span>
+	</a>
     </li>
     {{ end }}
-  </ul>
-</section>
-{{ end }}
+</ul>

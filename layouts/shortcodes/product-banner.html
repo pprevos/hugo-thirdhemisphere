@@ -1,5 +1,4 @@
 {{ $product := .Get 0 }}
-
 {{ range .Site.Data.products }}
 {{ if eq .code $product }}
 <div class="box">

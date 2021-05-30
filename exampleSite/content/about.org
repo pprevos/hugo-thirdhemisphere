@@ -1,0 +1,2 @@
+#+title: about
+#+description: Third Hemsphere is an search engine optimised Hugo theme focused on Org-Mode.

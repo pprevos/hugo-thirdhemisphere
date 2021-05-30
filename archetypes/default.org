@@ -1,9 +1,0 @@
-#+title: "{{ replace .Name "-" " " | title }}"
-#+date: {{ .Date }}
-#+categories[]: 
-#+tags[]: 
-#+keyphrase: 
-#+description: 
-#+images[]: 
-#+draft: true
-#+seo: true
