@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content={{if or (eq .Params.private true) .Data.Singular }}"noindex, nofollow"{{ else }}"index, follow"{{ end }}/>
+<meta name="robots" content={{if eq .Params.private true }}"noindex, nofollow"{{ else }}"index, follow"{{ end }}/>
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Site.LanguageCode }}" />
 {{ with .OutputFormats.Get "rss" -}}
@@ -18,19 +18,14 @@
 {{ partial "schema-article.html" . }}
 {{- end }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="{{ .Site.BaseURL }}/css/style.css">
 <!-- <link rel="stylesheet" href="/css/debug.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- slider code -->
 {{ if .Params.slider }}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $('.slider').bxSlider();
-    });
-</script>
+<!-- slider code -->
+<link rel="{{ .Site.BaseURL }}css/slider.css">
 {{ end }}
 <!-- Parse LaTeX formulas with MathJax set math = true -->
 {{ if .Params.math }}
@@ -55,6 +50,6 @@
  };
 </script>
 {{ end }}
-{{ if .Params.pinterest }}
-<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-{{ end }}
+  
+<script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/bulma-accordion/dist/js/bulma-accordion.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/bulma-accordion/dist/css/bulma-accordion.min.css">

@@ -1,86 +1,85 @@
 {{ define "main" }}
 <article>
-    <div class="columns is-centered">
-	<div class="column max-800px">
-	    {{ if and (in (string .Site.BaseURL) "localhost") (eq .Params.seo "true") }}
-	    {{ partial "seo-check.html" . }}
-	    {{ end }}
-	    {{ if .Page.Params.Images }}
-	    <section>
-		<figure class="title-image">
-		    <img src="{{ with .Params.images }}{{ index . 0 | absURL }}{{ end }}"
-			 alt="{{ .Description }}" title="{{ .Description }}">
-		</figure>
-	    </section>
-	    {{ end }}
-	    <section class="section">
-		<h1 class="title is-2">{{ .Title }}</h1>
-		{{ partial "author.html" . }}
-		<div class="tags is-pulled-left">
-		    {{ $root := .Site.BaseURL }}
-		    {{ range .Params.categories }}
-		    <a class="tag is-primary" href="{{ $root }}categories/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
-		    {{ end }}
-		</div>
-		<div class="tags is-pulled-right">
-		    {{ range .Params.tags }}
-		    <a class="tag is-info" href="{{ $root }}tags/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
-		    {{ end }}
-		</div>
-	    </section>
-	    <section class="content">
-		{{ .Content }}
-	    </section>
-	    {{ if or .Site.Params.twitter .Site.Params.Facebook .Site.Params.reddit .Site.Params.linkedin }}
-	    <section class="content">
-		<h2>Share this article</h2>
-		{{ partial "social-share.html" . }}
-	    </section>
-	    {{ end }}
+  <div class="columns is-centered">
+    <div class="column max-800px">
+      {{ if and (in (string .Site.BaseURL) "localhost") (eq .Params.seo "true") }}
+      {{ partial "seo-check.html" . }}
+      {{ end }}
+      {{ if .Page.Params.Images }}
+      <section>
+	<figure class="title-image">
+	  <img src="{{ with .Params.images }}{{ index . 0 | absURL }}{{ end }}"
+	       alt="{{ .Description }}" title="{{ .Description }}">
+	</figure>
+      </section>
+      {{ end }}
+      <section class="section">
+	<h1 class="title is-2">{{ .Title }}</h1>
+	{{ partial "author.html" . }}
+	<div class="tags is-pulled-left">
+	  {{ $root := .Site.BaseURL }}
+	  {{ range .Params.categories }}
+	  <a class="tag is-primary" href="{{ $root }}categories/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
+	  {{ end }}
 	</div>
+	<div class="tags is-pulled-right">
+	  {{ range .Params.tags }}
+	  <a class="tag is-info" href="{{ $root }}tags/{{ . | urlize}}/">{{ replace . "-" " " }}</a>
+	  {{ end }}
+	</div>
+      </section>
+      <section class="content">
+	{{ .Content }}
+      </section>
+      {{ if or .Site.Params.twitter .Site.Params.Facebook .Site.Params.reddit .Site.Params.linkedin }}
+      <section class="is-centred">
+	{{ partial "social-share.html" . }}
+      </section>
+      {{ end }}
     </div>
+  </div>
 </article>
 {{ $related := .Site.RegularPages.Related . | first 3 }}
 {{ if (ne (len $related) 0) }}
 <section class="section">
-    <div class="columns is-centered">
-	<div class="column max-800px">
-	    <div class="content">
-		<h2>You might also enjoy reading these articles</h2>
+  <div class="columns is-centered">
+    <div class="column max-800px">
+      <div class="content">
+	<h2>You might also enjoy reading these articles</h2>
+      </div>
+      <div class="columns">
+	{{ range $related }}
+	<div class="column is-one-third">
+	  <div class="card">
+	    {{ if .Page.Params.Images }}
+	    <div class="card-image">
+	      <figure class="image is-3by2">
+		<a href="{{ .Permalink }}" title="{{ .Params.description}}">
+		  <img src="{{ with .Params.images }}{{ index . 0 }}{{ end }}" alt="{{ .Description }}">
+		</a>
+	      </figure>
 	    </div>
-	    <div class="columns">
-		{{ range $related }}
-		<div class="column is-one-third">
-		    <div class="card">
-			<p class="has-text-weight-bold">{{ .Title }}</p>
-			{{ if .Page.Params.Images }}
-			<div class="card-image">
-			    <figure class="image is-3by2">
-				<a href="{{ .Permalink }}" title="{{ .Params.description}}">
-				    <img src="{{ with .Params.images }}{{ index . 0 }}{{ end }}" alt="{{ .Description }}">
-				</a>
-			    </figure>
-			</div>
-			{{ else }}
-			<a href="{{ .Permalink }}" title="{{ .Params.description}}">
-			    <p>{{ .Params.description }}</p>
-			</a>
-			{{ end }}
-		    </div>
-		</div>
-		{{ end }}
-	    </div>
+	    {{ else }}
+	    <a href="{{ .Permalink }}" title="{{ .Params.description}}">
+	      <p>{{ .Params.description }}</p>
+	    </a>
+	    {{ end }}
+	    <p class="is-italic">{{ .Title }}</p>
+	  </div>
 	</div>
+	{{ end }}
+      </div>
     </div>
+  </div>
 </section>
 {{ end }}
 {{ if ne .Params.comments "false" }}
 <aside class="columns is-centered">
-    <div class="column max-800px">
-	<div class="content">
-	    {{ template "_internal/disqus.html" . }}
-	</div>
+  <div class="column max-800px">
+    <div class="content">
+      {{ template "_internal/disqus.html" . }}
     </div>
+  </div>
 </aside>
 {{ end }}
 {{ end }}

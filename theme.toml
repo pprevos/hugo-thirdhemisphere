@@ -2,12 +2,18 @@ name = "Third Hemisphere"
 license = "MIT"
 licenselink = "https://github.com/pprevos/hugo-thirdhemisphere/blob/master/LICENSE"
 description = "Hugo theme optimised for Org-Mode and on-site SEO"
+
 homepage = "https://github.com/pprevos/hugo-thirdhemisphere/"
-tags = ["blog", "Bulma", "SEO", "Org-Mode"]
-features = ["Search-Engine Optimisation", "Image slider", "Embed Pinterest", "Contact form", "Structured data", "Mathjax"]
-min_version = "0.83.1"
+demosite = "https://thirdhemisphere.net/"
+
+tags = ["blog", "Bulma", "SEO", "Org-Mode", "Bibliographies"]
+features = ["Search-Engine Optimisation", "Image slider", "Contact form", "Structured data", "Mathjax", "Bibliographies"]
 
 [author]
   name = "Peter Prevos"
   homepage = "https://peterprevos.com/"
 
+[original]
+  name = "Päktesh"
+  homepage = "https://www.pakstech.com/blog/create-hugo-theme/"
+  

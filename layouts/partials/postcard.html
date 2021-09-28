@@ -1,36 +1,39 @@
 {{ $pagecount := len .Pages}}
 <div class="card">
-    {{ if .Page.Params.Images }}
-    <div class="card-image">
-	<figure class="image is-3by2">
-	    <a href="{{ .Permalink }}">
-		<img src="{{ with .Params.images }}{{ index . 0 | absURL }}{{ end }}" alt="{{ .Description }}" title="{{ .Description }}">
-	    </a>
-	</figure>
+  {{ if .Page.Params.Images }}
+  <div class="card-image">
+    <figure class="image is-3by2">
+      <a href="{{ .Permalink }}">
+	<img src="{{ with .Params.images }}{{ index . 0 | absURL }}{{ end }}" alt="{{ .Description }}" title="{{ .Description }}">
+      </a>
+    </figure>
+  </div>
+  {{ end }}
+  <div class="card-content">
+    <a class="title is-4" href="{{ .Permalink }}">{{ .Title }}</a>
+    <span class="heading">
+      <time datetime="{{ .Date.Format "2006-01-02"}}">{{ if gt .Lastmod .Date}}{{ .Lastmod.Format "2 January 2006"}}{{ else }}{{ .Date.Format "2 January 2006"}}{{ end }}</time>
+    </span>
+    <div class="content">
+      {{ .Description }}
+    </div>
+    {{if ne $pagecount 0 }}
+    <div class="content">
+      <p class="has-text-grey">{{ $pagecount }} article{{ if ne $pagecount 1 }}s{{ end }}<a href="{{ .Permalink }}/index.xml" title="RSS feed"> <span class="icon fa-lg has-text-grey is-pulled-right"><i class="fas fa-rss"></i></a></span></p>
+    </div>
+    {{ else }}
+    <div class="tags">
+      {{ $root := .Site.BaseURL }}
+      {{ range .Params.categories }}
+      <a class="tag is-primary is-radiusless" href="{{ $root }}categories/{{ lower . }}/">{{ replace . "-" " " }}</a>
+      {{ end }}
+    </div>
+    <div class="tags">
+      {{ range .Params.tags }}
+      <a class="tag is-info is-radiusless" href="{{ $root }}tags/{{ lower . }}/">{{ replace . "-" " " }}</a>
+      {{ end }}
     </div>
     {{ end }}
-    <div class="card-content">
-	<a class="title is-4" href="{{ .Permalink }}">{{ .Title }}</a>
-	<span class="heading">
-	    <time datetime="{{ .PublishDate.Format "2006-01-02"}}">{{ .Lastmod.Format "2 January 2006"}}</time>
-	</span>
-	<div class="content">
-	    {{ .Description }}
-	</div>
-	<div class="content">
-	    {{if ne $pagecount 0 }}<p class="has-text-grey is-size-7">{{ $pagecount }} article{{ if ne $pagecount 1 }}s{{ end }}</p>{{ end }}
-	</div>
-	<div class="tags">
-	    {{ $root := .Site.BaseURL }}
-	    {{ range .Params.categories }}
-	    <a class="tag is-primary is-radiusless" href="{{ $root }}categories/{{ lower . }}/">{{ replace . "-" " " }}</a>
-	    {{ end }}
-	</div>
-	<div class="tags">
-	    {{ range .Params.tags }}
-	    <a class="tag is-info is-radiusless" href="{{ $root }}tags/{{ lower . }}/">{{ replace . "-" " " }}</a>
-	    {{ end }}
-	</div>
-    </div>
+  </div>
 </div>
 

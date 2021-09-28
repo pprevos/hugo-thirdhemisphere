@@ -2,10 +2,13 @@
 <div class="container">
   <div class="section">
     <div class="content">
+      {{ if and (in (string .Site.BaseURL) "localhost") (eq .Params.seo "true") }}
+      {{ partial "seo-check.html" . }}
+      {{ end }}
       <h1>{{ with .Title }}{{ replace . "-" " " }}{{ end }}</h1>
       {{ .Content }}
     </div>
-    <div class="columns is-multiline">
+    <div class="columns is-multiline is-centered">
 	{{ range .Paginator.Pages }}
 	<div class="column is-one-quarter-desktop is-half-tablet">
         {{ partial "postcard.html" . }}

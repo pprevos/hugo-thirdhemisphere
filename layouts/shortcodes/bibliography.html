@@ -1,0 +1,71 @@
+{{ $kwd := .Get 0 }}
+
+<div class ="box">
+  {{ range .Site.Data.bibliography }}
+  {{ if in (lower .keyword) (lower $kwd) }}
+  {{ $place := index . "publisher-place"}}
+  
+  <p>
+    {{ if or .author .editor }}
+    {{ if .author}}
+    {{ $n := len .author }}
+    {{ if le $n 2}}
+    {{ range $index, $author := (first 2 .author) }}
+    {{ index . "non-dropping-particle" }}{{ .family }} {{ if and (gt $n 1) ( eq $index 0) }}and {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ if gt $n 2}}{{ range first 1 .author}}{{ index . "non-dropping-particle" }}{{ .family }}{{ end }} et al.{{ end }}
+    {{ else }}
+    {{ if .editor }}
+    {{ $n := len .editor }}
+    {{ if le $n 2}}
+    {{ range $index, $author := (first 2 .editor) }}
+    {{ index . "non-dropping-particle" }}{{ .family }} {{ if and (gt $n 1) ( eq $index 0) }}and {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ if gt $n 2}}{{ range first 1 .editor}}{{ index . "non-dropping-particle" }}{{ .family }}{{ end }} et al.{{ end }}
+    (Ed{{ if gt $n 1 }}s{{ end }}.)
+    {{ end }}
+    {{ end }}
+    {{ else }}
+    Anonymous
+    {{ end }}
+
+    {{ range .issued }}
+    {{ $year := print (first 1 .) }}
+    ({{ strings.TrimRight "]" (strings.TrimLeft "[" $year) }}),
+    {{ end }}
+
+    {{ if or (eq .type "book") (eq .type "thesis") }}
+    <i>{{title .title }}</i> ({{ .publisher }}{{ if $place }}, {{ $place }}{{ end }}).
+    {{ else }}    
+
+    {{ .title }}{{if and (ne (substr .title -1) "?") (ne (substr .title -1) "!")}}.{{ end }}
+
+    {{ if .editor }}
+    In: 
+    {{ $n := len .editor }}
+    {{ if le $n 2}}
+    {{ range $index, $author := (first 2 .editor) }}
+    {{ index . "non-dropping-particle" }}{{ .family }} {{ if and (gt $n 1) ( eq $index 0) }}and {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ if gt $n 2}}{{ range first 1 .editor}}{{ index . "non-dropping-particle" }}{{ .family }}{{ end }} et al.{{ end }}
+    {{ if .editor }}(Ed{{ if gt $n 1 }}s{{ end }}.){{end}}
+    {{ end }}
+    
+    <i>{{ title (index . "container-title") }}</i>{{ if .volume }}, {{ .volume }}{{ end }}{{ if .issue }}({{ .issue }}){{ end }}{{ if .page }}, {{ .page }}
+    {{end}}
+
+    {{ if eq .type "chapter"}} ({{ .publisher }}, {{ $place }}){{ end }}{{ if and (eq .type "paper-conference") ($place) }} ({{ $place }}){{ end }}. 
+    {{ end}}
+
+    {{ if .DOI }}doi: <a href = "https://doi.org/{{ .DOI }}" target="_blank">{{ .DOI }}</a>.{{ end }}
+    {{ if and .URL (not .DOI) }}<a href = "{{ .URL }}" target="_blank">{{ trim .URL "https://" }}</a>.{{ end }}
+  </p>
+
+  {{ end }}
+
+  {{ end }}
+</div>
+

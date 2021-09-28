@@ -8,6 +8,7 @@ This [Hugo](https://gohugo.io/) theme create websites optimised for search engin
 - Uses [Bulma CSS](https://bulma.io/), based on the work by [Päktech](https://www.pakstech.com/blog/create-hugo-theme/)
 - Optimised for technical SEO, mimicking the functionality of the [Yoast SEO Wordpress plugin](https://yoast.com/)
 - Optimised for use with [Org-Mode](htttps://orgmode.org/).
+- Control over which additional Javascript and CSS is loaded using page variables.
 
 The following pages use this theme:
 
@@ -22,27 +23,21 @@ git submodule add https://github.com/pprevos/hugo-thirdhemisphere themes
 ```
 
 ## Org-Mode optimisation
-Emacs Org-Mode is the most powerful markdown language in existence. Hugo can parse Org-Mode files out-of-the-box.
+Emacs [Org mode](https://orgmode.org/) is the most powerful markdown language in existence. Hugo can parse Org-Mode files out-of-the-box.
 
-The `archetypes` folder contains a template for new Org-Mode pages, which include all theme-specific page variables.
-
-Keyword values can be either strings (`#+key: value`), or a whitespace-separated list of strings (`#+key[]: value_1 value_2`). If you need to add a value with two words, you will need to use a hyphen. This template replaces any hyphens in taxonomies with a space.
+The `archetypes` folder contains a template for new Org mode pages, which includes all theme-specific page variables.
 
 Read [this article](https://lucidmanager.org/productivity/create-websites-with-org-mode-and-hugo/) for more information on how to use Org-Mode and Hugo.
 
 ## Hero images
 The `index.html` and `404.html` pages use hero images. 
 
-The hero image for the index page is set in the `heroindex` site parameter.
+The hero image for the index page is set in the `heroindex` site parameter in the configuration file.
 
-The hero image for the 404 page is set in the `hero404` site parameter.
+The hero image for the 404 page is set in the `hero404` site parameter in the configuration file.
 
 ## Taxonomies
 The theme uses the category and tag taxonomies. Ideally, each category and tag should have an index file that specifies a title, a featured image and a description.
-
-All taxonomy pages are set as private and will not appear in the sitemap or any RSS files.
-
-The index page shows a summary of all category pages. You can add an icon to this summary by setting the `icon` variable in the index file.
 
 ## Shortcodes
 ### Contact form
@@ -50,22 +45,42 @@ To enable the contact form, create a `contact.md` or `contact.org` page in the `
 
 The contact from shortcode enables a form by assigning an endpoint that processes the data. The example below uses [Formspree](https://formspree.io/), but this can be any other endpoint.
 
-`{{< contact-form "https://formspree.io/abcdefgh" >}}`
-
-### Pinterest
-The Pinterest shortcode displays a board. The first parameter contains the URL, the second and third parameter the width and height of the frame and the last parameter contains the image size. For example:
-
-`{{< pinterest "https://www.pinterest.com.au/HorizonOfReason/pacific-island-hopping/" 600 600 300>}}`
+`{{< contact-form "https://formspree.io/{form_id}" >}}`
 
 ### Image Slider
 This shortcode provides a simple image slider. Place all images for the slider in one folder and call the shortcode as follows: 
 
 `{{< slider "image folder location" >}}`
 
-The activate the Javascript for the slider, also set the `slider` variable to `true` in your config file.
+The activate the Javascript code for the slider, also set the `slider` variable to `true` in your config file.
+
+### Bibliography
+This shortcode can create a bibliography from a JSON file, filtered by a keyword.
+
+You can export a BibTeX file to JSON withe the powerful [Pandoc software](https://pandoc.org/):
+
+`pandoc bibliography.bib -t csljson -o bibliography.json`
+
+You can also export from your favourite bibliography manager, such as Zotero, but make sure you select CSL JSON or the shortcode will be able to parse the content.
+
+The JSON file in your data folder needs to be named `bibliography.json`. 
+
+To show the bibliography, use the following shortcode:
+
+`{{< bibliography "keyword" >}}`
+
+The entries will show in the order in which they appear in the JSON file.
+
+If you want to show all entries in the bibliography, then omit the keyword parameter.
+
+### Categories
+The categories shortcode lists all article categories, a description and an icon, for use in the homepage and/or about page.
+
+You can add an icon to this summary by setting the `icon` variable in the relevant index file.
 
 ## Search-Engine Optimisation
-Google'sGoogle's mission is to "to organise the world's information and make it universally accessible and useful". This means that each page needs to have:
+Google's mission is to "to organise the world's information and make it universally accessible and useful". This means that each page needs to have:
+
 - Quality content
 - Good UX & UI
 - Flawless security
@@ -86,6 +101,9 @@ The robots meta tag for all files is set to `index, follow`. For any files that 
 ### Canonical links
 Each page contains a self-referencing [canonical link](https://yoast.com/rel-canonical/). Index pages contain an alternate link to the relevant RSS file.
   
+### Internationalisation
+Each page contains an alternate self-referencing link wit the site language code.
+  
 ### Structured Data
 The theme uses the built-in Open Graph and Twitter card templates. Content pages also have the [article schema](https://developers.google.com/search/docs/data-types/article) in JSON-LD format. This schema uses the:
 
@@ -96,15 +114,12 @@ The theme uses the built-in Open Graph and Twitter card templates. Content pages
 - Last modified date
 - Site author or page author
 - Publishing organisation
-- Site logo
-  
-### Internationalisation
-Each page contains an alternate self-referencing link wit the site language code.
+- Site logo (favicon)
   
 ### Content optimisation
-This theme contains a partial template that assesses the content of a page. This module implements some of the features of the popular WordPress Yoast plugin.
+This theme contains a partial template that assesses the content of a page, which is useful when writing a new page and trying to optimise it for a keyword.
 
-The SEO assessment only appears when running the site on localhost, and when the `seo` parameter is set to `true`.
+The SEO assessment only appears when running the site on localhost, and when the `seo` page parameter is set to `true`.
 
 ![Example of SEO assessment.](images/seo-example.png)
 
@@ -124,13 +139,15 @@ Each page can have two titles, the one displayed on the page in the `h1` header 
 You can define a featured image with the `images` parameter. This image should be at least 800 pixels wide with an aspect ratio of 3:2. The image is used in the structured data page summary on index pages. The template assigns the meta description to the [alt and title tags](https://yoa.st/33c).
 
 #### Content
-The [content length](https://yoa.st/34n) need to be at least 300 words and contain the [[https://yoa.st/33e][keyphrase]] appears in first paragraph. Ideally, the key phrase should be mentioned a few times throughout the text. At least one [heading](https://yoa.st/33m) needs to contain the keyphrase.
+The [content length](https://yoa.st/34n) need to be at least 300 words and contain the [keyphrase](https://yoa.st/33e) appears in first paragraph. Ideally, the key phrase should be mentioned a few times throughout the text. 
 
-## Branding
+At least one [heading](https://yoa.st/33m) needs to contain the keyphrase.
+
+## Logo
 The logo image is a square png file that is used in the navigation bar and as the favicon. The location of the logo file is identified in the params section of the config file, e.g. `logo = "/favicon.png"`.
 
 ## RSS - Really Simple Syndication
-The RSS template has been enhanced to remove the author e-mail. The RSS feed shows the full content of each regular page instead of only the summary. Each index category and tag) has its own feed. Pages with the `private` parameter set to `true` are excluded from the feed.
+The RSS template has been enhanced to remove the author e-mail. The RSS feed shows the full content of each regular page instead of only the summary. Each index category and tag has its own feed. Pages with the `private` parameter set to `true` are excluded from the RSS feed.
 
 ## Mathematical formulas
 If you like to typeset mathematical equations on your website, the set the `math` parameter to `true`. This setting loads [MathJax](https://www.mathjax.org/) so you can display beautiful mathematics.
@@ -138,10 +155,12 @@ If you like to typeset mathematical equations on your website, the set the `math
 ## Sharing Buttons
 Each page shows simple sharing buttons for either Facebook, Twitter, Reddit or LinkedIn. 
 
-To enable these buttons, set the relevant site parameters to `true`. For Twitter, you need to set the username without the @-symbol, e.g. `"pprevos"`
+To enable these buttons, set the relevant site parameters to `true` in the site configuration. For Twitter, you need to set the username without the @-symbol, e.g. `"pprevos"`
 
 ## Social Media links
-The social media menu in the `config.toml` provides icons and links to your profiles in the footer. You can find the relevant icons on the [Font Awesome](https://fontawesome.com/icons?d=gallery) website, e.g. "`fab fa-github`".
+The social media menu in the site configuration provides icons and links to your profiles in the footer. 
+
+You can find the relevant icons on the [Font Awesome](https://fontawesome.com/icons?d=gallery) website, e.g. "`fab fa-github`".
 
 ## Copyright statement
 A copyright statement appears in the central footer column with the appropriate icon. The `copyright` variable holds the copyright statement text, which can include HTML.

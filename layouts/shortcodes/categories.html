@@ -1,0 +1,27 @@
+    <div class="container">
+	<div class="columns is-multiline">
+	    {{ range .Site.Taxonomies.categories }}
+	    <div class="column is-half">
+		<article class="media notification has-background-white">
+		    <figure class="media-left">
+			<a href="{{ .Page.Permalink }}" title="{{ replace .Page.Title "-" " "}}">
+			    <span class="icon">
+				<i class="fas fa-2x {{ .Page.Params.icon }} has-text-info"></i>
+			    </span>
+			</a>
+		    </figure>
+		    <div class="media-content">
+			<div class="content">
+			    <h1 class="title is-size-4">
+				<a href="{{ .Page.Permalink }}" title="{{ replace .Page.Title "-" " "}}" style="text-decoration: none;">{{ replace .Page.Title "-" " "}}</a>
+			    </h1>
+			    <p class="subtitle is-size-5">{{ .Page.Description }}</p>
+			    {{ $pagecount := len .Pages}}
+			    <p class="has-text-grey is-size-6">{{ $pagecount }} article{{ if ne $pagecount 1 }}s{{ end }}</p>
+			</div>
+		    </div>
+		</article>
+	    </div>
+	    {{ end }}
+	</div>
+    </div>

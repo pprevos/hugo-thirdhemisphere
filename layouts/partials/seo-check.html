@@ -15,13 +15,13 @@
       <div class="media-content">
 	<a href= "#">{{ $tit }}</a><br>
 	<span class="has-text-success is-size-7">{{ .Permalink }}</span><br>
-	<span class="has-text-grey is-size-7">{{ .PublishDate.Format "Jan 2, 2006"}} - {{ .Description }}</span>
+	<span class="has-text-grey is-size-7">{{ if gt .Lastmod .Date}}{{ .Lastmod.Format "2 January 2006"}}{{ else }}{{ .Date.Format "2 January 2006"}}{{ end }} - {{ .Description }}</span>
       </div>
     </div>
   </div>
 
   <div class="columns is-multiline is-vcentered">
-    <!-- Title length between 30 and 60 characters -->
+    <!-- Title length between 30 and 65 characters -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
 	{{ $lent := (len $tit) }}
@@ -30,7 +30,7 @@
 	    <i class="fa fa-circle 
 		      {{ if (lt $lent 40) }}
 		      has-text-warning
-		      {{ else if (gt $lent 65) }}
+		      {{ else if (ge $lent 65) }}
 		      has-text-danger
 		      {{ else }}
 		      has-text-success
@@ -82,7 +82,6 @@
 	</div>
       </aside>
     </div>
-
     <!-- Check featured image -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
@@ -142,7 +141,8 @@
     <!-- Keyphrase checks -->
     {{ $kph := (lower .Params.Keyphrase) }}
     {{ $kpl := (countwords $kph) }}
-
+    {{ if gt $kpl 0 }}
+    
     <!-- Keyphrase between 1 and 4 words -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
@@ -174,7 +174,6 @@
 	</div>
       </aside>
     </div>
-    {{ if gt $kpl 0 }}
 
     <!-- Keyphrase in title -->
     <div class="column is-one-quarter">

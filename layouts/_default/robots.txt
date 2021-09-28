@@ -1,6 +1,5 @@
 User-Agent: *
 sitemap: {{ .Site.BaseURL }}/sitemap.xml
-Disallow: /categories/
-Disallow: /tags/
+Disallow: /pdf/
 {{ range .Data.Pages }}{{ if eq .Params.private "true" }}Disallow: {{ .Permalink }}${{ end }}
 {{ end }}

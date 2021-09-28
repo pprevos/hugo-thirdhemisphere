@@ -1,6 +1,7 @@
 <footer class="footer">
     <div class="columns has-text-centered">
-	<div class="column is-one-third is-narrow">
+      <div class="column is-one-third is-narrow">
+	    <p>Social media</p>
 	    {{ range .Site.Menus.social }}
 	    <a href="{{ .URL | absURL }}" title="{{ .Name }}">
 		<span class="icon fa-lg has-text-dark"><i class="{{ .Pre }}"></i></span>
@@ -11,12 +12,16 @@
 	    {{ .Site.Copyright  | safeHTML }}
 	</div>
 	<div class="column is-one-third is-narrow">
+	  	    <p>Written in Emacs</p>
+	    <a href="https://www.gnu.org/software/emacs/" target="_blank">
+		<img src="{{ .Site.BaseURL }}images/emacs-logo.png" alt="Emacs" width="32" height="32" title = "Written in Emacs">
+	    </a>
 	    <p>Powered by</p>
 	    <a href="https://gohugo.io/" target="_blank">
-		<img src="{{ .Site.BaseURL }}images/hugo-logo.png" alt="Hugo" width="64" height="12">
-	    </a>
+		<img src="{{ .Site.BaseURL }}images/hugo-logo.png" alt="Hugo" width="64" height="12" title = "Powered by Hugo">
+	    </a> &nbsp; &nbsp;
 	    <a href="https://bulma.io/" target="_blank">
-		<img src="{{ .Site.BaseURL }}images/made-with-bulma.png" alt="Bulma" width="64" height="12">
+		<img src="{{ .Site.BaseURL }}images/made-with-bulma.png" alt="Bulma" width="64" height="12" title = "Powered by Bulma CSS">
 	    </a>
 	</div>
     </div>

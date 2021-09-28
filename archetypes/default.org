@@ -1,0 +1,14 @@
+#+title: {{ replace .Name "-" " " | title }}
+#+date: {{ .Date }}
+#+lastmod: 2021-09-28
+#+categories[]: 
+#+tags[]: 
+#+images[]: 
+#+keyphrase: 
+#+description:
+#+seotitle: 
+#+seo: true
+#+math: false
+#+slider: false
+#+private: false
+#+draft: true
