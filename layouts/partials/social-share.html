@@ -1,4 +1,4 @@
-<p>Share this content</p>
+<p class="has-text-weight-semibold pb-4">Share this content</p>
 <ul class="share-buttons">
     <li>
 	<a title = "Share this article">
@@ -8,7 +8,7 @@
 	</a>
     </li>
     <!-- Twitter -->
-    {{ if .Site.Params.twitter }}
+    {{- if .Site.Params.twitter -}}
     <li>
 	<a href="https://twitter.com/intent/tweet?text={{ .Title }}+{{ .Permalink }}+via%20@{{ .Site.Params.twitter }}" target = "_blank" title = "Tweet this article">
 	    <span class="icon has-text-grey is-medium">
@@ -17,9 +17,9 @@
 	</a>
 	<script async src="https://platform.twitter.com/widgets.js"></script>
     </li>
-    {{ end }}
+    {{- end -}}
     <!-- Facebook -->
-    {{ if .Site.Params.facebook }}
+    {{- if .Site.Params.facebook }}
     <li>
 	<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftest.com&quote=" target="_blank"
 	   title="Share on Facebook"
@@ -29,9 +29,9 @@
 	    </span>
 	</a>
     </li>
-    {{ end }}
+    {{- end -}}
     <!-- Reddit -->
-    {{ if .Site.Params.reddit }}
+    {{- if .Site.Params.reddit }}
     <li><a href="https://www.reddit.com/submit?url=http%3A%2F%2Ftest.com&title=" target="_blank"
 	   title="Submit to Reddit"
 	   onclick="window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
@@ -40,9 +40,9 @@
 	</span>
     </a>
     </li>
-    {{ end }}
+    {{- end -}}
     <!-- LinkedIn -->
-    {{ if .Site.Params.linkedin }}
+    {{- if .Site.Params.linkedin }}
     <li>
 	<a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftest.com&title=&summary=&source=http%3A%2F%2Ftest.com"
 	   target="_blank" title="Share on LinkedIn"
@@ -52,5 +52,5 @@
 	    </span>
 	</a>
     </li>
-    {{ end }}
+    {{- end }}
 </ul>

@@ -1,55 +1,79 @@
+<title>
+  {{- if not .IsHome -}}
+  {{- if .Params.seotitle -}}
+  {{ .Params.seotitle }}
+  {{- else -}}
+  {{ .Title }}
+  {{- end -}}
+  {{- else -}}
+  {{ .Site.Title }}
+  {{- end -}}
+</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content={{if eq .Params.private true }}"noindex, nofollow"{{ else }}"index, follow"{{ end }}/>
+<meta name="robots" content=
+      {{- if .Params.private -}}
+      "noindex, nofollow"
+      {{- else -}}
+      "index, follow"
+      {{- end -}} />
+<meta name="description" content="{{- with .Description -}}
+				  {{ . }}
+				  {{- else -}}
+				  {{ .Site.Title }} | {{ .Site.Params.description }}
+				  {{- end -}}">
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Site.LanguageCode }}" />
-{{ with .OutputFormats.Get "rss" -}}
-{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-{{ end -}}
-<title>{{ if not .IsHome }}{{ if .Params.seotitle }}{{ .Params.seotitle }}{{ else }}{{ .Title }}{{ end }}{{ else }}{{ .Site.Title }}{{ end }}</title>
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end }}{{ end }} ">
-<link rel="icon" type="image/png" href="{{ .Site.Params.logo | absURL }}">  
-{{ template "_internal/opengraph.html" . }}
-{{ template "_internal/twitter_cards.html" . }}
-{{ if not (in (string .Site.BaseURL) "localhost") }}
-{{ template "_internal/google_analytics_async.html" . }}
-{{ end }}
-{{- if .IsPage -}}
-{{ partial "schema-article.html" . }}
-{{- end }}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
 
+{{- with .OutputFormats.Get "rss" -}}
+{{- printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML -}}
+{{- end }}
+<link rel="icon" type="image/png" href="{{ .Site.Params.logo | absURL }}">
+
+<!-- Social Media OpenGraphs and schema -->
+{{- if not .Params.private -}}
+{{- template "_internal/opengraph.html" .  -}}
+{{- template "_internal/twitter_cards.html" . -}}
+{{- if not (in (string .Site.BaseURL) "localhost") -}}
+{{- template "_internal/google_analytics_async.html" . -}}
+{{- end -}}
+{{- if .IsPage -}}
+{{- partial "schema-article.html" . -}}
+{{- end -}}
+{{- end -}}
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/style.css">
-<!-- <link rel="stylesheet" href="/css/debug.css"> -->
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-{{ if .Params.slider }}
+{{- if .Params.slider -}}
 <!-- slider code -->
 <link rel="{{ .Site.BaseURL }}css/slider.css">
-{{ end }}
+{{- end -}}
+
 <!-- Parse LaTeX formulas with MathJax set math = true -->
-{{ if .Params.math }}
+{{- if .Params.math -}}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
- MathJax = {
-     tex: {
-	 inlineMath: [['$', '$'], ['\\(', '\\)']]
-     },
-     svg: {
-	 fontCache: 'global'
-     }
- };
+  MathJax = {
+      tex: {
+	  inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+	  fontCache: 'global'
+      }
+  };
 </script>
-{{ end }}
-{{ if .Params.shop }}
+{{- end -}}
+{{- if .Params.shop -}}
 <script type="text/javascript" src="https://payhip.com/payhip.js?v=24u68984"></script>
 <script type="text/javascript">
- var PayhipConfig = {
-     enableCart: true
- };
+  var PayhipConfig = {
+      enableCart: true
+  };
 </script>
-{{ end }}
-  
-<script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/bulma-accordion/dist/js/bulma-accordion.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/bulma-accordion/dist/css/bulma-accordion.min.css">
+{{- end }}

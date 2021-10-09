@@ -1,58 +1,52 @@
-{{ $author := .Site.Author.name }}
-{{ $image := .Site.Author.image }}
-{{ $lastmod := .Params.Lastmod }}
+{{- $author := .Site.Author.name }}
+{{- $image := .Site.Author.image }}
+{{- $lastmod := .Params.Lastmod -}}
 
-{{ if .Params.Author }}
-{{ $author = .Params.Author }}
-{{ end }}
+{{- if .Params.Author }}
+{{- $author = .Params.Author }}
+{{- end -}}
 
-{{ if .Params.authorimage }}
-{{ $image = .Params.authorimage }}
-{{ else if .Params.Author }}
-{{ $image = .Site.Params.logo }}
-{{ end }}
+{{- if .Params.authorimage }}
+{{- $image = .Params.authorimage }}
+{{- else if .Params.Author }}
+{{- $image = .Site.Params.logo }}
+{{- end -}}
 
 <div class="columns is-tablet">
   <div class="columns is-mobile">
-    {{ if ne $image "" }}
+    {{- if ne $image "" }}
     <div class="column is-narrow">
       <figure class="image is-64x64">
-	<img class="is-rounded" src="{{ $image | absURL }}"
-	     alt = "{{ $author }}" title = "{{ $author }}">
+	<img class="is-rounded" src="{{ $image | absURL }}" alt = "{{ $author }}" title = "{{ $author }}">
       </figure>
     </div>
-    {{ end }}
+    {{- end }}
     <div class="column">
       <p>{{ $author }} |  
-	<time datetime="{{ .Date.Format "2006-01-02"}}">
-	  {{ .Date.Format "2 January 2006" }}
-	</time>
-	{{ if ne .Lastmod .Date }}
+	<time datetime="{{ .Date.Format "2006-01-02"}}">{{ .Date.Format "2 January 2006" }}</time>
+	{{- if ne .Lastmod .Date }}
 	<br>
 	<time datetime="{{ .Lastmod.Format "2006-01-02"}}">
 	  <span class="has-text-grey-light">
 	    Last Updated | {{ .Lastmod.Format "2 January 2006" }}
 	  </span>
 	</time>
-	{{ end }}
+	{{- end }}
 	<br>
 	<span class="has-text-grey-light">
 	  {{ .WordCount }} words |
-	  {{ if eq .ReadingTime 1 }}
-	  One minute
-	  {{ else }}
-	  {{ .ReadingTime }} minutes
-	  {{ end }}
+	  {{- if eq .ReadingTime 1 }} One minute
+	  {{- else }} {{ .ReadingTime }} minutes
+	  {{- end }}
 	</span>
-	<br>
       </p>
     </div>
   </div>
-  {{ if or .Site.Params.twitter .Site.Params.Facebook .Site.Params.reddit .Site.Params.linkedin }}
+  {{- if or .Site.Params.twitter .Site.Params.Facebook .Site.Params.reddit .Site.Params.linkedin }}
   <div class="column">
     <div class="is-pulled-right">
       {{ partial "social-share.html" . }}
     </div>
   </div>
-  {{ end }}
+  {{- end }}
 </div>

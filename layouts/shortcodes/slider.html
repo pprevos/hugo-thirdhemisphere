@@ -1,45 +1,40 @@
 <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
-{{ $param := .Get 0 }}
-{{ $localFolder := printf "/static%s" $param }}
-{{ $files := sort (readDir $localFolder) }}
-{{ $n := 0 }}
+{{- $param := .Get 0 }}
+{{- $localFolder := printf "/static%s" $param }}
+{{- $files := sort (readDir $localFolder) }}
+{{- $n := 0 }}
 
 <div class="slideshow-container">
-  {{ $.Scratch.Set "counter" 0 }}
-  {{ range $files }}
-  {{ $.Scratch.Set "counter" (add ($.Scratch.Get "counter") 1) }}
+  {{- $.Scratch.Set "counter" 0 }}
+  {{- range $files }}
+  {{- $.Scratch.Set "counter" (add ($.Scratch.Get "counter") 1) }}
   <div class="mySlides fade">
     <div class="numbertext">{{$.Scratch.Get "counter" }} / {{ len $files}}</div>
     <img src="{{ $param }}{{ .Name }}" />
   </div>
-  {{ end }}
+  {{- end }}
   <!-- Next and previous buttons -->
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
 <br>
-
 <!-- The dots/circles -->
 <div style="text-align:center">
-  {{ $.Scratch.Set "counter" 0 }}
-  {{range $files}}
-    {{ $.Scratch.Set "counter" (add ($.Scratch.Get "counter") 1) }}
+  {{- $.Scratch.Set "counter" 0 }}
+  {{- range $files }}
+  {{- $.Scratch.Set "counter" (add ($.Scratch.Get "counter") 1) }}
   <span class="dot" onclick="currentSlide({{$.Scratch.Get "counter" }})"></span>
-  {{ end }}
+  {{- end }}
 </div>
-
 <script>
   var slideIndex = 1;
   showSlides(slideIndex);
-
   function plusSlides(n) {
       showSlides(slideIndex += n);
   }
-
   function currentSlide(n) {
       showSlides(slideIndex = n);
   }
-
   function showSlides(n) {
       var i;
       var slides = document.getElementsByClassName("mySlides");

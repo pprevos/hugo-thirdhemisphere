@@ -2,7 +2,8 @@
 
 /* Basic layout  */
 .max-800px {
-    max-width: 800px;
+    max-width: 960px;
+    margin:auto;
 }
 
 /* Transparent text background in hero */
@@ -29,8 +30,6 @@ h2 {
     padding-top: 1em;
 }
 
-h3 {
-    padding-top: 1em;
-    font-style: italic;
+content.h3 {
+    margin-top: 1em;
 }
-

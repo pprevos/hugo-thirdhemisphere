@@ -1,46 +1,57 @@
-<!-- List citations by keyword -->
-{{- $json_filepath := path.Join "data" (print .Page.Params.bib ".json") }}
-{{- $kwd := .Get 0 }}
+<!-- Set variables -->
+{{- $tp := .Get 0 -}}
+{{- $id := .Get 1 -}}
+{{- $json_filepath := path.Join "data" (print  .Page.Params.bib ".json") -}}
+
+<!--Get data  -->
 {{- if fileExists $json_filepath -}}
-{{- $bib := getJSON $json_filepath -}}
-<div class ="box">
-  {{ range $bib -}}
-  {{- if in (lower .keyword) (lower $kwd) -}}
-  <p>
-    <!-- Author / editor -->
-    {{- if or .author .editor -}}
-    {{- if .author -}}
-    {{- $n := len .author -}}
-    {{- if le $n 2 -}}
-    {{- range $index, $author := (first 2 .author) -}}
-    {{- index . "non-dropping-particle" -}}{{- .family }}, {{ .given }}
-    {{- if and (gt $n 1) ( eq $index 0) }} and {{ end -}}
-    {{- end -}}
-    {{- end -}}
-    {{- if gt $n 2 }}
-    {{- range first 1 .author}}
-    {{- index . "non-dropping-particle" }}{{- .family }}, {{ .given }}{{- end }} et al.
-    {{- end -}}
-    {{- else -}}
-    {{- if .editor }}
-    {{- $n := len .editor }}
-    {{- if le $n 2}}
-    {{- range $index, $author := (first 2 .editor) }}
-    {{- index . "non-dropping-particle" }}{{- .family }} {{- if and (gt $n 1) ( eq $index 0) }}and {{- end }}
-    {{- end }}
-    {{- end }}
-    {{- if gt $n 2}}{{- range first 1 .editor}}{{- index . "non-dropping-particle" }} {{- .family }}{{- end }} et al.{{- end }}
-    (Ed{{- if gt $n 1 }}s{{- end }}.)
-    {{- end }}
-    {{- end }}
-    {{- else }}
-    Anonymous
-    {{- end -}}
-    <!-- Year -->
-    {{- range .issued }}
-    {{- $year := print (first 1 .) }} (
-    {{- strings.TrimRight "]" (strings.TrimLeft "[" $year) -}})
-    {{- end -}}.
+{{- $json := getJSON $json_filepath -}}
+{{- $entry := where $json "id" $id -}}
+
+{{- if  eq (len $entry) 0 -}}
+<span class="has-background-danger has-text-white">Not found</span>
+{{- end -}}
+{{- range $entry -}}
+
+<!-- Author / editor -->
+{{- if or .author .editor -}}
+{{- if .author -}}
+{{- if eq $tp "p" -}}
+(
+{{- end -}}
+{{- $n := len .author -}}
+{{- if le $n 2 -}}
+{{- range $index, $author := (first 2 .author) -}}
+{{- index . "non-dropping-particle" -}}{{- .family }}
+{{ if and (gt $n 1) ( eq $index 0) -}} and {{- end -}}
+{{- end -}}
+{{- end -}}
+{{- if gt $n 2 -}}
+{{- range first 1 .author -}}
+{{- index . "non-dropping-particle" }}{{ .family }}{{- end }} et al.
+{{ end -}}
+{{- else -}}
+{{- if .editor -}}
+{{- $n := len .editor -}}
+{{- if le $n 2 -}}
+{{- range $index, $author := (first 2 .editor) }}
+{{- index . "non-dropping-particle" }}{{- .family }} {{- if and (gt $n 1) ( eq $index 0) }}and {{- end }}
+{{- end }}
+{{- end }}
+{{- if gt $n 2}}{{- range first 1 .editor}}{{- index . "non-dropping-particle" }} {{- .family }}{{- end }} et al. {{- end }}
+(Ed{{- if gt $n 1 }}s{{- end }}.)
+{{- end -}}
+{{- end -}}
+{{- else -}}
+Anonymous
+{{- end -}}
+<!-- Year -->
+{{- range .issued -}}
+{{- $year := print (first 1 .) -}}
+{{- if or (eq $tp "t") (eq $tp "f") }}({{- end -}}
+{{- strings.TrimRight "]" (strings.TrimLeft "[" $year) -}})
+{{- end -}}
+{{- if eq $tp "f" -}}.
     <!-- Title  -->
     {{- if or (eq .type "book") (eq .type  "thesis") -}}
     <em>{{ title .title }}</em>
@@ -62,16 +73,16 @@
     <!-- Chapter -->
     {{- if eq .type "chapter" -}}
     In: 
-    {{ if .editor -}}
-    {{- $n := len .editor }}
-    {{- if le $n 2}}
-    {{- range $index, $author := (first 2 .editor) }}
+    {{- if .editor -}}
+    {{- $n := len .editor -}}
+    {{- if le $n 2 -}}
+    {{- range $index, $author := (first 2 .editor) -}}
     {{- index . "non-dropping-particle" }}{{- .family }} {{- if and (gt $n 1) ( eq $index 0) }}and {{- end }}
     {{- end }}
     {{- end }}
     {{- if gt $n 2}}{{- range first 1 .editor}}{{- index . "non-dropping-particle" }} {{- .family }}{{- end }} et al.{{- end }}
     (Ed{{- if gt $n 1 }}s{{- end }}.),
-    {{- end }}
+    {{- end -}}
     <i>{{ title (index . "container-title") }}</i>
     {{- $place := index . "publisher-place" -}}
     {{- if or .publisher $place }} ({{ end }}
@@ -101,10 +112,10 @@
     {{- if and .URL (not .DOI) -}}
     <a href="{{ .URL }}" title="{{ .title }}" target="_blank">{{ .URL }}</a>.
     {{- end -}}
-  </p>
-  {{ end -}}
-  {{- end -}}
-</div>
-{{- else -}}
-<span class="has-background-danger has-text-white">ERROR</span>
 {{- end -}}
+{{- end -}}
+{{- else -}}
+<span class="has-background-danger has-text-white">No file</span>
+{{- end -}}
+
+

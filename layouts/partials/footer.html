@@ -1,28 +1,25 @@
 <footer class="footer">
-    <div class="columns has-text-centered">
-      <div class="column is-one-third is-narrow">
-	    <p>Social media</p>
-	    {{ range .Site.Menus.social }}
-	    <a href="{{ .URL | absURL }}" title="{{ .Name }}">
-		<span class="icon fa-lg has-text-dark"><i class="{{ .Pre }}"></i></span>
-	    </a>
-	    {{ end }}
-	</div>
-	<div class="column is-one-third is-narrow">
-	    {{ .Site.Copyright  | safeHTML }}
-	</div>
-	<div class="column is-one-third is-narrow">
-	  	    <p>Written in Emacs</p>
-	    <a href="https://www.gnu.org/software/emacs/" target="_blank">
-		<img src="{{ .Site.BaseURL }}images/emacs-logo.png" alt="Emacs" width="32" height="32" title = "Written in Emacs">
-	    </a>
-	    <p>Powered by</p>
-	    <a href="https://gohugo.io/" target="_blank">
-		<img src="{{ .Site.BaseURL }}images/hugo-logo.png" alt="Hugo" width="64" height="12" title = "Powered by Hugo">
-	    </a> &nbsp; &nbsp;
-	    <a href="https://bulma.io/" target="_blank">
-		<img src="{{ .Site.BaseURL }}images/made-with-bulma.png" alt="Bulma" width="64" height="12" title = "Powered by Bulma CSS">
-	    </a>
-	</div>
+  <div class="columns has-text-centered">
+    <div class="column is-one-third is-narrow">
+      <p>Social media</p>
+      {{- range .Site.Menus.social }}
+      <a href="{{ .URL | absURL }}" title="{{ .Name }}">
+	<span class="icon fa-lg has-text-dark"><i class="{{ .Pre }}"></i></span>
+      </a>
+      {{- end -}}
     </div>
+    <div class="column is-one-third is-narrow">
+      <i class='fab fa-creative-commons' aria-hidden='true'></i> This work is licensed under a <a rel='license' href='https://creativecommons.org/licenses/by-sa/4.0/' target = '_blank'>Creative Commons Attribution-ShareAlike 4.0 International</a> License.
+    </div>
+    <div class="column is-one-third is-narrow">
+      <p>Powered by</p>
+      <a href="https://gohugo.io/" target="_blank">
+	<img src="{{ .Site.BaseURL }}images/hugo-logo.png" alt="Hugo" width="64" height="12" title = "Powered by Hugo">
+      </a> &nbsp; &nbsp;
+      <a href="https://bulma.io/" target="_blank">
+	<img src="{{ .Site.BaseURL }}images/made-with-bulma.png" alt="Bulma" width="64" height="16" title = "Powered by Bulma CSS"></a>&nbsp; &nbsp;
+      <a href="https://www.gnu.org/software/emacs/" target="_blank">
+	<img src="{{ .Site.BaseURL }}images/emacs-logo.png" alt="Emacs" width="16" height="16" title = "Written in Emacs"></a>
+    </div>
+  </div>
 </footer>

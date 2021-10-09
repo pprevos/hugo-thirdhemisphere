@@ -1,8 +1,8 @@
 <!-- SEO check -->
-{{ $tit := .Title }}
-{{ if .Params.seotitle }}
-{{ $tit = .Params.seotitle }}
-{{ end }}
+{{- $title := .Title }}
+{{- if .Params.seotitle }}
+{{- $title = .Params.seotitle }}
+{{- end }}
 <aside class="section has-background-light mgt-small">
   <!-- Mimick Google preview -->
   <div class="box">
@@ -13,7 +13,7 @@
         </figure>
       </div>
       <div class="media-content">
-	<a href= "#">{{ $tit }}</a><br>
+	<a href= "#">{{ $title }}</a><br>
 	<span class="has-text-success is-size-7">{{ .Permalink }}</span><br>
 	<span class="has-text-grey is-size-7">{{ if gt .Lastmod .Date}}{{ .Lastmod.Format "2 January 2006"}}{{ else }}{{ .Date.Format "2 January 2006"}}{{ end }} - {{ .Description }}</span>
       </div>
@@ -21,154 +21,173 @@
   </div>
 
   <div class="columns is-multiline is-vcentered">
-    <!-- Title length between 30 and 65 characters -->
+    <!-- Keyphrase checks -->
+    {{- $kph := (lower .Params.Keyphrase) }}
+
+    <!-- Keyphrase between 1 and 6 words -->
+    {{- $kpl := (countwords $kph) -}}
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
-	{{ $lent := (len $tit) }}
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if (lt $lent 40) }}
-		      has-text-warning
-		      {{ else if (ge $lent 65) }}
-		      has-text-danger
-		      {{ else }}
-		      has-text-success
-		      {{ end}}
-		      "></i>
+		      {{- if (lt $kpl 1) }} has-text-danger
+		      {{- else if (gt $kpl 6) }} has-text-warning
+		      {{- else }} has-text-success
+		      {{- end }}"></i>
 	  </span>
 	</figure>
 	<div class="media-content">
 	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/34h" target="_blank">
-		Title width</a>  
-	      {{ if (lt $lent 40) }}
-	      too short: 
-	      {{ else if (gt $lent 65) }}
-	      too long: 
-	      {{ end }}
-	      {{ $lent }} chars.
+	    <p class="is-size-7">Keyphrase: 
+	      {{- if (lt $kpl 1) -}} unavailable
+	      {{- else if (gt $kpl 6) -}} "{{ $kph }}" is longer than 6 words
+	      {{- else }} "{{ $kph }}"
+	      {{- end -}}
 	    </p>
 	  </div>
 	</div>
       </aside>
     </div>
+
+    <!-- Unique keyphrase -->
+    {{- $nkp := 0 }}
+    {{- range .Site.Pages }}
+    {{- if eq (lower .Params.keyphrase) $kph }}
+    {{- $nkp = add $nkp 1 }}
+    {{- end }}
+    {{- end }}
+    <div class="column is-one-quarter">
+      <aside class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
+		      {{- if gt $nkp 1 }} has-text-danger
+		      {{- else }} has-text-success
+		      {{- end }}"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7">Keyphrase used {{ $nkp }} time{{ if gt $nkp 1 }}s{{ end }} on this site</p>
+	  </div>
+	</div>
+      </aside>
+    </div>
+    
+    <!-- Keyphrase in slug -->
+    {{- $slug := replaceRE "/|-|_|http:" " " .Permalink -}}
+    <div class="column is-one-quarter">
+      <aside class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
+		      {{- if in $slug $kph }} has-text-success
+		      {{- else }} has-text-danger
+		      {{- end }}"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7"> Keyphrase {{- if in $slug $kph }} appears {{- else }} does not appear {{- end }} in the slug
+	    </p>
+	  </div>
+	</div>
+      </aside>
+    </div>
+
+    <!-- Unique description -->
+    {{- $nkp := 0 }}
+    {{- $des := lower .Description }}
+    {{- range .Site.Pages }}
+    {{- if eq (lower .Params.description) $des }}
+    {{- $nkp = add $nkp 1 }}
+    {{- end }}
+    {{- end }}
+    <div class="column is-one-quarter">
+      <aside class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
+		      {{- if gt $nkp 1 }} has-text-danger
+		      {{- else }} has-text-success
+		      {{- end }}"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7">Description used {{ $nkp }} time{{ if gt $nkp 1 }}s{{ end }} on this site</p>
+	  </div>
+	</div>
+      </aside>
+    </div>
+    
+    <!-- Keyphrase in meta description -->
+    {{- with lower .Description -}}
+    <div class="column is-one-quarter">
+      <aside class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
+		      {{- if (in . $kph) }} has-text-success
+		      {{- else }} has-text-danger
+		      {{- end }}"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7">Description {{ if (in . $kph) -}} contains {{ else -}} does not contain {{ end -}} keyphrase</p>
+	  </div>
+	</div>
+      </aside>
+    </div>
+    {{- end }}
+
     <!-- Meta description between 120 and 156 characters -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
-	{{ $dsl := (len .Description) }}
+	{{- $dsl := (len .Description) }}
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if eq $dsl 0 }}
-		      has-text-danger
-		      {{ else if or (lt $dsl 120) (gt $dsl 156) }}
-		      has-text-warning
-		      {{ else }}
-		      has-text-success
-		      {{ end}}
-		      "></i>
+		      {{- if eq $dsl 0 }} has-text-danger
+		      {{- else if or (lt $dsl 120) (gt $dsl 155) }} has-text-warning
+		      {{- else }} has-text-success
+		      {{- end }}"></i>
 	  </span>
 	</figure>
 	<div class="media-content">
 	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/34d" target="_blank">Meta desrciption</a> is {{ $dsl }} chars
-	      <br>
-	      {{ if eq $dsl 0 }}unavailable.{{ end }}
-	      {{ if lt $dsl 120 }}(< 120){{ end }}
-              {{ if gt $dsl 156 }}(> 156){{ end }}
-	    </p>
-	  </div>
-	</div>
-      </aside>
-    </div>
-    <!-- Check featured image -->
-    <div class="column is-one-quarter">
-      <aside class="media notification has-background-white">
-	<figure class="media-left">
-	  <span class="icon fa-lg">
-	    <i class="fa fa-circle 
-		      {{ if .Params.images }}
-		      has-text-success
-		      {{ else }}
-		      has-text-danger
-		      {{ end}}
-		      "></i>
-	  </span>
-	</figure>
-	<div class="media-content">
-	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33c" target="_blank">Featured image</a> with alt tags is 
-	      {{ if .Params.images }}
-	      available.
-	      {{ else }}
-	      unavailable.
-	      {{ end }}
+	    <p class="is-size-7">Description {{ $dsl }} chars
+	      {{- if lt $dsl 120 }} (< 120){{ end -}}
+				       {{- if gt $dsl 156 }}(> 156){{ end -}}
 	    </p>
 	  </div>
 	</div>
       </aside>
     </div>
 
-    <!-- Content has at least 300 words -->
+    <!-- Title length between 40 and 65 characters -->
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
+	{{- $lent := (len $title) }}
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if gt .WordCount 300 }}
-		      has-text-success
-		      {{ else }}
-		      has-text-danger
-		      {{ end}}
-		      "></i>
+		      {{- if (lt $lent 40) }} has-text-danger
+		      {{- else if (ge $lent 65) }} has-text-danger
+		      {{- else }} has-text-success
+		      {{- end }}"></i>
 	  </span>
 	</figure>
 	<div class="media-content">
 	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/34n" target="_blank">Wordcount</a> is 
-	      {{ if gt .WordCount 300 }}
-	      longer than 300 words.
-	      {{ else }}
-	      too short: {{ .WordCount }} words.
-	      {{ end }}
-	    </p>
-	  </div>
-	</div>
-      </aside>
-    </div>
-
-    <!-- Keyphrase checks -->
-    {{ $kph := (lower .Params.Keyphrase) }}
-    {{ $kpl := (countwords $kph) }}
-    {{ if gt $kpl 0 }}
-    
-    <!-- Keyphrase between 1 and 4 words -->
-    <div class="column is-one-quarter">
-      <aside class="media notification has-background-white">
-	<figure class="media-left">
-	  <span class="icon fa-lg">
-	    <i class="fa fa-circle 
-		      {{ if (lt $kpl 1) }}
-		      has-text-danger
-		      {{ else if (gt $kpl 6) }}
-		      has-text-warning
-		      {{ else }}
-		      has-text-success
-		      {{ end}}
-		      "></i>
-	  </span>
-	</figure>
-	<div class="media-content">
-	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/34i" target="_blank">Keyphrase</a> 
-	      {{ if (lt $kpl 1) }}
-	      unavailable.
-	      {{ else if (gt $kpl 6) }}
-	      "{{ $kph }}". Longer than the recommended 6 words.
-	      {{ else }}
-	      "{{ $kph }}".
-	      {{ end }}
+	    <p class="is-size-7">Title
+	      {{- if (lt $lent 40) }} {{ $lent }} chars (< 40)
+							   {{- else if (ge $lent 65) }}
+							   {{ $lent }} chars (> 65)
+		{{- else }} {{ $lent }} chars
+		{{- end -}}
 	    </p>
 	  </div>
 	</div>
@@ -181,176 +200,118 @@
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if (in (lower $tit) $kph) }}
-		      has-text-success
-		      {{ else }}
-		      has-text-danger
-		      {{ end}}
-		      "></i>
+		      {{- if (in (lower $title) $kph) }} has-text-success
+		      {{- else }} has-text-danger
+		      {{- end }}"></i>
 	  </span>
 	</figure>
 	<div class="media-content">
 	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33g" target="_blank">Keyphrase</a> 
-	      {{ if (in (lower $tit) $kph) }}
-	      appears in the title.
-	      {{ else }}
-	      does not appear in the title.
-	      {{ end }}
-	    </p>
+	    <p class="is-size-7">Title 
+	      {{- if (in (lower $title) $kph) }} contains
+	      {{- else }} does not contain
+	      {{- end }} keyphrase</p>
 	  </div>
 	</div>
       </aside>
     </div>
-    
-    <!-- Keyphrase in meta description -->
-    {{ with lower .Description }}
-    <div class="column is-one-quarter">
-      <aside class="media notification has-background-white">
-	<figure class="media-left">
-	  <span class="icon fa-lg">
-	    <i class="fa fa-circle 
-		      {{ if (in . $kph) }}
-		      has-text-success
-		      {{ else }}
-		      has-text-danger
-		      {{ end}}
-		      "></i>
-	  </span>
-	</figure>
-	<div class="media-content">
-	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33k" target="_blank">Keyphrase</a> 
-	      {{ if (in . $kph) }}
-	      appears in the description.
-	      {{ else }}
-	      does not appear in the description.
-	      {{ end }}
-	    </p>
-	  </div>
-	</div>
-      </aside>
-    </div>
-    {{ end }}
-    
-    <!-- Keyphrase in first paragraph -->
-    {{ with lower .Summary }}
-    <div class="column is-one-quarter">
-      <aside class="media notification has-background-white">
-	<figure class="media-left">
-	  <span class="icon fa-lg">
-	    <i class="fa fa-circle 
-		      {{ if (in . $kph) }}
-		      has-text-success
-		      {{ else }}
-		      has-text-danger
-		      {{ end}}
-		      "></i>
-	  </span>
-	</figure>
-	<div class="media-content">
-	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33e" target="_blank">Keyphrase</a> 
-	      {{ if (in . $kph) }}
-	      appears in the first paragraph.
-	      {{ else }}
-	      does not appear in the first {{ countwords . }} words.
-	      {{ end }}
-	    </p>
-	  </div>
-	</div>
-      </aside>
-    </div>
-    {{ end }}
-    
+
     <!-- Keyphrase in headings -->
-    {{ $toc := lower .TableOfContents }}
+    {{- $toc := lower .TableOfContents }}
     <div class="column is-one-quarter">
       <aside class="media notification has-background-white">
 	<figure class="media-left">
 	  <span class="icon fa-lg">
 	    <i class="fa fa-circle 
-		      {{ if (in $toc $kph) }}
-		      has-text-success
-		      {{ else }}
-		      has-text-danger
-		      {{ end}}
-		      "></i>
+		      {{- if (in $toc $kph) }} has-text-success
+		      {{- else }} has-text-danger
+		      {{- end}}"></i>
 	  </span>
 	</figure>
 	<div class="media-content">
 	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33m" target="_blank">Keyphrase</a> 
-	      {{ if (in $toc $kph) }}
-	      appears in the headings.
-	      {{ else }}
-	      does not appear in the headings.
-	      {{ end }}
+	    <p class="is-size-7">At least one heading
+	      {{- if (in $toc $kph) }} contains
+	      {{- else }} does not contain
+	      {{- end }} keyphrase</p>
+	  </div>
+	</div>
+      </aside>
+    </div>
+
+    <!-- Content has at least 300 words -->
+    <div class="column is-one-quarter">
+      <aside class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
+		      {{- if gt .WordCount 300 }} has-text-success
+		      {{- else }} has-text-danger
+		      {{- end }}"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7">Content is 
+	      {{- if gt .WordCount 300 }} longer than 300 words
+	      {{- else }} only {{ .WordCount }} words
+	      {{- end -}}
+	    </p>
+	  </div>
+	</div>
+      </aside>
+    </div>
+
+    <!-- Keyphrase in first paragraph -->
+    {{- with lower .Summary }}
+    <div class="column is-one-quarter">
+      <aside class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
+		      {{- if (in . $kph) }} has-text-success
+		      {{- else }} has-text-danger
+		      {{- end }}"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7">The first {{ countwords . }} words
+	      {{- if (in . $kph) }} contain
+	      {{- else }} don't contain
+	      {{- end }} the keyphrase</p>
+	  </div>
+	</div>
+      </aside>
+    </div>
+    {{- end }}
+
+    <!-- Check featured image -->
+    {{- $image := "NA" }}
+    {{- if .Params.images }}
+    {{- $image = print "static" (index .Params.images 0) }}
+    {{- end }}
+    <div class="column is-one-quarter">
+      <aside class="media notification has-background-white">
+	<figure class="media-left">
+	  <span class="icon fa-lg">
+	    <i class="fa fa-circle 
+		      {{- if fileExists $image }} has-text-success
+		      {{- else }} has-text-danger
+		      {{- end }}"></i>
+	  </span>
+	</figure>
+	<div class="media-content">
+	  <div class="content">
+	    <p class="is-size-7">Featured image
+	      {{- if fileExists $image }} available.
+	      {{- else }} unavailable.
+	      {{- end -}}
 	    </p>
 	  </div>
 	</div>
       </aside>
     </div>
     
-    <!-- Keyphrase in slug -->
-    {{ $slug := replaceRE "/|-|_|http:" " " .Permalink}}
-    <div class="column is-one-quarter">
-      <aside class="media notification has-background-white">
-	<figure class="media-left">
-	  <span class="icon fa-lg">
-	    <i class="fa fa-circle 
-		      {{ if in $slug $kph }}
-		      has-text-success
-		      {{ else }}
-		      has-text-danger
-		      {{ end}}
-		      "></i>
-	  </span>
-	</figure>
-	<div class="media-content">
-	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33o" target="_blank">Keyphrase</a> 
-	      {{ if in $slug $kph }}
-	      appears in the slug.
-	      {{ else }}
-	      does not appear in the slug.
-	      {{ end }}
-	    </p>
-	  </div>
-	</div>
-      </aside>
-    </div>
-    
-    <!-- Unique keyphrase -->
-    {{ $nkp := 0 }}
-    {{ range .Site.RegularPages }}
-    {{ if eq (lower .Params.keyphrase) $kph }}
-    {{ $nkp = add $nkp 1 }}
-    {{ end }}
-    {{ end }}
-    <div class="column is-one-quarter">
-      <aside class="media notification has-background-white">
-	<figure class="media-left">
-	  <span class="icon fa-lg">
-	    <i class="fa fa-circle 
-		      {{ if gt $nkp 1 }}
-		      has-text-danger
-		      {{ else }}	
-		      has-text-success
-		      {{ end }}
-		      "></i>
-	  </span>
-	</figure>
-	<div class="media-content">
-	  <div class="content">
-	    <p class="is-size-7"><a href="https://yoa.st/33x" target="_blank">Keyphrase</a>
-	      used {{ $nkp }} time{{ if gt $nkp 1 }}s{{ end }}.
-	    </p>
-	  </div>
-	</div>
-      </aside>
-    </div>
-    {{ end }} <!-- checks with keyphrase -->
   </div> <!-- end colums -->
-  <hr>
 </aside>

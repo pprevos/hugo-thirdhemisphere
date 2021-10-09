@@ -1,0 +1,17 @@
+{{ if in .Site.BaseURL "localhost" }}
+<table>
+    <tr>
+    <th>Title</th>
+    <th>Wordcount</th>
+  </tr>
+  {{ range .Site.Pages -}}
+  {{- if .Params.draft -}}
+  <tr>
+    <td><a href ="{{ .Permalink }}">{{ .Title }}</a></td>
+    <td>{{ .WordCount }}</td>
+  </tr>
+  {{- end -}}
+  {{- end }}
+</table>
+{{ end }}
+

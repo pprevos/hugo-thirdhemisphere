@@ -1,0 +1,9 @@
+User-Agent: *
+Sitemap: {{ .Site.BaseURL }}/sitemap.xml
+{{ range .Data.Pages -}}
+{{- if eq .Params.private "true" -}}
+Disallow: {{ .Permalink }}$
+{{ end -}}
+{{- end -}}
+Disallow: {{ .Site.BaseURL }}pdf/$
+

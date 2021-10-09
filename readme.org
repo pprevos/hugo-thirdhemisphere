@@ -1,0 +1,324 @@
+#+title: Third Hemisphere Hugo Theme
+
+This [[https://gohugo.io/][Hugo]] theme create websites optimised for search engines.
+
+* Features
+- Simple one-column design
+- Uses [[https://bulma.io/][Bulma CSS]], based on the work by
+  [[https://www.pakstech.com/blog/create-hugo-theme/][Päktech]]
+- Optimised for technical SEO, mimicking the functionality of the
+  [[https://yoast.com/][Yoast SEO Wordpress plugin]]
+- Optimised for use with [[htttps://orgmode.org/][Org-Mode]].
+- Control over which additional Javascript and CSS is loaded using page
+  variables.
+
+The following pages use this theme:
+
+- [[https://lucidmanager.org/][The Lucid Manager]]
+- [[https://horizonofreason.com/][The Horizon of Reason]]
+
+* Getting started
+At the root of your Hugo project, run:
+
+#+begin_src shell
+git submodule add https://github.com/pprevos/hugo-thirdhemisphere themes
+#+end_src
+
+* Org mode optimisation
+Emacs [[https://orgmode.org/][Org mode]] is the most powerful markdown
+language in existence. Hugo can parse Org-Mode files out-of-the-box.
+
+The =archetypes= folder contains a template for new Org mode pages,
+which includes all theme-specific page variables.
+
+Read
+[[https://lucidmanager.org/productivity/create-websites-with-org-mode-and-hugo/][this
+article]] for more information on how to use Org-Mode and Hugo.
+
+** Hero images
+   :PROPERTIES:
+   :CUSTOM_ID: hero-images
+   :END:
+The =index.html= and =404.html= pages use hero images.
+
+The hero image for the index page is set in the =heroindex= site
+parameter in the configuration file.
+
+The hero image for the 404 page is set in the =hero404= site parameter
+in the configuration file.
+
+** Taxonomies
+   :PROPERTIES:
+   :CUSTOM_ID: taxonomies
+   :END:
+The theme uses the category and tag taxonomies. Ideally, each category
+and tag should have an index file that specifies a title, a featured
+image and a description.
+
+** Shortcodes
+   :PROPERTIES:
+   :CUSTOM_ID: shortcodes
+   :END:
+*** Contact form
+    :PROPERTIES:
+    :CUSTOM_ID: contact-form
+    :END:
+To enable the contact form, create a =contact.md= or =contact.org= page
+in the =content= folder with the appropriate title and set the layout to
+=page=, a plain page with only a header and footer. You can use this
+template for other pages that don't require a featured image and author
+information.
+
+The contact from shortcode enables a form by assigning an endpoint that
+processes the data. The example below uses
+[[https://formspree.io/][Formspree]], but this can be any other
+endpoint.
+
+={{< contact-form "https://formspree.io/{form_id}" >}}=
+
+*** Image Slider
+    :PROPERTIES:
+    :CUSTOM_ID: image-slider
+    :END:
+This shortcode provides a simple image slider. Place all images for the
+slider in one folder and call the shortcode as follows:
+
+={{< slider "image folder location" >}}=
+
+The activate the Javascript code for the slider, also set the =slider=
+variable to =true= in your config file.
+
+*** Bibliography
+    :PROPERTIES:
+    :CUSTOM_ID: bibliography
+    :END:
+This shortcode can create a bibliography from a JSON file, filtered by a
+keyword.
+
+You can export a BibTeX file to JSON withe the powerful
+[[https://pandoc.org/][Pandoc software]]:
+
+=pandoc bibliography.bib -t csljson -o bibliography.json=
+
+You can also export from your favourite bibliography manager, such as
+Zotero, but make sure you select CSL JSON or the shortcode will be able
+to parse the content.
+
+The JSON file in your data folder needs to be named =bibliography.json=.
+
+To show the bibliography, use the following shortcode:
+
+={{< bibliography "keyword" >}}=
+
+The entries will show in the order in which they appear in the JSON
+file.
+
+If you want to show all entries in the bibliography, then omit the
+keyword parameter.
+
+*** Categories
+    :PROPERTIES:
+    :CUSTOM_ID: categories
+    :END:
+The categories shortcode lists all article categories, a description and
+an icon, for use in the homepage and/or about page.
+
+You can add an icon to this summary by setting the =icon= variable in
+the relevant index file.
+
+** Search-Engine Optimisation
+   :PROPERTIES:
+   :CUSTOM_ID: search-engine-optimisation
+   :END:
+Google's mission is to "to organise the world's information and make it
+universally accessible and useful". This means that each page needs to
+have:
+
+- Quality content
+- Good UX & UI
+- Flawless security
+- Effective PR and social
+- Technical excellence
+
+This purpose of this theme is to help achieve these goals.
+
+*** robots.txt
+    :PROPERTIES:
+    :CUSTOM_ID: robots.txt
+    :END:
+Any files that have the =private= option set to =true= are disallowed.
+You need to set the =enableRobotsTXT= site parameter to =true= to enable
+this functionality.
+
+*** Sitemap
+    :PROPERTIES:
+    :CUSTOM_ID: sitemap
+    :END:
+Any files that have the =private= option set to =true= are excluded from
+the sitemap.
+
+*** Robots meta tags
+    :PROPERTIES:
+    :CUSTOM_ID: robots-meta-tags
+    :END:
+The robots meta tag for all files is set to =index, follow=. For any
+files that have the =private= option set to =true=, the tag is set to
+=noindex, nofollow=.
+
+*** Canonical links
+    :PROPERTIES:
+    :CUSTOM_ID: canonical-links
+    :END:
+Each page contains a self-referencing
+[[https://yoast.com/rel-canonical/][canonical link]]. Index pages
+contain an alternate link to the relevant RSS file.
+
+*** Internationalisation
+    :PROPERTIES:
+    :CUSTOM_ID: internationalisation
+    :END:
+Each page contains an alternate self-referencing link wit the site
+language code.
+
+*** Structured Data
+    :PROPERTIES:
+    :CUSTOM_ID: structured-data
+    :END:
+The theme uses the built-in Open Graph and Twitter card templates.
+Content pages also have the
+[[https://developers.google.com/search/docs/data-types/article][article
+schema]] in JSON-LD format. This schema uses the:
+
+- Title or SEO title of the page
+- Page description
+- Featured images
+- Published date
+- Last modified date
+- Site author or page author
+- Publishing organisation
+- Site logo (favicon)
+
+*** Content optimisation
+    :PROPERTIES:
+    :CUSTOM_ID: content-optimisation
+    :END:
+This theme contains a partial template that assesses the content of a
+page, which is useful when writing a new page and trying to optimise it
+for a keyword.
+
+The SEO assessment only appears when running the site on localhost, and
+when the =seo= page parameter is set to =true=.
+
+#+caption: Example of SEO assessment.
+[[file:images/seo-example.png]]
+
+**** Keyphrase
+     :PROPERTIES:
+     :CUSTOM_ID: keyphrase
+     :END:
+The key phrase should be [[https://yoa.st/34i][between 1 and 4 words]].
+You will need to do some research to find the ideal phrase. You should
+only use [[https://yoa.st/33x][each keyphrase once]] on your site.
+
+**** Slug
+     :PROPERTIES:
+     :CUSTOM_ID: slug
+     :END:
+The [[https://yoa.st/33o][page slug]] of the page should ideally contain
+the keyphrase.
+
+**** Meta description
+     :PROPERTIES:
+     :CUSTOM_ID: meta-description
+     :END:
+The [[https://yoa.st/34d][meta description]] is a summary of the page,
+between 120 and 156 characters long. The keyphrase should
+[[https://yoa.st/33k][appear in the meta description]].
+
+**** Title
+     :PROPERTIES:
+     :CUSTOM_ID: title
+     :END:
+Each page can have two titles, the one displayed on the page in the =h1=
+header and an optional separate version for the title tag. To set a
+separate title for a page, use the =seotitle= option. The ideal
+[[https://yoa.st/34h][title width]] is between 50 and 60 characters, and
+it should contain the [[https://yoa.st/33g][keyphrase]].
+
+**** Featured image
+     :PROPERTIES:
+     :CUSTOM_ID: featured-image
+     :END:
+You can define a featured image with the =images= parameter. This image
+should be at least 800 pixels wide with an aspect ratio of 3:2. The
+image is used in the structured data page summary on index pages. The
+template assigns the meta description to the [[https://yoa.st/33c][alt
+and title tags]].
+
+**** Content
+     :PROPERTIES:
+     :CUSTOM_ID: content
+     :END:
+The [[https://yoa.st/34n][content length]] need to be at least 300 words
+and contain the [[https://yoa.st/33e][keyphrase]] appears in first
+paragraph. Ideally, the key phrase should be mentioned a few times
+throughout the text.
+
+At least one [[https://yoa.st/33m][heading]] needs to contain the
+keyphrase.
+
+** Logo
+   :PROPERTIES:
+   :CUSTOM_ID: logo
+   :END:
+The logo image is a square png file that is used in the navigation bar
+and as the favicon. The location of the logo file is identified in the
+params section of the config file, e.g. =logo = "/favicon.png"=.
+
+** RSS - Really Simple Syndication
+   :PROPERTIES:
+   :CUSTOM_ID: rss---really-simple-syndication
+   :END:
+The RSS template has been enhanced to remove the author e-mail. The RSS
+feed shows the full content of each regular page instead of only the
+summary. Each index category and tag has its own feed. Pages with the
+=private= parameter set to =true= are excluded from the RSS feed.
+
+** Mathematical formulas
+   :PROPERTIES:
+   :CUSTOM_ID: mathematical-formulas
+   :END:
+If you like to typeset mathematical equations on your website, the set
+the =math= parameter to =true=. This setting loads
+[[https://www.mathjax.org/][MathJax]] so you can display beautiful
+mathematics.
+
+** Sharing Buttons
+   :PROPERTIES:
+   :CUSTOM_ID: sharing-buttons
+   :END:
+Each page shows simple sharing buttons for either Facebook, Twitter,
+Reddit or LinkedIn.
+
+To enable these buttons, set the relevant site parameters to =true= in
+the site configuration. For Twitter, you need to set the username
+without the @-symbol, e.g. ="pprevos"=
+
+** Social Media links
+   :PROPERTIES:
+   :CUSTOM_ID: social-media-links
+   :END:
+The social media menu in the site configuration provides icons and links
+to your profiles in the footer.
+
+You can find the relevant icons on the
+[[https://fontawesome.com/icons?d=gallery][Font Awesome]] website,
+e.g. "=fab fa-github=".
+
+** Copyright statement
+   :PROPERTIES:
+   :CUSTOM_ID: copyright-statement
+   :END:
+A copyright statement appears in the central footer column with the
+appropriate icon. The =copyright= variable holds the copyright statement
+text, which can include HTML.
